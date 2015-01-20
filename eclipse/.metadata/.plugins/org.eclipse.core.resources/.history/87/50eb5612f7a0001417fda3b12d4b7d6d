@@ -1,0 +1,10 @@
+package com.favor;
+
+import net.minecraftforge.fml.common.Mod;
+
+@Mod(modid = FavorOfTheGods.MODID, name = "Favor of the Gods", version = FavorOfTheGods.VERSION);
+public class FavorOfTheGods {
+	public static final String MODID = "favorofthegods";
+	public static final String VERSION = "0.0.0";
+	
+}
