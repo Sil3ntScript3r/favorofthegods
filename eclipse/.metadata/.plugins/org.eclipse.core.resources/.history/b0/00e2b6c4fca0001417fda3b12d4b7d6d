@@ -1,0 +1,50 @@
+package com.favor;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
+
+public class Favor implements IExtendedEntityProperties {
+	// Set the max and min favor you're allowed to acquire for any one god
+	private static final int MAX_FAVOR = 100;
+	private static final int MIN_FAVOR = 0;
+	
+	public static final String FAVOR = "Favor";
+	
+	private final EntityPlayer player;
+	private int favorStefan, favorDesertPig;
+	
+	public Favor(EntityPlayer player)
+	{
+		this.player = player;
+	}
+	
+	@Override
+	public void saveNBTData(NBTTagCompound compound)
+	{
+		NBTTagCompound properties = new NBTTagCompound();
+		
+		properties.setInteger("FavorStefan", MAX_FAVOR / 2);
+		properties.setInteger("FavorDesertPig", MAX_FAVOR / 2);
+	}
+
+	@Override
+	public void loadNBTData(NBTTagCompound compound)
+	{
+		NBTTagCompound properties = (NBTTagCompound)compound.getTag(FAVOR);
+		
+		this.favorStefan = properties.getInteger("FavorStefan");
+		this.favorDesertPig = properties.getInteger("FavorDesertPig");
+	}
+
+	@Override
+	public void init(Entity entity, World world) 
+	{
+		
+	}
+	
+	// End required methods
+
+}

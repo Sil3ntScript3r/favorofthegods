@@ -1,5 +1,6 @@
 package com.favor;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,7 +16,7 @@ public class FavorOfTheGods {
 	@Mod.Instance(FavorOfTheGods.MODID)
 	public static FavorOfTheGods instance;
 	
-	@SidedProxy(clientSide = "favorofthegods.ClientOnlyProxy", serverSide = "favorofthegods.ServerOnlyProxy")
+	@SidedProxy(clientSide = "com.favor.ClientOnlyProxy", serverSide = "com.favor.ServerOnlyProxy")
 	public static CommonProxy proxy;
 	
 	@EventHandler
@@ -34,6 +35,7 @@ public class FavorOfTheGods {
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		proxy.postInit();
+		MinecraftForge.EVENT_BUS.register(new EventList());
 	}
 	
 	public static String prependModID(String name, char letter)

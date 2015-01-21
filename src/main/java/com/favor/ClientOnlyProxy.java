@@ -6,16 +6,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 public class ClientOnlyProxy extends CommonProxy {
+	@Override
 	public void preInit()
 	{
 		super.preInit();
 	}
 	
+	@Override
 	public void init()
 	{
 		super.init();
 	}
 	
+	@Override
 	public void postInit()
 	{
 		super.postInit();

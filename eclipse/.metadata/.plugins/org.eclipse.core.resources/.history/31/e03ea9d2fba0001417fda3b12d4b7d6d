@@ -1,0 +1,34 @@
+package com.favor;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
+
+public class Favor implements IExtendedEntityProperties {
+	public Favor()
+	{
+		
+	}
+	
+	@Override
+	public void saveNBTData(NBTTagCompound compound)
+	{
+		NBTTagCompound properties = new NBTTagCompound();
+		
+		properties.setInteger("FavorBlood", 50);
+	}
+
+	@Override
+	public void loadNBTData(NBTTagCompound compound)
+	{
+
+	}
+
+	@Override
+	public void init(Entity entity, World world) 
+	{
+		
+	}
+
+}

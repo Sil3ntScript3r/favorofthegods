@@ -1,0 +1,13 @@
+package com.favor;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+public class EventList {
+	@SubscribeEvent
+	public void onEntityConstruct(EntityConstructing event)
+	{
+		if(event.entity instanceof EntityPlayer && Favor.get((EntityPlayer)event.entity) == null)
+	}
+}

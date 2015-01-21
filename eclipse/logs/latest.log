@@ -1,0 +1,57 @@
+[19:02:40] [Client thread/INFO]: Setting user: Player272
+[19:02:45] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:02:52] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Favor of the Gods
+[19:02:53] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:02:53] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[19:02:53] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:02:53] [Thread-7/INFO]: OpenAL initialized.
+[19:02:53] [Sound Library Loader/INFO]: Sound engine started
+[19:02:58] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:02:59] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Favor of the Gods
+[19:02:59] [Client thread/INFO]: SoundSystem shutting down...
+[19:02:59] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:02:59] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:03:00] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[19:03:00] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:03:00] [Thread-9/INFO]: OpenAL initialized.
+[19:03:00] [Sound Library Loader/INFO]: Sound engine started
+[19:03:03] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:03:09] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[19:03:09] [Server thread/INFO]: Generating keypair
+[19:03:09] [Server thread/INFO]: Preparing start region for level 0
+[19:03:10] [Server thread/INFO]: Preparing spawn area: 20%
+[19:03:11] [Server thread/INFO]: Preparing spawn area: 54%
+[19:03:13] [Server thread/INFO]: Changing view distance to 12, from 10
+[19:03:14] [Server thread/INFO]: Player272[local:E:106ccaf4] logged in with entity id 433 at (215.30000001192093, 66.0, 262.69369013080996)
+[19:03:14] [Server thread/INFO]: Player272 joined the game
+[19:03:15] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2217ms behind, skipping 44 tick(s)
+[19:03:26] [Server thread/INFO]: Saving and pausing game...
+[19:03:26] [Server thread/INFO]: Saving chunks for level 'TEDS'/Overworld
+[19:03:27] [Server thread/INFO]: Saving chunks for level 'TEDS'/Nether
+[19:03:27] [Server thread/INFO]: Saving chunks for level 'TEDS'/The End
+[19:03:29] [Server thread/INFO]: Stopping server
+[19:03:29] [Server thread/INFO]: Saving players
+[19:03:29] [Server thread/INFO]: Saving worlds
+[19:03:29] [Server thread/INFO]: Saving chunks for level 'TEDS'/Overworld
+[19:03:29] [Server thread/INFO]: Saving chunks for level 'TEDS'/Nether
+[19:03:29] [Server thread/INFO]: Saving chunks for level 'TEDS'/The End
+[19:06:33] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[19:06:33] [Server thread/INFO]: Generating keypair
+[19:06:34] [Server thread/INFO]: Preparing start region for level 0
+[19:06:35] [Server thread/INFO]: Preparing spawn area: 92%
+[19:06:35] [Server thread/INFO]: Changing view distance to 12, from 10
+[19:06:35] [Server thread/INFO]: Player272[local:E:5108009c] logged in with entity id 1170 at (206.0188174595032, 68.0, 273.71013032282207)
+[19:06:35] [Server thread/INFO]: Player272 joined the game
+[19:06:38] [Server thread/INFO]: Saving and pausing game...
+[19:06:38] [Server thread/INFO]: Saving chunks for level 'TEDS'/Overworld
+[19:06:38] [Server thread/INFO]: Saving chunks for level 'TEDS'/Nether
+[19:06:38] [Server thread/INFO]: Saving chunks for level 'TEDS'/The End
+[19:06:53] [Server thread/INFO]: Stopping server
+[19:06:53] [Server thread/INFO]: Saving players
+[19:06:53] [Server thread/INFO]: Saving worlds
+[19:06:53] [Server thread/INFO]: Saving chunks for level 'TEDS'/Overworld
+[19:06:53] [Server thread/INFO]: Saving chunks for level 'TEDS'/Nether
+[19:06:53] [Server thread/INFO]: Saving chunks for level 'TEDS'/The End
+[19:06:54] [Client thread/INFO]: Stopping!
+[19:06:54] [Client thread/INFO]: SoundSystem shutting down...
+[19:06:54] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
