@@ -1,0 +1,10 @@
+package com.favor.gods;
+
+public class Gods {
+	private static String name;
+	
+	protected void increaseFavor(int num, EntityPlayer player)
+	{
+		
+	}
+}

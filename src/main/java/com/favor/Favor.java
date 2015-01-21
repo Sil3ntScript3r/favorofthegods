@@ -8,7 +8,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Favor implements IExtendedEntityProperties {
 	// Set the most and least favor you're allowed to acquire for any one god
-	private static final int MAX_FAVOR = 100;
+	private static final int MAX_FAVOR = 1000;
 	private static final int MIN_FAVOR = 0;
 	
 	// Set the name of the property
@@ -16,13 +16,15 @@ public class Favor implements IExtendedEntityProperties {
 	
 	private final EntityPlayer player;
 	
-	// [PROBABLY TEMP] Store the favors of the gods
-	private int favorStefan, favorDesertPig;
+	// Store the favors of the gods
+	private int[] godFavors = new int[2];
 	
 	// When Favor is created, set player to a player passed in
 	public Favor(EntityPlayer player)
 	{
 		this.player = player;
+		godFavors[0] = 257;
+		godFavors[1] = -59;
 	}
 	
 	// Call to assign Favor to a player
@@ -42,11 +44,12 @@ public class Favor implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		NBTTagCompound properties = new NBTTagCompound();
+		// TODO: Why NBT tag no save
+		properties.setIntArray("godFavors", godFavors);
 		
-		properties.setInteger("FavorStefan", MAX_FAVOR / 2);
-		properties.setInteger("FavorDesertPig", MAX_FAVOR / 2);
+		properties.setTag(FAVOR_TAG, properties);
 		
-		compound.setTag(FAVOR_TAG, properties);
+		System.out.println("FAVOR DATA SAVED");
 	}
 
 	// Load Favor data from a tag
@@ -55,16 +58,21 @@ public class Favor implements IExtendedEntityProperties {
 	{
 		NBTTagCompound properties = (NBTTagCompound)compound.getTag(FAVOR_TAG);
 		
-		this.favorStefan = properties.getInteger("FavorStefan");
-		this.favorDesertPig = properties.getInteger("FavorDesertPig");
+		godFavors = properties.getIntArray("godFavors");
 		
 		System.out.println("--Favor--");
-		System.out.println("Stefan: " + favorStefan);
-		System.out.println("Desert Pig: " + favorDesertPig);
+		System.out.println("Length: " + godFavors.length);
+		System.out.println("Stefan: " + godFavors[0]);
+		System.out.println("Desert Pig: " + godFavors[1]);
 	}
 
 	@Override
 	public void init(Entity entity, World world)
+	{
+		
+	}
+	
+	public void increaseFavor(int num, int god)
 	{
 		
 	}

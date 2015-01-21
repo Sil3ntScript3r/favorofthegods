@@ -8,7 +8,7 @@ public class EventList {
 	@SubscribeEvent
 	public void onEntityConstruct(EntityConstructing event)
 	{
-		// Make sure the entity is a player, and doesn't already have a Favor system. If yes>no, give them one
+		// Make sure the entity is a player, and doesn't already have a Favor system. If yes and no, give them one
 		if(event.entity instanceof EntityPlayer && Favor.get((EntityPlayer)event.entity) == null)
 		{
 			Favor.register((EntityPlayer)event.entity);

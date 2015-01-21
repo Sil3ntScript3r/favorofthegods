@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.Mod.Instance"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.event.FMLPreInitializationEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.event.FMLInitializationEvent"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.event.FMLPostInitializationEvent"/>
+<fullyQualifiedTypeName name="java.lang.Character"/>
+<fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
+</qualifiedTypeNameHistroy>

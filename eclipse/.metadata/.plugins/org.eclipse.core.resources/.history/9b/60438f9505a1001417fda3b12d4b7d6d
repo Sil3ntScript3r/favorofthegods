@@ -1,0 +1,5 @@
+package com.favor.gods;
+
+public abstract class Gods {
+	private static String name;
+}
