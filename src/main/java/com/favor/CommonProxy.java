@@ -1,14 +1,17 @@
 package com.favor;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.favor.items.ItemFavorCheck;
 
 public abstract class CommonProxy {
+	public static ItemFavorCheck favorCheck;
+	
 	public void preInit()
 	{
-		
+		favorCheck = (ItemFavorCheck)new ItemFavorCheck().setUnlocalizedName("favorCheck");
+		GameRegistry.registerItem(favorCheck, "favorCheck");
 	}
 
 	public void init()

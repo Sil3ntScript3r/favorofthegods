@@ -1,0 +1,26 @@
+package com.favor;
+
+import net.minecraft.entity.player.EntityPlayer;
+
+import com.favor.items.ItemFavorCheck;
+
+public abstract class CommonProxy {
+	public static ItemFavorCheck favorCheck;
+	
+	public void preInit()
+	{
+		favorCheck = (ItemFavorCheck)new ItemFavorCheck().setUnlocalizedName("favorCheck");
+	}
+
+	public void init()
+	{
+
+	}
+
+	public void postInit()
+	{
+
+	}
+	
+	abstract public boolean playerIsInCreativeMode(EntityPlayer player);
+}

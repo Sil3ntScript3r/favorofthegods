@@ -8,6 +8,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import com.favor.gods.*;
+
 @Mod(modid = FavorOfTheGods.MODID, name = "Favor of the Gods", version = FavorOfTheGods.VERSION)
 public class FavorOfTheGods {
 	public static final String MODID = "favorofthegods";
@@ -36,6 +38,8 @@ public class FavorOfTheGods {
 	{
 		proxy.postInit();
 		MinecraftForge.EVENT_BUS.register(new EventList());
+		MinecraftForge.EVENT_BUS.register(new GodStefan());
+		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
 	}
 	
 	public static String prependModID(String name, char letter)
