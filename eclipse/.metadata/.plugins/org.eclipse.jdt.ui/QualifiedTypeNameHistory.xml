@@ -7,4 +7,10 @@
 <fullyQualifiedTypeName name="java.lang.Character"/>
 <fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
+<fullyQualifiedTypeName name="net.minecraft.item.Item"/>
+<fullyQualifiedTypeName name="net.minecraft.creativetab.CreativeTabs"/>
+<fullyQualifiedTypeName name="net.minecraft.util.ChatComponentText"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.registry.GameRegistry"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
 </qualifiedTypeNameHistroy>

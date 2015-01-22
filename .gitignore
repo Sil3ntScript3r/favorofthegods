@@ -1,3 +1,16 @@
+# Local project files
+.settings/
+bin/
+eclipse/
+.gradle/
+build/
+gradle/
+*.classpath
+*.project
+build.gradle
+gradlew
+gradlew.bat
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
