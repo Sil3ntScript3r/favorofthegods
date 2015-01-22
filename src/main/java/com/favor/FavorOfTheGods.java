@@ -7,8 +7,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
-import com.favor.gods.*;
+import com.favor.gods.GodDesertPig;
+import com.favor.gods.GodStefan;
 
 @Mod(modid = FavorOfTheGods.MODID, name = "Favor of the Gods", version = FavorOfTheGods.VERSION)
 public class FavorOfTheGods {
@@ -17,6 +21,7 @@ public class FavorOfTheGods {
 	
 	@Mod.Instance(FavorOfTheGods.MODID)
 	public static FavorOfTheGods instance;
+	public static SimpleNetworkWrapper network;
 	
 	@SidedProxy(clientSide = "com.favor.ClientOnlyProxy", serverSide = "com.favor.ServerOnlyProxy")
 	public static CommonProxy proxy;
@@ -24,6 +29,8 @@ public class FavorOfTheGods {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("Favor");
+		network.registerMessage(PacketHandler.Handler.class, PacketHandler.class, 0, Side.SERVER);
 		proxy.preInit();
 	}
 	

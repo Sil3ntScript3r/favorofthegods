@@ -16,7 +16,6 @@ public class EventList {
 			((Favor)(event.entity.getExtendedProperties(Favor.FAVOR_TAG))).saveNBTData(playerData);
 			
 			CommonProxy.storeEntityData(((EntityPlayer)event.entity).getName(), playerData);
-			Favor.saveProxyData((EntityPlayer)event.entity);
 		}
 	}
 	

@@ -50,6 +50,7 @@ public class Favor implements IExtendedEntityProperties {
 		compound.setTag(FAVOR_TAG, properties);
 		
 		System.out.println("FAVOR DATA SAVED");
+		FavorOfTheGods.network.sendToServer(new PacketHandler("Favors: " + godFavors[0] + godFavors[1]));
 	}
 
 	// Load Favor data from a tag
