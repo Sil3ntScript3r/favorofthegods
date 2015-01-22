@@ -26,19 +26,7 @@ public class Favor implements IExtendedEntityProperties {
 		godFavors[0] = 0;
 		godFavors[1] = 0;
 	}
-	
-	// Call to assign Favor to a player
-	public static final void register(EntityPlayer player)
-	{
-		player.registerExtendedProperties(Favor.FAVOR_TAG, new Favor(player));
-	}
-	
-	// Retrieve the Favor from a player
-	public static final Favor get(EntityPlayer player)
-	{
-		return (Favor)player.getExtendedProperties(FAVOR_TAG);
-	}
-	
+
 	// Save Favor data to a Tag
 	@Override
 	public void saveNBTData(NBTTagCompound compound)
@@ -80,5 +68,44 @@ public class Favor implements IExtendedEntityProperties {
 	public int getFavor(int god)
 	{
 		return godFavors[god];
+	}
+	
+	// Call to assign Favor to a player
+	public static final void register(EntityPlayer player)
+	{
+		player.registerExtendedProperties(Favor.FAVOR_TAG, new Favor(player));
+	}
+	
+	// Retrieve the Favor from a player
+	public static final Favor get(EntityPlayer player)
+	{
+		return (Favor)player.getExtendedProperties(FAVOR_TAG);
+	}
+	
+	public static void saveProxyData(EntityPlayer player)
+	{
+		Favor playerData = Favor.get(player);
+		NBTTagCompound savedData = new NBTTagCompound();
+		
+		playerData.saveNBTData(savedData);
+		CommonProxy.storeEntityData(getSaveKey(player), savedData);
+	}
+	
+	public static void loadProxyData(EntityPlayer player)
+	{
+		Favor playerData = Favor.get(player);
+		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
+		
+		if(savedData != null)
+		{
+			playerData.loadNBTData(savedData);
+		}
+		
+		//playerData.syncProperties();
+	}
+	
+	private static String getSaveKey(EntityPlayer player)
+	{
+		return player.getName() + ":" + FAVOR_TAG;
 	}
 }
