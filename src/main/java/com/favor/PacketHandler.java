@@ -7,30 +7,37 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class PacketHandler implements IMessage {
-	private String text;
+	private int[] favors = new int[Favor.numGods];
 	
 	public PacketHandler(){}
 	
-	public PacketHandler(String text)
+	public PacketHandler(int[] favors)
 	{
-		this.text = text;
+		this.favors = favors;
 	}
 	
 	public void fromBytes(ByteBuf buf)
 	{
-		text = ByteBufUtils.readUTF8String(buf);
+		for(int x : favors)
+		{
+			
+		}
 	}
 	
 	public void toBytes(ByteBuf buf)
 	{
-		ByteBufUtils.writeUTF8String(buf, text);
+		for(int x : favors)
+		{
+			ByteBufUtils.writeVarInt(buf, favors[x], 0);
+		}
 	}
 
 	public static class Handler implements IMessageHandler<PacketHandler, IMessage>
 	{
 		public IMessage onMessage(PacketHandler message, MessageContext context)
 		{
-			System.out.println(String.format("Recieved %s from %s", message.text, context.getServerHandler().playerEntity.getDisplayName()));
+			System.out.println(String.format("Recieved %s from %s", message.favors, context.getServerHandler().playerEntity.getDisplayName()));
+			
 			return null;
 		}
 	}

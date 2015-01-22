@@ -33,7 +33,7 @@ public class EventList {
 				((Favor)(event.entity.getExtendedProperties(Favor.FAVOR_TAG))).loadNBTData(playerData);
 			}
 			
-			//((Favor)(event.entity.getExtendedProperties(Favor.FAVOR_TAG))).syncProperties();
+			((Favor)(event.entity.getExtendedProperties(Favor.FAVOR_TAG))).syncProperties();
 		}
 	}
 	
