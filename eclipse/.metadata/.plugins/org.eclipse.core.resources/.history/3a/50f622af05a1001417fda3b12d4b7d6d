@@ -1,5 +1,0 @@
-package com.favor.gods;
-
-public class Gods {
-	private static String name;
-}

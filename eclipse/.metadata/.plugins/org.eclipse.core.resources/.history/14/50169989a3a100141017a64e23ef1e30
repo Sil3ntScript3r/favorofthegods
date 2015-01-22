@@ -1,5 +1,0 @@
-package com.favor.items;
-
-public class ItemFavorCheck extends Item {
-
-}
