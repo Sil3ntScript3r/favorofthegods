@@ -44,7 +44,7 @@ public class Favor implements IExtendedEntityProperties {
 		compound.setTag(FAVOR_TAG, properties);
 		
 		System.out.println("FAVOR DATA SAVED");
-		FavorOfTheGods.network.sendTo(new PacketHandler(godFavors), (EntityPlayerMP) player);
+		//FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
 	}
 
 	// Load Favor data from a tag
@@ -65,6 +65,11 @@ public class Favor implements IExtendedEntityProperties {
 	public void init(Entity entity, World world)
 	{
 		
+	}
+	
+	public void setFavor(int num, int god)
+	{
+		godFavors[god] = num;
 	}
 	
 	// Increase the favor of a god given
@@ -122,7 +127,7 @@ public class Favor implements IExtendedEntityProperties {
 		// TODO: Get property syncing working
 		if(!player.worldObj.isRemote)
 		{
-			FavorOfTheGods.network.sendTo(new PacketHandler(godFavors), (EntityPlayerMP) player);
+			FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
 		}
 	}
 	

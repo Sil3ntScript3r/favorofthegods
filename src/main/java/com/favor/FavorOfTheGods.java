@@ -29,8 +29,8 @@ public class FavorOfTheGods {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		network = NetworkRegistry.INSTANCE.newSimpleChannel("Favor");
-		network.registerMessage(PacketHandler.Handler.class, PacketHandler.class, 0, Side.SERVER);
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("FavorOfTheGods");
+		network.registerMessage(PacketHandler.Handler.class, PacketHandler.class, 0, Side.CLIENT);
 		proxy.preInit();
 	}
 	
