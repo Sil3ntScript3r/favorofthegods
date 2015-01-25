@@ -10,11 +10,19 @@ public class Gods {
 	public static final int GOD_STEFAN = 0;
 	public static final int GOD_DESERTPIG = 1;
 	
-	protected void increaseFavor(int num, EntityPlayer player, int god)
+	void increaseFavor(int num, EntityPlayer player, int god)
 	{
 		if(Favor.get(player) != null)
 		{
 			Favor.get(player).increaseFavor(num, god);
+		}
+	}
+	
+	void decreaseFavor(int num, EntityPlayer player, int god)
+	{
+		if(Favor.get(player) != null)
+		{
+			Favor.get(player).decreaseFavor(num, god);
 		}
 	}
 }

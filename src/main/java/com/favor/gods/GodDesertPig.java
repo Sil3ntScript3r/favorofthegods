@@ -1,5 +1,6 @@
 package com.favor.gods;
 
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -11,15 +12,18 @@ public class GodDesertPig extends Gods {
 	@SubscribeEvent
 	public void onEntityDied(LivingDeathEvent event)
 	{
-		if(event.entity instanceof EntitySheep)
+		if(event.source.getEntity() instanceof EntityPlayer)
 		{
-			if(event.source.getEntity() instanceof EntityPlayer)
+			EntityPlayer player = (EntityPlayer)event.source.getEntity();
+			// Desert Pig does not get along with sheep
+			if(event.entity instanceof EntitySheep)
 			{
-				EntityPlayer player = (EntityPlayer)event.source.getEntity();
-				if(Favor.get(player) != null)
-				{
-					increaseFavor(10, player, GOD_DESERTPIG);
-				}
+					increaseFavor(1, player, GOD_DESERTPIG);
+			}
+			// Desert Pig hates if you kill his own kind
+			else if(event.entity instanceof EntityPig)
+			{
+					decreaseFavor(2, player, GOD_DESERTPIG);
 			}
 		}
 	}

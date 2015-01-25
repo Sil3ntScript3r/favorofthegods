@@ -12,8 +12,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Favor implements IExtendedEntityProperties {
 	// Set the most and least favor you're allowed to acquire for any one god
-	private static final int MAX_FAVOR = 1000;
-	private static final int MIN_FAVOR = -1000;
+	private static final short MAX_FAVOR = 1000;
+	private static final short MIN_FAVOR = -1000;
 	
 	// Set the name of the property
 	public static final String FAVOR_TAG = "Favor";
@@ -42,8 +42,7 @@ public class Favor implements IExtendedEntityProperties {
 		properties.setIntArray("godFavors", godFavors);
 
 		compound.setTag(FAVOR_TAG, properties);
-		System.out.println("FAVOR DATA SAVED");
-		//FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
+		FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
 	}
 
 	// Load Favor data from a tag
@@ -76,6 +75,21 @@ public class Favor implements IExtendedEntityProperties {
 	public void increaseFavor(int num, int god)
 	{
 		godFavors[god] += num;
+		
+		if(godFavors[god] > MAX_FAVOR)
+			godFavors[god] = MAX_FAVOR;
+		
+		syncProperties();
+	}
+	
+	// Decrease the favor of a god given
+	public void decreaseFavor(int num, int god)
+	{
+		godFavors[god] -= num;
+		
+		if(godFavors[god] < MIN_FAVOR)
+			godFavors[god] = MIN_FAVOR;
+		
 		syncProperties();
 	}
 	

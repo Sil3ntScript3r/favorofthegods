@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-// TODO: MAKE THIS WORK
+
 public class PacketHandler implements IMessage {
 	private int[] favors = new int[Favor.numGods];
 	private EntityPlayer player;
