@@ -1,5 +1,6 @@
 package com.favor;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -11,11 +12,14 @@ public class EventList {
 	@SubscribeEvent
 	public void onLivingDeathEvent(LivingDeathEvent event)
 	{
+		// Check if a player died on the server only
 		if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer)
 		{
+			// It was a player, so copy their NBTTag...
 			NBTTagCompound playerData = new NBTTagCompound();
 			Favor.get((EntityPlayer)event.entity).saveNBTData(playerData);
 			
+			// ...And save it to the CommonProxy
 			CommonProxy.storeEntityData(((EntityPlayer)event.entity).getName(), playerData);
 			Favor.saveProxyData((EntityPlayer) event.entity);
 		}
@@ -24,10 +28,18 @@ public class EventList {
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
+		// [TEMP] Make sure there is actually a world
+		if(Minecraft.getMinecraft().theWorld == null)
+			return;
+		
+		// Make sure it's a player joining
 		if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer)
 		{
+			System.out.println("Player joined the world");
+			// Get their Favor data out of the CommonProxy
 			NBTTagCompound playerData = CommonProxy.getEntityData(((EntityPlayer)event.entity).getName());
 			
+			// Make sure they have Favor
 			if(playerData != null)
 			{
 				((Favor)(event.entity.getExtendedProperties(Favor.FAVOR_TAG))).loadNBTData(playerData);

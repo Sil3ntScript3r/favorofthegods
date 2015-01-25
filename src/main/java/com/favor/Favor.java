@@ -40,9 +40,8 @@ public class Favor implements IExtendedEntityProperties {
 		NBTTagCompound properties = new NBTTagCompound();
 
 		properties.setIntArray("godFavors", godFavors);
-		
+
 		compound.setTag(FAVOR_TAG, properties);
-		
 		System.out.println("FAVOR DATA SAVED");
 		//FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
 	}
@@ -67,6 +66,7 @@ public class Favor implements IExtendedEntityProperties {
 		
 	}
 	
+	// Sets the favor to the specified amount for the specified god
 	public void setFavor(int num, int god)
 	{
 		godFavors[god] = num;
@@ -124,14 +124,14 @@ public class Favor implements IExtendedEntityProperties {
 	// Sync up the client with the server
 	public final void syncProperties()
 	{
-		// TODO: Get property syncing working
+		// TODO: Make the property syncing work better
 		if(!player.worldObj.isRemote)
 		{
 			FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
 		}
 	}
 	
-	// Get the name we save our date under for the proxies
+	// Get the name we save our data under for the proxy data
 	private static String getSaveKey(EntityPlayer player)
 	{
 		return player.getName() + ":" + FAVOR_TAG;
