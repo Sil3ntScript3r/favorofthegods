@@ -9,12 +9,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.favor.items.ItemDecreaseFavor;
 import com.favor.items.ItemFavorCheck;
 import com.favor.items.ItemIncreaseFavor;
 
 public abstract class CommonProxy implements IGuiHandler {
 	public static ItemFavorCheck favorCheck;
 	public static ItemIncreaseFavor increaseFavor;
+	public static ItemDecreaseFavor decreaseFavor;
 	private static final Map<String, NBTTagCompound> favorData = new HashMap<String, NBTTagCompound>();
 	
 	public void preInit()
@@ -24,6 +26,9 @@ public abstract class CommonProxy implements IGuiHandler {
 		
 		increaseFavor = (ItemIncreaseFavor)new ItemIncreaseFavor().setUnlocalizedName("increaseFavor");
 		GameRegistry.registerItem(increaseFavor, "increaseFavor");
+		
+		decreaseFavor = (ItemDecreaseFavor)new ItemDecreaseFavor().setUnlocalizedName("decreaseFavor");
+		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");
 	}
 
 	public void init()
