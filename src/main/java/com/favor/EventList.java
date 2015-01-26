@@ -28,10 +28,6 @@ public class EventList {
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event)
 	{
-		// [TEMP] Make sure there is actually a world
-		if(Minecraft.getMinecraft().theWorld == null)
-			return;
-		
 		// Make sure it's a player joining
 		if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer)
 		{

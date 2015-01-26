@@ -1,7 +1,7 @@
 package com.favor;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +17,11 @@ public class Favor implements IExtendedEntityProperties {
 	
 	// Set the name of the property
 	public static final String FAVOR_TAG = "Favor";
+	public static Set<EntityPlayer> players = new HashSet<EntityPlayer>();
 	
 	private final EntityPlayer player;
 	
+	// TODO: Stop being so bad and change godFavors to a List(assuming that works)
 	// Store the favors of the gods
 	private int[] godFavors = new int[2];
 	
@@ -103,6 +105,7 @@ public class Favor implements IExtendedEntityProperties {
 	public static final void register(EntityPlayer player)
 	{
 		player.registerExtendedProperties(Favor.FAVOR_TAG, new Favor(player));
+		players.add(player);
 	}
 	
 	// Retrieve the Favor from a player

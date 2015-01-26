@@ -1,8 +1,12 @@
 package com.favor;
 
 import io.netty.buffer.ByteBuf;
+
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -29,9 +33,10 @@ public class PacketHandler implements IMessage {
 		{
 			favors[x] = ByteBufUtils.readVarShort(buf);
 		}
-
-		System.out.println(Minecraft.getMinecraft().theWorld);
-		player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(ByteBufUtils.readUTF8String(buf));
+		
+		// Get the player from the name given in the bytes
+		String targetPlayer = ByteBufUtils.readUTF8String(buf);
+		player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(targetPlayer);
 	}
 	
 	// Encode the message

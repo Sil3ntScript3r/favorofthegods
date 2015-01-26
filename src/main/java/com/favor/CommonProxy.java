@@ -10,15 +10,20 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.favor.items.ItemFavorCheck;
+import com.favor.items.ItemIncreaseFavor;
 
 public abstract class CommonProxy implements IGuiHandler {
 	public static ItemFavorCheck favorCheck;
+	public static ItemIncreaseFavor increaseFavor;
 	private static final Map<String, NBTTagCompound> favorData = new HashMap<String, NBTTagCompound>();
 	
 	public void preInit()
 	{
 		favorCheck = (ItemFavorCheck)new ItemFavorCheck().setUnlocalizedName("favorCheck");
 		GameRegistry.registerItem(favorCheck, "favorCheck");
+		
+		increaseFavor = (ItemIncreaseFavor)new ItemIncreaseFavor().setUnlocalizedName("increaseFavor");
+		GameRegistry.registerItem(increaseFavor, "increaseFavor");
 	}
 
 	public void init()
