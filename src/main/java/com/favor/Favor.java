@@ -12,8 +12,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Favor implements IExtendedEntityProperties {
 	// Set the most and least favor you're allowed to acquire for any one god
-	private static final short MAX_FAVOR = 1000;
-	private static final short MIN_FAVOR = -1000;
+	private static final int MAX_FAVOR = 1000;
+	private static final int MIN_FAVOR = -1000;
 	
 	// Set the name of the property
 	public static final String FAVOR_TAG = "Favor";

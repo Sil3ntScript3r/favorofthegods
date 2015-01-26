@@ -31,7 +31,7 @@ public class PacketHandler implements IMessage {
 	{
 		for(int x = 0; x < Favor.numGods; x++)
 		{
-			favors[x] = ByteBufUtils.readVarShort(buf);
+			favors[x] = ByteBufUtils.readVarInt(buf, 5);
 		}
 		
 		// Get the player from the name given in the bytes
@@ -44,10 +44,9 @@ public class PacketHandler implements IMessage {
 	{
 		for(int x = 0; x < favors.length; x++)
 		{
-			ByteBufUtils.writeVarShort(buf, favors[x]);
+			ByteBufUtils.writeVarInt(buf, favors[x], 5);
 		}
-
-		// TODO: Might be a better way to do this
+		
 		ByteBufUtils.writeUTF8String(buf, player.getName());
 		System.out.println(player.getName());
 	}
