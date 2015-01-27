@@ -1,14 +1,20 @@
 package com.favor.gods;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.favor.Favor;
-
 public class GodStefan extends Gods {
+	public GodStefan()
+	{
+		goodBlocks.add(Blocks.dirt);
+		goodBlocks.add(Blocks.red_flower);
+	}
+	
 	@SubscribeEvent
 	public void onEntityDied(LivingDeathEvent event)
 	{

@@ -3,12 +3,15 @@ package com.favor;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.favor.altar.BlockAltar;
+import com.favor.altar.TileAltar;
 import com.favor.items.ItemDecreaseFavor;
 import com.favor.items.ItemFavorCheck;
 import com.favor.items.ItemIncreaseFavor;
@@ -17,6 +20,7 @@ public abstract class CommonProxy implements IGuiHandler {
 	public static ItemFavorCheck favorCheck;
 	public static ItemIncreaseFavor increaseFavor;
 	public static ItemDecreaseFavor decreaseFavor;
+	public static BlockAltar altar;
 	private static final Map<String, NBTTagCompound> favorData = new HashMap<String, NBTTagCompound>();
 	
 	public void preInit()
@@ -29,6 +33,10 @@ public abstract class CommonProxy implements IGuiHandler {
 		
 		decreaseFavor = (ItemDecreaseFavor)new ItemDecreaseFavor().setUnlocalizedName("decreaseFavor");
 		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");
+		
+		altar = (BlockAltar)new BlockAltar(Material.wood).setUnlocalizedName("blockAltar");
+		GameRegistry.registerBlock(altar, "blockAltar");
+		GameRegistry.registerTileEntity(TileAltar.class, "tileAltar");
 	}
 
 	public void init()

@@ -35,6 +35,19 @@ public class Favor implements IExtendedEntityProperties {
 		godFavors[0] = NEUTRAL_FAVOR;
 		godFavors[1] = NEUTRAL_FAVOR;
 	}
+	
+	// Call to assign Favor to a player
+	public static final void register(EntityPlayer player)
+	{
+		player.registerExtendedProperties(Favor.FAVOR_TAG, new Favor(player));
+		players.add(player);
+	}
+	
+	// Retrieve the Favor from a player
+	public static final Favor get(EntityPlayer player)
+	{
+		return (Favor)player.getExtendedProperties(FAVOR_TAG);
+	}
 
 	// Save Favor data to a Tag
 	@Override
@@ -102,19 +115,6 @@ public class Favor implements IExtendedEntityProperties {
 		return godFavors[god];
 	}
 	
-	// Call to assign Favor to a player
-	public static final void register(EntityPlayer player)
-	{
-		player.registerExtendedProperties(Favor.FAVOR_TAG, new Favor(player));
-		players.add(player);
-	}
-	
-	// Retrieve the Favor from a player
-	public static final Favor get(EntityPlayer player)
-	{
-		return (Favor)player.getExtendedProperties(FAVOR_TAG);
-	}
-	
 	// Save the Favor data to a safe location so it doesn't reset on death
 	public static void saveProxyData(EntityPlayer player)
 	{
@@ -142,7 +142,6 @@ public class Favor implements IExtendedEntityProperties {
 	// Sync up the client with the server
 	public final void syncProperties()
 	{
-		// TODO: Make the property syncing work better
 		if(!player.worldObj.isRemote)
 		{
 			FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
