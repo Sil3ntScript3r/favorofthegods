@@ -37,6 +37,11 @@ public class TileAltar extends TileEntity {
 			
 		}
 	}
+	
+	public int checkRank()
+	{
+		return 0;
+	}
 
 	public boolean hasMaster()
 	{

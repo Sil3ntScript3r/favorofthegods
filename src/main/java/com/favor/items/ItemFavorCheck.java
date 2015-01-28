@@ -23,6 +23,7 @@ public class ItemFavorCheck extends Item {
 			System.out.println("--Favor--");
 			System.out.println("Stefan: " + favor.getFavor(0));
 			System.out.println("Desert Pig: " + favor.getFavor(1));
+			System.out.println("Altar Location: " + favor.getAltarPos());
 		}
 		return itemStack;
 	}

@@ -1,6 +1,5 @@
 package com.favor.gods;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +10,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class GodStefan extends Gods {
 	public GodStefan()
 	{
-		goodBlocks.add(Blocks.dirt);
-		goodBlocks.add(Blocks.red_flower);
+		super();
+		goodBlocks[0].add(Blocks.dirt);
+		goodBlocks[0].add(Blocks.red_flower);
+		
+		goodBlocks[5].add(Blocks.wool);
 	}
 	
 	@SubscribeEvent

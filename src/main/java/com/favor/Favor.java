@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -20,7 +21,11 @@ public class Favor implements IExtendedEntityProperties {
 	public static final String FAVOR_TAG = "Favor";
 	public static Set<EntityPlayer> players = new HashSet<EntityPlayer>();
 	
+	// Owner of this Favor
 	private final EntityPlayer player;
+	
+	// Position of the Altar this player prayed to
+	private BlockPos altarPos;
 	
 	// TODO: Stop being so bad and change godFavors to a List(assuming that works)
 	// Store the favors of the gods
@@ -54,11 +59,13 @@ public class Favor implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		NBTTagCompound properties = new NBTTagCompound();
-
+		int[] pos = {altarPos.getX(), altarPos.getY(), altarPos.getZ()};
+		
 		properties.setIntArray("godFavors", godFavors);
+		properties.setIntArray("altarPos", pos);
 
 		compound.setTag(FAVOR_TAG, properties);
-		FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
+		FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, altarPos, player), (EntityPlayerMP) player);
 	}
 
 	// Load Favor data from a tag
@@ -68,10 +75,12 @@ public class Favor implements IExtendedEntityProperties {
 		NBTTagCompound properties = (NBTTagCompound)compound.getTag(FAVOR_TAG);
 		
 		godFavors = properties.getIntArray("godFavors");
+		altarPos = new BlockPos(properties.getIntArray("altarPos")[0], properties.getIntArray("altarPos")[1], properties.getIntArray("altarPos")[2]);
 		
 		System.out.println("--Favor--");
 		System.out.println("Stefan: " + godFavors[0]);
 		System.out.println("Desert Pig: " + godFavors[1]);
+		System.out.println("Altar Position: " + altarPos);
 	}
 
 	// Required implemented method
@@ -115,6 +124,16 @@ public class Favor implements IExtendedEntityProperties {
 		return godFavors[god];
 	}
 	
+	public BlockPos getAltarPos()
+	{
+		return altarPos;
+	}
+	
+	public void setAltarPos(BlockPos pos)
+	{
+		altarPos = pos;
+	}
+	
 	// Save the Favor data to a safe location so it doesn't reset on death
 	public static void saveProxyData(EntityPlayer player)
 	{
@@ -144,7 +163,7 @@ public class Favor implements IExtendedEntityProperties {
 	{
 		if(!player.worldObj.isRemote)
 		{
-			FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, player), (EntityPlayerMP) player);
+			FavorOfTheGods.network.sendTo(new PacketHandler(godFavors, altarPos, player), (EntityPlayerMP) player);
 		}
 	}
 	

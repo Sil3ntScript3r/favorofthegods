@@ -24,8 +24,12 @@ import com.favor.Favor;
 public class GodDesertPig extends Gods {
 	public GodDesertPig()
 	{
-		goodBlocks.add(Blocks.dirt);
-		goodBlocks.add(Blocks.yellow_flower);
+		super();
+		goodBlocks[0].add(Blocks.dirt);
+		goodBlocks[0].add(Blocks.yellow_flower);
+		goodBlocks[0].add(Blocks.jukebox);
+		goodBlocks[0].add(Blocks.sandstone);
+		//goodBlocks[4].add(pigBlock); Pepper demands a pig block
 	}
 	
 	@SubscribeEvent
