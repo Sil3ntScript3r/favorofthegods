@@ -10,11 +10,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.favor.Favor;
 
 public class Gods {
+	// Ints used to easily talk about a certain God
 	public static final int GOD_STEFAN = 0;
 	public static final int GOD_DESERTPIG = 1;
 	
 	private static String name;
 	
+	// List of all the blocks that can be used for the Altar
+	// Array index = rank of the block
+	// All gods set this themself in their constructor
 	public static List[] goodBlocks = new List[6];
 	public static List<Block> goodBlocks0;
 	public static List<Block> goodBlocks1;

@@ -1,5 +1,6 @@
 package com.favor;
 
+import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
+import com.favor.altar.BlockAltar;
 import com.favor.gods.GodDesertPig;
 import com.favor.gods.GodStefan;
 
@@ -47,6 +49,7 @@ public class FavorOfTheGods {
 		MinecraftForge.EVENT_BUS.register(new EventList());
 		MinecraftForge.EVENT_BUS.register(new GodStefan());
 		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
+		//MinecraftForge.EVENT_BUS.register(new BlockAltar(Material.rock));
 	}
 	
 	public static String prependModID(String name, char letter)

@@ -53,6 +53,30 @@ public class Favor implements IExtendedEntityProperties {
 	{
 		return (Favor)player.getExtendedProperties(FAVOR_TAG);
 	}
+	
+	// Save the Favor data to a safe location so it doesn't reset on death
+	public static void saveProxyData(EntityPlayer player)
+	{
+		Favor playerData = Favor.get(player);
+		NBTTagCompound savedData = new NBTTagCompound();
+		
+		playerData.saveNBTData(savedData);
+		CommonProxy.storeEntityData(getSaveKey(player), savedData);
+	}
+	
+	// Load the Favor data from the safe location so we may use it again
+	public static void loadProxyData(EntityPlayer player)
+	{
+		Favor playerData = Favor.get(player);
+		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
+		
+		if(savedData != null)
+		{
+			playerData.loadNBTData(savedData);
+		}
+		
+		playerData.syncProperties();
+	}
 
 	// Save Favor data to a Tag
 	@Override
@@ -132,30 +156,6 @@ public class Favor implements IExtendedEntityProperties {
 	public void setAltarPos(BlockPos pos)
 	{
 		altarPos = pos;
-	}
-	
-	// Save the Favor data to a safe location so it doesn't reset on death
-	public static void saveProxyData(EntityPlayer player)
-	{
-		Favor playerData = Favor.get(player);
-		NBTTagCompound savedData = new NBTTagCompound();
-		
-		playerData.saveNBTData(savedData);
-		CommonProxy.storeEntityData(getSaveKey(player), savedData);
-	}
-	
-	// Load the Favor data from the safe location so we may use it again
-	public static void loadProxyData(EntityPlayer player)
-	{
-		Favor playerData = Favor.get(player);
-		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
-		
-		if(savedData != null)
-		{
-			playerData.loadNBTData(savedData);
-		}
-		
-		playerData.syncProperties();
 	}
 
 	// Sync up the client with the server
