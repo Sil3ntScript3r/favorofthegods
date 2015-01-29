@@ -5,11 +5,9 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -37,6 +35,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 			Favor favor = Favor.get(player);
 			if(favor != null)
 			{
+				((TileAltar)world.getTileEntity(pos)).setOwner(player);
 				favor.setAltarPos(pos);
 				System.out.println(pos);
 			}
@@ -45,15 +44,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		return this.getDefaultState();
 	}
 	
-	/*@SubscribeEvent
-	public void onBlockBreakPlayer(BlockEvent.BreakEvent event)
-	{
-		if(!event.world.isRemote && event.state.getBlock() == this)
-		{
-			event.world.spawnEntityInWorld(new EntityLightningBolt(event.world, event.pos.getX(), event.pos.getY(), event.pos.getZ()));
-		}
-	}*/
-	
+	// When the Altar is destroyed by a player, call lightning down and make it explode
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
 	{
 		if(!world.isRemote)
@@ -67,21 +58,11 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	// When the block is spawned, check to see what rank the Altar is
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
-		if(world.getBlockState(pos.add(0, -1, 0)).getBlock() == Blocks.stone)
+		TileEntity altar = world.getTileEntity(pos);
+		if(altar != null && altar instanceof TileAltar)
 		{
-			if(world.getBlockState(pos.add(1, -1, 0)).getBlock() == Blocks.air)
-			{
-				if(world.getBlockState(pos.add(-1, -1, 0)).getBlock() == Blocks.air)
-				{
-					if(world.getBlockState(pos.add(0, -1, 1)).getBlock() == Blocks.air)
-					{
-						if(world.getBlockState(pos.add(0, -1, -1)).getBlock() == Blocks.air)
-						{
-							System.out.println("Altar is complete");
-						}
-					}
-				}
-			}
+			TileAltar tilealtar = (TileAltar)altar;
+			tilealtar.checkRank(world);
 		}
 	}
 

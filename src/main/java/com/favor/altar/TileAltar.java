@@ -1,60 +1,76 @@
 package com.favor.altar;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+
+import com.favor.Favor;
 
 public class TileAltar extends TileEntity {
-	private boolean isMaster, hasMaster;
-	private int masterX, masterY, masterZ;
-
+	private int rank;
+	private EntityPlayer ownerPlayer;
+	
 	public void writeToNBT(NBTTagCompound data)
 	{
 		super.writeToNBT(data);
-		data.setInteger("masterX", masterX);
-		data.setInteger("masterY", masterY);
-		data.setInteger("masterZ", masterZ);
-		data.setBoolean("hasMaster", hasMaster);
-		data.setBoolean("isMaster", isMaster);
-		
-		if(hasMaster && isMaster)
-		{
-
-		}
 	}
 	
 	public void readFromNBT(NBTTagCompound data)
 	{
 		super.readFromNBT(data);
-		masterX = data.getInteger("masterX");
-		masterY = data.getInteger("masterY");
-		masterZ = data.getInteger("masterZ");
-		hasMaster = data.getBoolean("hasMaster");
-		isMaster = data.getBoolean("isMaster");
+	}
+	
+	// TODO: Finish checking rank of the Altar
+	public void checkRank(World world)
+	{
+		rank = -1;
+		Favor favor = Favor.get(ownerPlayer);
 		
-		if(hasMaster && isMaster)
+		// Check if it meets Rank 0 requirements, and see which God is being praised
+		if(world.getBlockState(pos.add(0, -1, 0)).getBlock() == Blocks.dirt)
 		{
-			
+			if(world.getBlockState(pos.add(1, -1, 0)).getBlock() == Blocks.air && world.getBlockState(pos.add(-1, -1, 0)).getBlock() == Blocks.air)
+			{
+				if(world.getBlockState(pos.add(0, -1, 1)).getBlock() == Blocks.air && world.getBlockState(pos.add(0, -1, -1)).getBlock() == Blocks.air)
+				{
+					rank++;
+					checkStefan();
+				}
+			}
+		}
+		
+		if(world.getBlockState(pos.add(0, -1, 0)).getBlock() == Blocks.sandstone)
+		{
+			if(world.getBlockState(pos.add(1, -1, 0)).getBlock() == Blocks.air && world.getBlockState(pos.add(-1, -1, 0)).getBlock() == Blocks.air)
+			{
+				if(world.getBlockState(pos.add(0, -1, 1)).getBlock() == Blocks.air && world.getBlockState(pos.add(0, -1, -1)).getBlock() == Blocks.air)
+				{
+					rank++;
+					checkDesertPig();
+				}
+			}
 		}
 	}
 	
-	public int checkRank()
+	public void checkStefan()
 	{
-		return 0;
-	}
-
-	public boolean hasMaster()
-	{
-		return hasMaster;
+		
 	}
 	
-	public boolean isMaster()
+	public void checkDesertPig()
 	{
-		return isMaster;
+		
 	}
 	
-	public BlockPos masterPos()
+	public int getRank()
 	{
-		return new BlockPos(masterX, masterY, masterZ);
+		return rank;
+	}
+	
+	public void setOwner(EntityPlayer owner)
+	{
+		ownerPlayer = owner;
 	}
 }

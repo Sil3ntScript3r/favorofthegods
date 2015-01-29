@@ -49,7 +49,6 @@ public class FavorOfTheGods {
 		MinecraftForge.EVENT_BUS.register(new EventList());
 		MinecraftForge.EVENT_BUS.register(new GodStefan());
 		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
-		//MinecraftForge.EVENT_BUS.register(new BlockAltar(Material.rock));
 	}
 	
 	public static String prependModID(String name, char letter)

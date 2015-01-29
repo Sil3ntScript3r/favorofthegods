@@ -13,9 +13,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Favor implements IExtendedEntityProperties {
 	// Set the most and least favor you're allowed to acquire for any one god
-	public static final int MAX_FAVOR = 1000;
+	public static final int MAX_FAVOR = 5000;
 	public static final int NEUTRAL_FAVOR = 0;
-	public static final int MIN_FAVOR = -1000;
+	public static final int MIN_FAVOR = -5000;
 	
 	// Set the name of the property
 	public static final String FAVOR_TAG = "Favor";
@@ -27,13 +27,12 @@ public class Favor implements IExtendedEntityProperties {
 	// Position of the Altar this player prayed to
 	private BlockPos altarPos;
 	
-	// TODO: Stop being so bad and change godFavors to a List(assuming that works)
 	// Store the favors of the gods
 	private int[] godFavors = new int[2];
 	
 	public static int numGods = 2;
 	
-	// When Favor is created, set player to a player passed in
+	// When Favor is created, set player to a player passed in and set Favor to defaults before the actual value is loaded in, if at all
 	public Favor(EntityPlayer player)
 	{
 		this.player = player;
