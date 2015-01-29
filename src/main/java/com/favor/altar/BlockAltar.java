@@ -56,10 +56,12 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
 	{
-		world.spawnEntityInWorld(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ()));
-		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 9f, true);
-		world.spawnEntityInWorld(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ()));
-		MinecraftServer.getServer().addChatMessage(new ChatComponentText("The Gods are not pleased with your defiance!"));
+		if(!world.isRemote)
+		{
+			world.spawnEntityInWorld(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ()));
+			world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 6f, true);
+			MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("The Gods are not pleased with your defiance!"));
+		}
 	}
 	
 	// When the block is spawned, check to see what rank the Altar is

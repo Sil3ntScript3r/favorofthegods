@@ -23,9 +23,12 @@ public class PacketHandler implements IMessage {
 		this.favors = favors;
 		this.player = player;
 		
-		this.altarPos[0] = altarPos.getX();
-		this.altarPos[1] = altarPos.getY();
-		this.altarPos[2] = altarPos.getZ();
+		if(altarPos != null)
+		{
+			this.altarPos[0] = altarPos.getX();
+			this.altarPos[1] = altarPos.getY();
+			this.altarPos[2] = altarPos.getZ();
+		}
 	}
 	
 	// Decode the message
