@@ -1,5 +1,8 @@
 package com.favor.gods;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,13 +25,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.favor.Favor;
 
 public class GodDesertPig extends Gods {
+	public static List[] altarBlocks;
+	
 	public GodDesertPig()
 	{
-		super();
-		goodBlocks[0].add(Blocks.dirt);
-		goodBlocks[0].add(Blocks.yellow_flower);
-		goodBlocks[0].add(Blocks.jukebox);
-		goodBlocks[0].add(Blocks.sandstone);
+		altarBlocks = initAltarBlocks(altarBlocks);
+		
+		altarBlocks[0].add(Blocks.sandstone);
 		//goodBlocks[4].add(pigBlock); Pepper demands a pig block
 	}
 	

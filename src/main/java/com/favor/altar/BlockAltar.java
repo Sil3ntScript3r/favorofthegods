@@ -35,13 +35,19 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 			Favor favor = Favor.get(player);
 			if(favor != null)
 			{
-				((TileAltar)world.getTileEntity(pos)).setOwner(player);
 				favor.setAltarPos(pos);
 				System.out.println(pos);
 			}
 		}
 		
 		return this.getDefaultState();
+	}
+	
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
+		((TileAltar)world.getTileEntity(pos)).setOwner(player);
+		((TileAltar)world.getTileEntity(pos)).checkRank(world, player);
+		return true;
 	}
 	
 	// When the Altar is destroyed by a player, call lightning down and make it explode

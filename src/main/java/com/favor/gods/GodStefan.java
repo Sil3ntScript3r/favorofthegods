@@ -1,5 +1,9 @@
 package com.favor.gods;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,13 +12,13 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GodStefan extends Gods {
+	public static List[] altarBlocks;
+	
 	public GodStefan()
-	{
-		super();
-		goodBlocks[0].add(Blocks.dirt);
-		goodBlocks[0].add(Blocks.red_flower);
+	{	
+		altarBlocks = initAltarBlocks(altarBlocks);
 		
-		goodBlocks[5].add(Blocks.wool);
+		altarBlocks[0].add(Blocks.dirt);
 	}
 	
 	@SubscribeEvent
