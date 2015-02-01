@@ -19,9 +19,31 @@ public class Gods {
 	// All gods set this themself in their constructor
 	//public static List<List[]> altarBlocks;
 	
+	public static List<List[]> godBlocks = new ArrayList<List[]>();
+	public static List<String> godNames = new ArrayList<String>();
+	
 	private static final int NUM_RANKS = 5;
 	
+	String name;
+	
 	Random rand = new Random();
+	
+	public static List getAltarBlocks(int god, int rank)
+	{
+		return godBlocks.get(god)[rank];
+	}
+	
+	static List[] initAltarBlocks()
+	{
+		List[] list = new List[NUM_RANKS + 1];
+		
+		for(int i = 0; i <= NUM_RANKS; i++)
+		{
+			list[i] = new ArrayList<Block>();
+		}
+		
+		return list;
+	}
 	
 	void increaseFavor(int num, EntityPlayer player, int god)
 	{
@@ -37,17 +59,5 @@ public class Gods {
 		{
 			Favor.get(player).decreaseFavor(num, god);
 		}
-	}
-	
-	List[] initAltarBlocks()
-	{
-		List[] list = new List[NUM_RANKS + 1];
-		
-		for(int i = 0; i <= NUM_RANKS; i++)
-		{
-			list[i] = new ArrayList<Block>();
-		}
-		
-		return list;
 	}
 }

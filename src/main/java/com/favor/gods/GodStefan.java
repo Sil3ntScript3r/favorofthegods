@@ -12,13 +12,19 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GodStefan extends Gods {
-	public static List[] altarBlocks;
+	private static List[] altarBlocks;
 	
 	public GodStefan()
 	{	
+		godNames.add(GOD_STEFAN, "Stefan");
+		
 		altarBlocks = initAltarBlocks();
+		godBlocks.add(GOD_STEFAN, altarBlocks);
 		
 		altarBlocks[0].add(Blocks.dirt);
+		
+		altarBlocks[1].add(Blocks.red_flower);
+		altarBlocks[1].add(Blocks.yellow_flower);
 	}
 	
 	@SubscribeEvent

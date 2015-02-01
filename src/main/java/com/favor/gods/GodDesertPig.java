@@ -25,11 +25,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.favor.Favor;
 
 public class GodDesertPig extends Gods {
-	public static List[] altarBlocks;
+	private static List[] altarBlocks;
 	
 	public GodDesertPig()
 	{
+		godNames.add(GOD_DESERTPIG, "Desert Pig");
+		
 		altarBlocks = initAltarBlocks();
+		godBlocks.add(GOD_DESERTPIG, altarBlocks);
 		
 		altarBlocks[0].add(Blocks.sandstone);
 		//goodBlocks[4].add(pigBlock); Pepper demands a pig block

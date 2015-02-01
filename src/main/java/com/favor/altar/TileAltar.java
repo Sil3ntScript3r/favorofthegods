@@ -19,6 +19,9 @@ import com.favor.gods.Gods;
 
 public class TileAltar extends TileEntity {
 	private static final int ALTAR_DEPTH = 3;
+	private static final int BASE_SIZE = 2;
+	private static final int SIZE_SCALE = 2;
+	private static final int BLOCKS_NEEDED = 5;
 	
 	private int rank;
 	private int mainGod;
@@ -45,57 +48,42 @@ public class TileAltar extends TileEntity {
 	public void checkRank(World world, EntityPlayer player)
 	{
 		rank = -1;
-		if(ownerPlayer == null)
-			return;
 		
 		if(!player.worldObj.isRemote)
 		{
-			Favor favor = Favor.get(ownerPlayer);
-			
-			// Check if it meets Rank 0 requirements, and see which God is being praised
-			// STEFAN
-			if(GodStefan.altarBlocks[0].contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
-			{
-				if(world.getBlockState(this.pos.add(1, -1, 0)).getBlock() == Blocks.air && world.getBlockState(this.pos.add(-1, -1, 0)).getBlock() == Blocks.air)
-				{
-					if(world.getBlockState(this.pos.add(0, -1, 1)).getBlock() == Blocks.air && world.getBlockState(this.pos.add(0, -1, -1)).getBlock() == Blocks.air)
-					{
-						rank = 0;
-						player.addChatComponentMessage(new ChatComponentText("Stefan accepts this altar."));
-						
-						mainGod = Gods.GOD_STEFAN;
-						checkBlocks(world, this.pos, 5);
-					}
-				}
-			}
-			
-			// DESERT PIG
-			else if(GodDesertPig.altarBlocks[0].contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
-			{
-				if(world.getBlockState(this.pos.add(1, -1, 0)).getBlock() == Blocks.air && world.getBlockState(this.pos.add(-1, -1, 0)).getBlock() == Blocks.air)
-				{
-					if(world.getBlockState(this.pos.add(0, -1, 1)).getBlock() == Blocks.air && world.getBlockState(this.pos.add(0, -1, -1)).getBlock() == Blocks.air)
-					{
-						rank = 0;
-						player.addChatComponentMessage(new ChatComponentText("Desert Pig accepts this altar."));
-						
-						mainGod = Gods.GOD_DESERTPIG;
-					}
-				}
-			}
-			
-			// Altar is not correct to reach Rank 0
-			else
+			//Favor favor = Favor.get(ownerPlayer);
+
+			// Make sure Altar meets Rank 0 requirements
+			if(!checkRank0(world))
 			{
 				player.addChatComponentMessage(new ChatComponentText("No God wants this altar."));
+				return;
 			}
-	
-			// Continue checking ranks
-			if(rank != -1)
+			else
 			{
-				
+				player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
+			}
+
+			checkBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * rank));
+		
+			surronding.retainAll(Gods.getAltarBlocks(mainGod, rank + 1));
+			System.out.println(surronding.size());
+		}
+	}
+	
+	private boolean checkRank0(World world)
+	{
+		for(int i = 0; i <= Gods.godBlocks.size(); i++)
+		{
+			if(Gods.getAltarBlocks(i, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
+			{
+				rank = 0;
+				mainGod = i;
+				return true;
 			}
 		}
+		
+		return false;
 	}
 	
 	private void checkBlocks(World world, BlockPos pos, int size)
