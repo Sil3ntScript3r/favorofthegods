@@ -68,7 +68,6 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		if(altar != null && altar instanceof TileAltar)
 		{
 			TileAltar tilealtar = (TileAltar)altar;
-			tilealtar.checkRank(world);
 		}
 	}
 

@@ -39,9 +39,9 @@ public class Gods {
 		}
 	}
 	
-	List[] initAltarBlocks(List[] list)
+	List[] initAltarBlocks()
 	{
-		list = new List[NUM_RANKS + 1];
+		List[] list = new List[NUM_RANKS + 1];
 		
 		for(int i = 0; i <= NUM_RANKS; i++)
 		{

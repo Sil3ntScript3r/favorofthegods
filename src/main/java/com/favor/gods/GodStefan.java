@@ -16,7 +16,7 @@ public class GodStefan extends Gods {
 	
 	public GodStefan()
 	{	
-		altarBlocks = initAltarBlocks(altarBlocks);
+		altarBlocks = initAltarBlocks();
 		
 		altarBlocks[0].add(Blocks.dirt);
 	}

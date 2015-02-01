@@ -29,7 +29,7 @@ public class GodDesertPig extends Gods {
 	
 	public GodDesertPig()
 	{
-		altarBlocks = initAltarBlocks(altarBlocks);
+		altarBlocks = initAltarBlocks();
 		
 		altarBlocks[0].add(Blocks.sandstone);
 		//goodBlocks[4].add(pigBlock); Pepper demands a pig block
