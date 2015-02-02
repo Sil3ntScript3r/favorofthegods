@@ -32,6 +32,7 @@ public class TileAltar extends TileEntity {
 	{
 		surronding = new ArrayList<Block>();
 		rank = -1;
+		mainGod = -1;
 	}
 	
 	public void writeToNBT(NBTTagCompound data)
@@ -44,69 +45,81 @@ public class TileAltar extends TileEntity {
 		super.readFromNBT(data);
 	}
 	
-	// TODO: Finish checking rank of the Altar
 	public void checkRank(World world, EntityPlayer player)
 	{
 		rank = -1;
 		
 		if(!player.worldObj.isRemote)
 		{
-			// Make sure Altar meets Rank 0 requirements
-			if(checkRank0(world))
+			// Make sure Altar isn't owned by a God already
+			if(mainGod == -1)
 			{
-				player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
+				// If it's not owned, assign it to one
+				if(checkRank0(world))
+				{
+					player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
+				}
+				else
+				{
+					player.addChatComponentMessage(new ChatComponentText("No God wants this altar."));
+					return;
+				}
 			}
 			else
 			{
-				player.addChatComponentMessage(new ChatComponentText("No God wants this altar."));
-				return;
+				// If it is owned, find out if it's still acceptable
+				if(Gods.getAltarBlocks(mainGod, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
+				{
+					player.addChatComponentMessage(new ChatComponentText("This Altar is Favored by " + Gods.godNames.get(mainGod) + "."));
+				}
+				else
+				{
+					player.addChatComponentMessage(new ChatComponentText("This Altar was Favored by " + Gods.godNames.get(mainGod) + ", but has since lost it's Favor."));
+				}
 			}
 			
+			// Iterate through all the possible Ranks
+			// Check the Altar at each Rank to see if it meets the requirements
 			for(int i = 1; i <= Gods.NUM_RANKS; i++)
 			{
 				getBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * i));
 				int[] b = checkBlockRank();
 
-				if(b[1] >= BLOCKS_NEEDED * i)
-				{
-					if(b[2] >= BLOCKS_NEEDED * (i - 1))
-					{
-						if(b[3] >= BLOCKS_NEEDED * (i - 2))
-						{
-							if(b[4] >= BLOCKS_NEEDED * (i - 3))
-							{
-								if(b[5] >= BLOCKS_NEEDED * (i - 4))
-								{
-									rank++;
-								}else
-								{
-									break;
-								}
-							}else
-							{
-								break;
-							}
-						}else
-						{
-							break;
-						}
-					}else
-					{
-						break;
-					}
-				} else
-				{
+				if(!checkRanks(i, b))
 					break;
-				}
+				
+				rank++;
 			}
 			
 			System.out.println("Rank: " + rank);
 		}
 	}
+
+	private boolean checkRanks(int i, int[] b)
+	{
+		if(b[1] >= BLOCKS_NEEDED * i)
+		{
+			if(b[2] >= BLOCKS_NEEDED * (i - 1))
+			{
+				if(b[3] >= BLOCKS_NEEDED * (i - 2))
+				{
+					if(b[4] >= BLOCKS_NEEDED * (i - 3))
+					{
+						if(b[5] >= BLOCKS_NEEDED * (i - 4))
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
 	
 	private boolean checkRank0(World world)
 	{
-		for(int i = 0; i <= Gods.godBlocks.size(); i++)
+		for(int i = 0; i < Gods.godBlocks.size(); i++)
 		{
 			if(Gods.getAltarBlocks(i, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 			{
