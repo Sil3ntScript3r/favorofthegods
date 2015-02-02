@@ -51,23 +51,56 @@ public class TileAltar extends TileEntity {
 		
 		if(!player.worldObj.isRemote)
 		{
-			//Favor favor = Favor.get(ownerPlayer);
-
 			// Make sure Altar meets Rank 0 requirements
-			if(!checkRank0(world))
+			if(checkRank0(world))
+			{
+				player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
+			}
+			else
 			{
 				player.addChatComponentMessage(new ChatComponentText("No God wants this altar."));
 				return;
 			}
-			else
+			
+			for(int i = 1; i <= Gods.NUM_RANKS; i++)
 			{
-				player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
-			}
+				getBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * i));
+				int[] b = checkBlockRank();
 
-			checkBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * rank));
-		
-			surronding.retainAll(Gods.getAltarBlocks(mainGod, rank + 1));
-			System.out.println(surronding.size());
+				if(b[1] >= BLOCKS_NEEDED * i)
+				{
+					if(b[2] >= BLOCKS_NEEDED * (i - 1))
+					{
+						if(b[3] >= BLOCKS_NEEDED * (i - 2))
+						{
+							if(b[4] >= BLOCKS_NEEDED * (i - 3))
+							{
+								if(b[5] >= BLOCKS_NEEDED * (i - 4))
+								{
+									rank++;
+								}else
+								{
+									break;
+								}
+							}else
+							{
+								break;
+							}
+						}else
+						{
+							break;
+						}
+					}else
+					{
+						break;
+					}
+				} else
+				{
+					break;
+				}
+			}
+			
+			System.out.println("Rank: " + rank);
 		}
 	}
 	
@@ -86,7 +119,24 @@ public class TileAltar extends TileEntity {
 		return false;
 	}
 	
-	private void checkBlocks(World world, BlockPos pos, int size)
+	private int[] checkBlockRank()
+	{
+		int[] blockCount = new int[Gods.NUM_RANKS + 1];
+		
+		for(int i = 0; i <= Gods.NUM_RANKS; i++)
+		{
+			for(Block block : surronding)
+			{
+				if(Gods.getAltarBlocks(mainGod, i).contains(block))
+					blockCount[i]++;
+			}
+		}
+		
+		System.out.println(blockCount[0] + " : " + blockCount[1] + " : " + blockCount[2] + " : " + blockCount[3] + " : " + blockCount[4] + " : " + blockCount[5]);
+		return blockCount;
+	}
+	
+	private void getBlocks(World world, BlockPos pos, int size)
 	{
 		surronding.clear();
 		
@@ -106,7 +156,7 @@ public class TileAltar extends TileEntity {
 			}
 		}
 		
-		System.out.println(surronding.size());
+		System.out.println("Surronding blocks in radius " + size + ": " + surronding.size());
 	}
 	
 	public int getRank()

@@ -35,6 +35,11 @@ public class GodDesertPig extends Gods {
 		godBlocks.add(GOD_DESERTPIG, altarBlocks);
 		
 		altarBlocks[0].add(Blocks.sandstone);
+		altarBlocks[1].add(Blocks.tnt);
+		altarBlocks[2].add(Blocks.anvil);
+		altarBlocks[3].add(Blocks.iron_ore);
+		altarBlocks[4].add(Blocks.jukebox);
+		altarBlocks[5].add(Blocks.emerald_block);
 		//goodBlocks[4].add(pigBlock); Pepper demands a pig block
 	}
 	

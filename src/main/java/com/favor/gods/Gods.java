@@ -15,24 +15,26 @@ public class Gods {
 	public static final int GOD_DESERTPIG = 1;
 	
 	// List of all the blocks that can be used for the Altar
-	// Array index = rank of the block
+	// First list = God to choose, based on it's number
+	// Array index = Rank of the block
+	// Second list = All the blocks the God has added for that rank
 	// All gods set this themself in their constructor
-	//public static List<List[]> altarBlocks;
-	
 	public static List<List[]> godBlocks = new ArrayList<List[]>();
 	public static List<String> godNames = new ArrayList<String>();
 	
-	private static final int NUM_RANKS = 5;
+	public static final int NUM_RANKS = 5;
 	
 	String name;
 	
 	Random rand = new Random();
 	
-	public static List getAltarBlocks(int god, int rank)
+	// Return the list of blocks for a certain rank
+	public static ArrayList<Block> getAltarBlocks(int god, int rank)
 	{
-		return godBlocks.get(god)[rank];
+		return (ArrayList<Block>)godBlocks.get(god)[rank];
 	}
 	
+	// Used by the gods to construct their ArrayList
 	static List[] initAltarBlocks()
 	{
 		List[] list = new List[NUM_RANKS + 1];
