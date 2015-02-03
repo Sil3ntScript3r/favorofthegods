@@ -19,30 +19,49 @@ public class TileAltar extends TileEntity {
 	private static final int BASE_SIZE = 2;
 	private static final int SIZE_SCALE = 2;
 	private static final int BLOCKS_NEEDED = 5;
+	private static final String TAG = "favor";
 	
 	private int rank;
 	private int mainGod;
-	private EntityPlayer ownerPlayer;
 	private List<Block> surronding;
 	private Favor favor;
 	
 	public TileAltar()
 	{
-		favor = new Favor(this.pos);
+		favor = new Favor();
 		
 		surronding = new ArrayList<Block>();
-		rank = -1;
-		mainGod = -1;
 	}
 	
 	public void writeToNBT(NBTTagCompound data)
 	{
 		super.writeToNBT(data);
+		NBTTagCompound favorTag = new NBTTagCompound();
+		
+		List<Integer> godFavors = favor.getFavors();
+		int[] favors = new int[godFavors.size()];
+		
+		for(int i = 0; i < godFavors.size(); i++)
+		{
+			favors[i] = godFavors.get(i);
+		}
+		
+		favorTag.setIntArray("godFavors", favors);
+		
+		data.setTag(TAG, favorTag);
 	}
 	
 	public void readFromNBT(NBTTagCompound data)
 	{
 		super.readFromNBT(data);
+		NBTTagCompound favorTag = (NBTTagCompound)data.getTag(TAG);
+		
+		int[] favors = favorTag.getIntArray("godFavors");
+		
+		for(int i = 0; i < favors.length; i++)
+		{
+			favor.setFavor(i, favors[i]);
+		}
 	}
 	
 	public void checkRank(World world, EntityPlayer player)
@@ -175,10 +194,5 @@ public class TileAltar extends TileEntity {
 	public int getRank()
 	{
 		return rank;
-	}
-	
-	public void setOwner(EntityPlayer owner)
-	{
-		ownerPlayer = owner;
 	}
 }

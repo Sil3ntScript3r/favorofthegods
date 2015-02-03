@@ -3,6 +3,8 @@ package com.favor;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.favor.altar.TileAltar;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -25,6 +27,7 @@ public class Favor implements IExtendedEntityProperties {
 	private final EntityPlayer player;
 	
 	// Position of the Altar this player prayed to
+	private World world;
 	private BlockPos altarPos;
 	
 	// Store the favors of the gods
@@ -152,8 +155,9 @@ public class Favor implements IExtendedEntityProperties {
 		return altarPos;
 	}
 	
-	public void setAltarPos(BlockPos pos)
+	public void setAltarPos(World wrld, BlockPos pos)
 	{
+		world = wrld;
 		altarPos = pos;
 	}
 

@@ -13,19 +13,21 @@ public class Favor {
 	
 	private static final String TAG = "Altar";
 	
-	private BlockPos altarPos;
 	private List<Integer> godFavors;
 	
-	public Favor(BlockPos pos)
+	public Favor()
 	{
-		altarPos = pos;
-		
 		godFavors = new ArrayList<Integer>();
 		
 		for(String s : Gods.godNames)
 		{
 			godFavors.add(0);
 		}
+	}
+	
+	public List<Integer> getFavors()
+	{
+		return godFavors;
 	}
 	
 	public int getFavor(int god)

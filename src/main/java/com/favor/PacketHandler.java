@@ -86,7 +86,7 @@ public class PacketHandler implements IMessage {
 				favorProp.setFavor(message.favors[x], x);
 			}
 			
-			favorProp.setAltarPos(new BlockPos(message.altarPos[0], message.altarPos[1], message.altarPos[2]));
+			//favorProp.setAltarPos(new BlockPos(message.altarPos[0], message.altarPos[1], message.altarPos[2]));
 			
 			return null;
 		}
