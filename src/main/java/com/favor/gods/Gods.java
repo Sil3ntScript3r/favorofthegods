@@ -20,6 +20,8 @@ public class Gods {
 	// Second list = All the blocks the God has added for that rank
 	// All gods set this themself in their constructor
 	public static List<List[]> godBlocks = new ArrayList<List[]>();
+	
+	// List of all the God's names, sorted by their number
 	public static List<String> godNames = new ArrayList<String>();
 	
 	public static final int NUM_RANKS = 5;

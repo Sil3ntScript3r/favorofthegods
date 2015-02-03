@@ -12,9 +12,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-import com.favor.Favor;
-import com.favor.gods.GodDesertPig;
-import com.favor.gods.GodStefan;
 import com.favor.gods.Gods;
 
 public class TileAltar extends TileEntity {
@@ -27,9 +24,12 @@ public class TileAltar extends TileEntity {
 	private int mainGod;
 	private EntityPlayer ownerPlayer;
 	private List<Block> surronding;
+	private Favor favor;
 	
 	public TileAltar()
 	{
+		favor = new Favor(this.pos);
+		
 		surronding = new ArrayList<Block>();
 		rank = -1;
 		mainGod = -1;
