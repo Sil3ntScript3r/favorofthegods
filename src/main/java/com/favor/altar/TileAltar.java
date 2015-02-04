@@ -23,13 +23,16 @@ public class TileAltar extends TileEntity {
 	
 	private int rank;
 	private int mainGod;
-	private List<Block> surronding;
 	private Favor favor;
+	private List<Block> surronding;
+	private List<EntityPlayer> followers;
 	
 	public TileAltar()
 	{
 		favor = new Favor();
+		mainGod = -1;
 		
+		followers = new ArrayList<EntityPlayer>();
 		surronding = new ArrayList<Block>();
 	}
 	
@@ -37,6 +40,8 @@ public class TileAltar extends TileEntity {
 	{
 		super.writeToNBT(data);
 		NBTTagCompound favorTag = new NBTTagCompound();
+		
+		favorTag.setInteger("mainGod", mainGod);
 		
 		List<Integer> godFavors = favor.getFavors();
 		int[] favors = new int[godFavors.size()];
@@ -56,6 +61,8 @@ public class TileAltar extends TileEntity {
 		super.readFromNBT(data);
 		NBTTagCompound favorTag = (NBTTagCompound)data.getTag(TAG);
 		
+		mainGod = favorTag.getInteger("mainGod");
+		
 		int[] favors = favorTag.getIntArray("godFavors");
 		
 		for(int i = 0; i < favors.length; i++)
@@ -65,9 +72,7 @@ public class TileAltar extends TileEntity {
 	}
 	
 	public void checkRank(World world, EntityPlayer player)
-	{
-		rank = -1;
-		
+	{	
 		if(!player.worldObj.isRemote)
 		{
 			// Make sure Altar isn't owned by a God already
@@ -94,8 +99,12 @@ public class TileAltar extends TileEntity {
 				else
 				{
 					player.addChatComponentMessage(new ChatComponentText("This Altar was Favored by " + Gods.godNames.get(mainGod) + ", but has since lost it's Favor."));
+					rank = -1;
+					return;
 				}
 			}
+			// Reset the rank before we start counting
+			rank = 0;
 			
 			// Iterate through all the possible Ranks
 			// Check the Altar at each Rank to see if it meets the requirements
@@ -191,8 +200,19 @@ public class TileAltar extends TileEntity {
 		System.out.println("Surronding blocks in radius " + size + ": " + surronding.size());
 	}
 	
+	public Favor getFavor()
+	{
+		return favor;
+	}
+	
 	public int getRank()
 	{
 		return rank;
+	}
+	
+	public void addFollower(EntityPlayer player)
+	{
+		if(!followers.contains(player))
+			followers.add(player);
 	}
 }

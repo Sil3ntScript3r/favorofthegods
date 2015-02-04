@@ -23,7 +23,7 @@ public class FavorOfTheGods {
 	
 	@Mod.Instance(FavorOfTheGods.MODID)
 	public static FavorOfTheGods instance;
-	public static SimpleNetworkWrapper network;
+	//public static SimpleNetworkWrapper network;
 	
 	@SidedProxy(clientSide = "com.favor.ClientOnlyProxy", serverSide = "com.favor.ServerOnlyProxy")
 	public static CommonProxy proxy;
@@ -31,8 +31,8 @@ public class FavorOfTheGods {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		network = NetworkRegistry.INSTANCE.newSimpleChannel("FavorOfTheGods");
-		network.registerMessage(PacketHandler.Handler.class, PacketHandler.class, 0, Side.CLIENT);
+		//network = NetworkRegistry.INSTANCE.newSimpleChannel("FavorOfTheGods");
+		//network.registerMessage(PacketHandler.Handler.class, PacketHandler.class, 0, Side.CLIENT);
 		proxy.preInit();
 	}
 	

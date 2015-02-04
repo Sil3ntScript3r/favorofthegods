@@ -15,7 +15,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import com.favor.Favor;
+import com.favor.PlayerProps;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
 	public BlockAltar(Material material)
@@ -32,7 +32,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 			EntityPlayer player = (EntityPlayer)placer;
 			System.out.println("Altar placed");
 			
-			Favor favor = Favor.get(player);
+			PlayerProps favor = PlayerProps.get(player);
 			if(favor != null)
 			{
 				//favor.setAltarPos(pos);
@@ -45,6 +45,12 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
+		if(PlayerProps.get(player) != null)
+		{
+			PlayerProps.get(player).setAltarPos(world, pos);
+			((TileAltar)world.getTileEntity(pos)).addFollower(player);
+		}
+
 		((TileAltar)world.getTileEntity(pos)).checkRank(world, player);
 		return true;
 	}

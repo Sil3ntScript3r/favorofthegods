@@ -7,7 +7,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.favor.Favor;
+import com.favor.PlayerProps;
+import com.favor.altar.Favor;
+import com.favor.altar.TileAltar;
 
 public class Gods {
 	// Ints used to easily talk about a certain God
@@ -51,17 +53,27 @@ public class Gods {
 	
 	void increaseFavor(int num, EntityPlayer player, int god)
 	{
-		if(Favor.get(player) != null)
+		if(PlayerProps.get(player) != null)
 		{
-			Favor.get(player).increaseFavor(num, god);
+			PlayerProps props = PlayerProps.get(player);
+			if(player.worldObj.getTileEntity(props.getAltarPos()) != null)
+			{
+				TileAltar altar = (TileAltar)player.worldObj.getTileEntity(props.getAltarPos());
+				altar.getFavor().increaseFavor(god, num);
+			}
 		}
 	}
 	
 	void decreaseFavor(int num, EntityPlayer player, int god)
 	{
-		if(Favor.get(player) != null)
+		if(PlayerProps.get(player) != null)
 		{
-			Favor.get(player).decreaseFavor(num, god);
+			PlayerProps props = PlayerProps.get(player);
+			if(player.worldObj.getTileEntity(props.getAltarPos()) != null)
+			{
+				TileAltar altar = (TileAltar)player.worldObj.getTileEntity(props.getAltarPos());
+				altar.getFavor().decreaseFavor(god, num);
+			}
 		}
 	}
 }
