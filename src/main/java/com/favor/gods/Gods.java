@@ -56,9 +56,9 @@ public class Gods {
 		if(PlayerProps.get(player) != null)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(player.worldObj.getTileEntity(props.getAltarPos()) != null)
+			if(props.getWorld().getTileEntity(props.getAltarPos()) != null)
 			{
-				TileAltar altar = (TileAltar)player.worldObj.getTileEntity(props.getAltarPos());
+				TileAltar altar = (TileAltar)props.getWorld().getTileEntity(props.getAltarPos());
 				altar.getFavor().increaseFavor(god, num);
 			}
 		}
@@ -69,9 +69,9 @@ public class Gods {
 		if(PlayerProps.get(player) != null)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(player.worldObj.getTileEntity(props.getAltarPos()) != null)
+			if(props.getWorld().getTileEntity(props.getAltarPos()) != null)
 			{
-				TileAltar altar = (TileAltar)player.worldObj.getTileEntity(props.getAltarPos());
+				TileAltar altar = (TileAltar)props.getWorld().getTileEntity(props.getAltarPos());
 				altar.getFavor().decreaseFavor(god, num);
 			}
 		}

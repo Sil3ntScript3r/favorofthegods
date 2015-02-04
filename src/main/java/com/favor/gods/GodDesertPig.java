@@ -36,7 +36,7 @@ public class GodDesertPig extends Gods {
 		altarBlocks[3].add(Blocks.iron_ore);
 		altarBlocks[4].add(Blocks.jukebox);
 		altarBlocks[5].add(Blocks.emerald_block);
-		//goodBlocks[4].add(pigBlock); Pepper demands a pig block
+		//goodBlocks[5].add(pigBlock); Pepper demands a pig block
 	}
 	
 	@SubscribeEvent

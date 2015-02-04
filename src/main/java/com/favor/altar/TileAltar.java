@@ -110,6 +110,9 @@ public class TileAltar extends TileEntity {
 			// Check the Altar at each Rank to see if it meets the requirements
 			for(int i = 1; i <= Gods.NUM_RANKS; i++)
 			{
+				if(favor.getFavor(mainGod) < favor.RANKS[rank + 1])
+					break;
+				
 				getBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * i));
 				int[] b = checkBlockRank();
 

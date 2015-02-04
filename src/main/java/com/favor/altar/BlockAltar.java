@@ -24,6 +24,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
+	/*
 	// When the block is placed by a player, associate the Altar with the player
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitx, float hity, float hitz, int meta, EntityLivingBase placer)
 	{
@@ -42,6 +43,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		
 		return this.getDefaultState();
 	}
+	*/
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
@@ -54,7 +56,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		((TileAltar)world.getTileEntity(pos)).checkRank(world, player);
 		return true;
 	}
-	
+
 	// When the Altar is destroyed by a player, call lightning down and make it explode
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
 	{
@@ -69,6 +71,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	// When the block is spawned, check to see what rank the Altar is
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
+		System.out.println("Altar block spawned");
 		TileEntity altar = world.getTileEntity(pos);
 		if(altar != null && altar instanceof TileAltar)
 		{
@@ -77,7 +80,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	}
 
 	public TileEntity createNewTileEntity(World world, int meta) {
-		System.out.println("Altar tile entity created");
+		System.out.println("Creating Tile Altar");
 		return new TileAltar();
 	}
 

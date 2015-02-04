@@ -3,6 +3,7 @@ package com.favor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -63,7 +64,7 @@ public class PlayerProps implements IExtendedEntityProperties {
 		
 		if(altarPos != null)
 			props.setIntArray("altarPos", new int[]{altarPos.getX(), altarPos.getY(), altarPos.getZ()});
-		
+
 		compound.setTag(TAG, props);
 	}
 
@@ -81,6 +82,10 @@ public class PlayerProps implements IExtendedEntityProperties {
 	public boolean checkAltar()
 	{
 		if(altarPos == null)
+		{
+			return false;
+		}
+		else if(world == null)
 		{
 			return false;
 		}
@@ -111,6 +116,11 @@ public class PlayerProps implements IExtendedEntityProperties {
 			return (TileAltar)world.getTileEntity(altarPos);
 		else
 			return null;
+	}
+	
+	public World getWorld()
+	{
+		return world;
 	}
 
 	public void init(Entity entity, World world)

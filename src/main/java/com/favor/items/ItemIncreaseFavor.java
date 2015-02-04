@@ -23,9 +23,9 @@ public class ItemIncreaseFavor extends Item {
 		
 		if(favor != null)
 			if(!player.isSneaking())
-				favor.increaseFavor(10, Gods.GOD_STEFAN);
+				favor.increaseFavor(Gods.GOD_DESERTPIG, 10);
 			else
-				favor.increaseFavor(250, Gods.GOD_DESERTPIG);
+				favor.increaseFavor(Gods.GOD_DESERTPIG, 250);
 			
 		return itemStack;
 	}

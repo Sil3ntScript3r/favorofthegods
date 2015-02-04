@@ -8,8 +8,9 @@ import net.minecraft.util.BlockPos;
 import com.favor.gods.Gods;
 
 public class Favor {
-	public static final int MAX_FAVOR = 5000;
-	public static final int MIN_FAVOR = -5000;
+	public static final int MAX_FAVOR = 10000;
+	public static final int MIN_FAVOR = -10000;
+	public static final int[] RANKS = new int[]{0, 500, 2500, 5000, 7500, MAX_FAVOR};
 	
 	private static final String TAG = "Altar";
 	
