@@ -17,8 +17,8 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.favor.PlayerProps;
-import com.favor.altar.Favor;
-import com.favor.altar.TileAltar;
+import com.favor.favornetwork.Favor;
+import com.favor.favornetwork.FavorHandler;
 
 public class GodDesertPig extends Gods {
 	private static List[] altarBlocks;
@@ -49,9 +49,9 @@ public class GodDesertPig extends Gods {
 			
 			if(props != null)
 			{
-				if(props.checkAltar())
+				if(props.checkReligion())
 				{
-					Favor favor = props.getAltar().getFavor();
+					Favor favor = FavorHandler.getFavor(props.getReligionName());
 					
 					// Desert Pig does not get along with sheep
 					if(event.entity instanceof EntitySheep)
@@ -82,11 +82,11 @@ public class GodDesertPig extends Gods {
 								zomb.setEquipmentDropChance(3, 0);
 								zomb.setEquipmentDropChance(4, 0);
 								
-								int minFavor = Favor.MIN_FAVOR;
+								int minFavor = FavorHandler.MIN_FAVOR;
 	
 								if(pigFavor == minFavor)
 								{
-									// RANK 4 ~ -1000 Favor
+									// RANK 4 ~ -10000 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.diamond_sword));
 									zomb.setCurrentItemOrArmor(1, new ItemStack(Items.diamond_helmet));
 									zomb.setCurrentItemOrArmor(2, new ItemStack(Items.diamond_chestplate));
@@ -96,7 +96,7 @@ public class GodDesertPig extends Gods {
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is VERY upset at the death you caused!"));
 								} else if(pigFavor <= minFavor * .75)
 								{
-									// RANK 3 ~ -750 Favor
+									// RANK 3 ~ -7500 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
 									zomb.setCurrentItemOrArmor(1, new ItemStack(Items.iron_helmet));
 									zomb.setCurrentItemOrArmor(2, new ItemStack(Items.iron_chestplate));
@@ -106,7 +106,7 @@ public class GodDesertPig extends Gods {
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is very upset at the death you caused!"));
 								} else if(pigFavor <= minFavor * .50)
 								{
-									// Rank 2 ~ -500 Favor
+									// Rank 2 ~ -5000 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
 									zomb.setCurrentItemOrArmor(1, new ItemStack(Items.golden_helmet));
 									zomb.setCurrentItemOrArmor(2, new ItemStack(Items.golden_chestplate));
@@ -116,7 +116,7 @@ public class GodDesertPig extends Gods {
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is upset at the death you caused!"));
 								} else if(pigFavor <= minFavor * .25)
 								{
-									// Rank 1 ~ -250 Favor
+									// Rank 1 ~ -2500 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_sword));
 									zomb.setCurrentItemOrArmor(1, new ItemStack(Items.leather_helmet));
 									zomb.setCurrentItemOrArmor(2, new ItemStack(Items.leather_chestplate));
@@ -160,9 +160,9 @@ public class GodDesertPig extends Gods {
 					EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(i);
 					PlayerProps props = PlayerProps.get(player);
 					
-					if(props.checkAltar())
+					if(props.checkReligion())
 					{
-						Favor favor = props.getAltar().getFavor();
+						Favor favor = FavorHandler.getFavor(props.getReligionName());
 						
 						if(favor.getFavor(GOD_DESERTPIG) >= 30)
 						{

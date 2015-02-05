@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.favor.altar.Favor;
+import com.favor.favornetwork.Favor;
 
 public class EventList {
 	@SubscribeEvent

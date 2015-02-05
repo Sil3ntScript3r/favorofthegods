@@ -14,13 +14,11 @@ public class PlayerProps implements IExtendedEntityProperties {
 	private static final String TAG = "FavorOfTheGods";
 	private final EntityPlayer player;
 	
-	private BlockPos altarPos;
-	private World world;
+	private String religionName;
 
 	public PlayerProps(EntityPlayer player)
 	{
 		this.player = player;
-		altarPos = null;
 	}
 	
 	public static void register(EntityPlayer player)
@@ -61,9 +59,8 @@ public class PlayerProps implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound)
 	{
 		NBTTagCompound props = new NBTTagCompound();
-		
-		if(altarPos != null)
-			props.setIntArray("altarPos", new int[]{altarPos.getX(), altarPos.getY(), altarPos.getZ()});
+
+		props.setString("religionName", religionName);
 
 		compound.setTag(TAG, props);
 	}
@@ -72,24 +69,12 @@ public class PlayerProps implements IExtendedEntityProperties {
 	{
 		NBTTagCompound props = (NBTTagCompound)compound.getTag(TAG);
 		
-		if(props.hasKey("altarPos"))
-		{
-			int[] pos = props.getIntArray("altarPos");
-			altarPos = new BlockPos(pos[0], pos[1], pos[2]);
-		}
+		religionName = props.getString("religionName");
 	}
 	
-	public boolean checkAltar()
+	public boolean checkReligion()
 	{
-		if(altarPos == null)
-		{
-			return false;
-		}
-		else if(world == null)
-		{
-			return false;
-		}
-		else if(world.getTileEntity(altarPos) == null)
+		if(religionName == null)
 		{
 			return false;
 		}
@@ -99,28 +84,14 @@ public class PlayerProps implements IExtendedEntityProperties {
 		}
 	}
 	
-	public void setAltarPos(World world, BlockPos pos)
+	public void setReligionName(String name)
 	{
-		this.world = world;
-		altarPos = pos;
+		religionName = name;
 	}
 	
-	public BlockPos getAltarPos()
+	public String getReligionName()
 	{
-		return altarPos;
-	}
-	
-	public TileAltar getAltar()
-	{
-		if(altarPos != null)
-			return (TileAltar)world.getTileEntity(altarPos);
-		else
-			return null;
-	}
-	
-	public World getWorld()
-	{
-		return world;
+		return religionName;
 	}
 
 	public void init(Entity entity, World world)

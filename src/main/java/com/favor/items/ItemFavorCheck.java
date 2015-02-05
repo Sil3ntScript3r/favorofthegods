@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.favor.PlayerProps;
-import com.favor.altar.Favor;
-import com.favor.altar.TileAltar;
+import com.favor.favornetwork.FavorHandler;
+import com.favor.gods.Gods;
 
 public class ItemFavorCheck extends Item {
 	public ItemFavorCheck()
@@ -21,29 +21,13 @@ public class ItemFavorCheck extends Item {
 		if(!world.isRemote)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(props != null)
+			
+			if(props.getReligionName() != null)
 			{
-				TileAltar altar = props.getAltar();
-				if(altar != null)
-				{
-					Favor favor = altar.getFavor();
-					if(favor != null)
-					{
-						System.out.println("--Favor--");
-						System.out.println("Stefan: " + favor.getFavor(0));
-						System.out.println("Desert Pig: " + favor.getFavor(1));
-						System.out.println("Altar Location: " + props.getAltarPos());
-					} else
-					{
-						System.out.println("Favor null");
-					}
-				} else
-				{
-					System.out.println("Altar null");
-				}
-			} else
-			{
-				System.out.println("Props null");
+				System.out.println("--Favor--");
+				System.out.println("Stefan: " + FavorHandler.getFavor(props.getReligionName()).getFavor(Gods.GOD_DESERTPIG));
+				System.out.println("Desert Pig: " + FavorHandler.getFavor(props.getReligionName()).getFavor(Gods.GOD_STEFAN));
+				System.out.println("Altar Location: " + props.getReligionName());
 			}
 		}
 

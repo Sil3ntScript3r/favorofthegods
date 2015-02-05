@@ -8,8 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 
 import com.favor.PlayerProps;
-import com.favor.altar.Favor;
 import com.favor.altar.TileAltar;
+import com.favor.favornetwork.Favor;
+import com.favor.favornetwork.FavorHandler;
 
 public class Gods {
 	// Ints used to easily talk about a certain God
@@ -56,10 +57,9 @@ public class Gods {
 		if(PlayerProps.get(player) != null)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(props.getWorld().getTileEntity(props.getAltarPos()) != null)
+			if(props.checkReligion())
 			{
-				TileAltar altar = (TileAltar)props.getWorld().getTileEntity(props.getAltarPos());
-				altar.getFavor().increaseFavor(god, num);
+				FavorHandler.increaseFavor(props.getReligionName(), god, num);
 			}
 		}
 	}
@@ -69,10 +69,9 @@ public class Gods {
 		if(PlayerProps.get(player) != null)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(props.getWorld().getTileEntity(props.getAltarPos()) != null)
+			if(props.checkReligion())
 			{
-				TileAltar altar = (TileAltar)props.getWorld().getTileEntity(props.getAltarPos());
-				altar.getFavor().decreaseFavor(god, num);
+				FavorHandler.decreaseFavor(props.getReligionName(), god, num);
 			}
 		}
 	}

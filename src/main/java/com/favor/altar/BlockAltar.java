@@ -23,33 +23,14 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		super(material);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
-	
-	/*
-	// When the block is placed by a player, associate the Altar with the player
-	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitx, float hity, float hitz, int meta, EntityLivingBase placer)
-	{
-		if(placer instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer)placer;
-			System.out.println("Altar placed");
-			
-			PlayerProps favor = PlayerProps.get(player);
-			if(favor != null)
-			{
-				//favor.setAltarPos(pos);
-				System.out.println(pos);
-			}
-		}
-		
-		return this.getDefaultState();
-	}
-	*/
-	
+
+	// When block is right clicked, set the clicker to this religion
+	// TODO: Don't change their religion if they have one already
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if(PlayerProps.get(player) != null)
 		{
-			PlayerProps.get(player).setAltarPos(world, pos);
+			PlayerProps.get(player).setReligionName("TESTTEST");
 			((TileAltar)world.getTileEntity(pos)).addFollower(player);
 		}
 
@@ -58,6 +39,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	}
 
 	// When the Altar is destroyed by a player, call lightning down and make it explode
+	// TODO: Make it not explode if it's not followed by a God
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state)
 	{
 		if(!world.isRemote)
@@ -83,5 +65,4 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		System.out.println("Creating Tile Altar");
 		return new TileAltar();
 	}
-
 }
