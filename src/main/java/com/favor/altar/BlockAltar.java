@@ -5,7 +5,6 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
@@ -16,8 +15,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.favor.PlayerProps;
+import com.favor.favornetwork.FavorHandler;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
+	private static final String TAG = "Favor_";
+	
 	public BlockAltar(Material material)
 	{
 		super(material);
@@ -25,16 +27,40 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	}
 
 	// When block is right clicked, set the clicker to this religion
-	// TODO: Don't change their religion if they have one already
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if(PlayerProps.get(player) != null)
+		TileAltar altar = (TileAltar)world.getTileEntity(pos);
+		
+		if(!world.isRemote)
 		{
-			PlayerProps.get(player).setReligionName("TESTTEST");
-			((TileAltar)world.getTileEntity(pos)).addFollower(player);
+			PlayerProps props = PlayerProps.get(player);
+			if(props != null)
+			{
+				if(props.getReligionName() == null)
+				{
+					if(altar.getReligionName() == null)
+					{
+						FavorHandler.createFavor(player.getName());
+						altar.setReligionName(player.getName());
+					}
+					
+					props.setReligionName(player.getName());
+					FavorHandler.addFollower(altar.getReligionName(), player);
+					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("You are now a follower of " + props.getReligionName()));
+				}
+				else if(FavorHandler.isFollowerOf(altar.getReligionName(), player))
+				{
+					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("You are already a follower of " + props.getReligionName()));
+				}
+				else
+				{
+					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("You can not join " + altar.getReligionName() + ", as you already are a follower of " + props.getReligionName()));
+				}
+			}
 		}
 
-		((TileAltar)world.getTileEntity(pos)).checkRank(world, player);
+		altar.checkRank(world, player);
+
 		return true;
 	}
 

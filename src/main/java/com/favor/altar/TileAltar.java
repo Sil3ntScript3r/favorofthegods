@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -28,14 +29,29 @@ public class TileAltar extends TileEntity {
 	// Used later for calcs
 	private List<Block> surronding;
 	
-	// Name of this religion/altar [UNFINISHED]
+	// Name of this religion/altar
 	private String name;
 	
 	public TileAltar()
 	{
 		// Init values to default
-		name = "TESTTEST";
 		surronding = new ArrayList<Block>();
+	}
+	
+	public void writeToNBT(NBTTagCompound tag)
+	{
+		super.writeToNBT(tag);
+		
+		if(name != null)
+			tag.setString("religionName", name);
+	}
+	
+	public void readFromNBT(NBTTagCompound tag)
+	{
+		super.readFromNBT(tag);
+		
+		if(tag.hasKey("religionName"))
+			name = tag.getString("religionName");
 	}
 	
 	// Master method to check the surronding blocks and religion's Favor to see what rank it is
@@ -45,6 +61,8 @@ public class TileAltar extends TileEntity {
 		if(!player.worldObj.isRemote)
 		{
 			Favor favor = FavorHandler.getFavor(name);
+			if(favor == null)
+				return;
 			
 			// Make sure Altar isn't owned by a God already
 			if(favor.getMain() == -1)
@@ -187,17 +205,13 @@ public class TileAltar extends TileEntity {
 		return rank;
 	}
 	
-	/*public Favor getFavor()
+	public String getReligionName()
 	{
-		return favor;
-	}*/
+		return name;
+	}
 	
-	// Adds a follower of this religion [SHOULD MOVE TO FAVORHANDLER]
-	public void addFollower(EntityPlayer player)
+	public void setReligionName(String name)
 	{
-		Favor favor = FavorHandler.getFavor(name);
-		
-		if(!favor.followers.contains(player))
-			favor.followers.add(player);
+		this.name = name;
 	}
 }

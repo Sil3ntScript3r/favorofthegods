@@ -60,7 +60,8 @@ public class PlayerProps implements IExtendedEntityProperties {
 	{
 		NBTTagCompound props = new NBTTagCompound();
 
-		props.setString("religionName", religionName);
+		if(religionName != null)
+			props.setString("religionName", religionName);
 
 		compound.setTag(TAG, props);
 	}
@@ -69,7 +70,8 @@ public class PlayerProps implements IExtendedEntityProperties {
 	{
 		NBTTagCompound props = (NBTTagCompound)compound.getTag(TAG);
 		
-		religionName = props.getString("religionName");
+		if(props.hasKey("religionName"))
+			religionName = props.getString("religionName");
 	}
 	
 	public boolean checkReligion()

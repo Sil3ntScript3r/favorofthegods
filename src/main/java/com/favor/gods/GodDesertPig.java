@@ -164,19 +164,22 @@ public class GodDesertPig extends Gods {
 					{
 						Favor favor = FavorHandler.getFavor(props.getReligionName());
 						
-						if(favor.getFavor(GOD_DESERTPIG) >= 30)
+						if(favor != null)
 						{
-							if(rand.nextInt(256) == 0)
+							if(favor.getFavor(GOD_DESERTPIG) >= 30)
 							{
 								if(rand.nextInt(256) == 0)
 								{
 									if(rand.nextInt(256) == 0)
 									{
-										ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .15)));
-										EntityItem entityItem = new EntityItem(player.worldObj, player.posX + rand.nextInt(3), player.posY + 5, player.posZ + rand.nextInt(3), item);
-										entityItem.setDefaultPickupDelay();
-										player.worldObj.spawnEntityInWorld(entityItem);
-										player.addChatComponentMessage(new ChatComponentText("Desert Pig has blessed you with his meat!"));
+										if(rand.nextInt(256) == 0)
+										{
+											ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .15)));
+											EntityItem entityItem = new EntityItem(player.worldObj, player.posX + rand.nextInt(3), player.posY + 5, player.posZ + rand.nextInt(3), item);
+											entityItem.setDefaultPickupDelay();
+											player.worldObj.spawnEntityInWorld(entityItem);
+											player.addChatComponentMessage(new ChatComponentText("Desert Pig has blessed you with his meat!"));
+										}
 									}
 								}
 							}
