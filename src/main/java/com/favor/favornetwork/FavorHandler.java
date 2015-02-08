@@ -95,7 +95,7 @@ public class FavorHandler {
 			return;
 		}
 		
-		data.increaseFavor(god, amount);
+		data.decreaseFavor(god, amount);
 		data.markDirty();
 	}
 	

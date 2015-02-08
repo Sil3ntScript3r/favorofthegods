@@ -79,7 +79,7 @@ public class PlayerProps implements IExtendedEntityProperties {
 		FavorHandler.addFollower(religionName, player);
 	}
 	
-	public boolean checkReligion()
+	public boolean hasReligion()
 	{
 		if(religionName == null)
 		{

@@ -34,11 +34,10 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 			godFavors.add(0);
 		}
 	}
-	// TODO: Change the player finding to not be by username
+
 	// Load the Favors and main God from NBT
 	public void readFromNBT(NBTTagCompound nbt)
 	{
-		System.out.println("READING FAVOR NBT DATA");
 		// Load all the God Favors
 		int[] favors = nbt.getIntArray("godFavors");
 		
@@ -54,8 +53,6 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 	// Save the Favor and main God to NBT
 	public void writeToNBT(NBTTagCompound nbt)
 	{
-		System.out.println("WRITING FAVOR NBT DATA");
-		
 		// Save all the God Favors
 		int[] favors = new int[godFavors.size()];
 		

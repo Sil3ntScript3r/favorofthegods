@@ -212,6 +212,7 @@ public class TileAltar extends TileEntity {
 	
 	public void setReligionName(String name)
 	{
+		System.out.println("Altar's religion set to " + name);
 		this.name = name;
 	}
 }

@@ -49,20 +49,20 @@ public class GodDesertPig extends Gods {
 			
 			if(props != null)
 			{
-				if(props.checkReligion())
+				if(props.hasReligion())
 				{
 					Favor favor = FavorHandler.getFavor(props.getReligionName());
 					
 					// Desert Pig does not get along with sheep
 					if(event.entity instanceof EntitySheep)
 					{
-							increaseFavor(1, player, GOD_DESERTPIG);
+							increaseFavor(player, GOD_DESERTPIG, 1);
 					}
 					
 					// Desert Pig hates if you kill his own kind
 					else if(event.entity instanceof EntityPig)
 					{
-						decreaseFavor(2, player, GOD_DESERTPIG);
+						decreaseFavor(player, GOD_DESERTPIG, 2);
 						
 						// 1/24 chance to spawn a tough zombie pigman upon pig death
 						if(favor.getFavor(GOD_DESERTPIG) <= -50)
@@ -137,7 +137,7 @@ public class GodDesertPig extends Gods {
 								}
 	
 								event.entity.worldObj.spawnEntityInWorld(zomb);
-								favor.increaseFavor(2, GOD_DESERTPIG);
+								increaseFavor(player, GOD_DESERTPIG, 2);
 							}
 						}
 					}
@@ -160,13 +160,13 @@ public class GodDesertPig extends Gods {
 					EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(i);
 					PlayerProps props = PlayerProps.get(player);
 					
-					if(props.checkReligion())
+					if(props.hasReligion())
 					{
 						Favor favor = FavorHandler.getFavor(props.getReligionName());
 						
 						if(favor != null)
 						{
-							if(favor.getFavor(GOD_DESERTPIG) >= 30)
+							if(favor.getFavor(GOD_DESERTPIG) >= FavorHandler.MAX_FAVOR * .005)
 							{
 								if(rand.nextInt(256) == 0)
 								{
@@ -174,7 +174,7 @@ public class GodDesertPig extends Gods {
 									{
 										if(rand.nextInt(256) == 0)
 										{
-											ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .15)));
+											ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .001)));
 											EntityItem entityItem = new EntityItem(player.worldObj, player.posX + rand.nextInt(3), player.posY + 5, player.posZ + rand.nextInt(3), item);
 											entityItem.setDefaultPickupDelay();
 											player.worldObj.spawnEntityInWorld(entityItem);

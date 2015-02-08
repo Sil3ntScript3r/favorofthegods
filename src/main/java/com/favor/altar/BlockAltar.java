@@ -36,7 +36,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 			PlayerProps props = PlayerProps.get(player);
 			if(props != null)
 			{
-				if(props.getReligionName() == null)
+				if(!props.hasReligion())
 				{
 					if(altar.getReligionName() == null)
 					{
@@ -46,15 +46,20 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 					
 					props.setReligionName(player.getName());
 					FavorHandler.addFollower(altar.getReligionName(), player);
-					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("You are now a follower of " + props.getReligionName()));
+					player.addChatComponentMessage(new ChatComponentText("You are now a follower of the new religion " + "§9" + props.getReligionName() + "§r" + "."));
+				}
+				else if(props.hasReligion() && altar.getReligionName() == null)
+				{
+					altar.setReligionName(props.getReligionName());
+					player.addChatComponentMessage(new ChatComponentText("This Altar now follows " + "§9" + props.getReligionName() + "§r" + "."));
 				}
 				else if(FavorHandler.isFollowerOf(altar.getReligionName(), player))
 				{
-					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("You are already a follower of " + props.getReligionName()));
+					player.addChatComponentMessage(new ChatComponentText("You are already a follower " + "§9" + altar.getReligionName() + "§r" + "."));
 				}
 				else
 				{
-					MinecraftServer.getServer().getConfigurationManager().sendChatMsg(new ChatComponentText("You can not join " + altar.getReligionName() + ", as you already are a follower of " + props.getReligionName()));
+					player.addChatComponentMessage(new ChatComponentText("You can not join " + "§9" + altar.getReligionName() + "§r" + ", as you already are a follower of " + "§9" + props.getReligionName() + "§r" + "."));
 				}
 			}
 		}
@@ -87,7 +92,8 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		}
 	}
 
-	public TileEntity createNewTileEntity(World world, int meta) {
+	public TileEntity createNewTileEntity(World world, int meta)
+	{
 		System.out.println("Creating Tile Altar");
 		return new TileAltar();
 	}

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.favor.PlayerProps;
 import com.favor.altar.TileAltar;
@@ -16,6 +17,7 @@ public class Gods {
 	// Ints used to easily talk about a certain God
 	public static final int GOD_STEFAN = 0;
 	public static final int GOD_DESERTPIG = 1;
+	public static final int GOD_BLOOD = 2;
 	
 	// List of all the blocks that can be used for the Altar
 	// First list = God to choose, based on it's number
@@ -39,6 +41,24 @@ public class Gods {
 		return (ArrayList<Block>)godBlocks.get(god)[rank];
 	}
 	
+	public static void initEvents()
+	{
+		MinecraftForge.EVENT_BUS.register(new GodStefan());
+		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
+	}
+	
+	public static int getRivalGod(int god)
+	{
+		if(god % 2 == 0)
+		{
+			return god + 1;
+		}
+		else
+		{
+			return god - 1;
+		}
+	}
+	
 	// Used by the gods to construct their ArrayList
 	static List[] initAltarBlocks()
 	{
@@ -52,24 +72,25 @@ public class Gods {
 		return list;
 	}
 	
-	void increaseFavor(int num, EntityPlayer player, int god)
+	void increaseFavor(EntityPlayer player, int god, int num)
 	{
 		if(PlayerProps.get(player) != null)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(props.checkReligion())
+			if(props.hasReligion())
 			{
 				FavorHandler.increaseFavor(props.getReligionName(), god, num);
+				FavorHandler.decreaseFavor(props.getReligionName(), getRivalGod(god), (int)num / 2);
 			}
 		}
 	}
 	
-	void decreaseFavor(int num, EntityPlayer player, int god)
+	void decreaseFavor(EntityPlayer player, int god, int num)
 	{
 		if(PlayerProps.get(player) != null)
 		{
 			PlayerProps props = PlayerProps.get(player);
-			if(props.checkReligion())
+			if(props.hasReligion())
 			{
 				FavorHandler.decreaseFavor(props.getReligionName(), god, num);
 			}
