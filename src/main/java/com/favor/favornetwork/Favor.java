@@ -34,7 +34,7 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 			godFavors.add(0);
 		}
 	}
-	
+	// TODO: Change the player finding to not be by username
 	// Load the Favors and main God from NBT
 	public void readFromNBT(NBTTagCompound nbt)
 	{
@@ -47,17 +47,6 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 			setFavor(i, favors[i]);
 		}
 		
-		// Load the followers of this religion
-		NBTTagList follow = nbt.getTagList("followers", Constants.NBT.TAG_COMPOUND);
-		System.out.println(follow.NBT_TYPES[8]);
-		System.out.println(follow.tagCount());
-
-		for(int i = 0; i < follow.tagCount(); i++)
-		{
-			NBTTagCompound tag = follow.getCompoundTagAt(i);
-			followers.add(MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(tag.getString("followerName")));
-		}
-		
 		// Load which God is being Favored
 		mainGod = nbt.getInteger("mainGod");
 	}
@@ -66,6 +55,7 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		System.out.println("WRITING FAVOR NBT DATA");
+		
 		// Save all the God Favors
 		int[] favors = new int[godFavors.size()];
 		
@@ -75,19 +65,6 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 		}
 		
 		nbt.setIntArray("godFavors", favors);
-		
-		// Save the followers of this religion
-		NBTTagList follow = new NBTTagList();
-		
-		for(int i = 0; i < followers.size(); i++)
-		{
-			System.out.println(followers.get(i).getName());
-			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString("followerName", followers.get(i).getName());
-			follow.appendTag(tag);
-		}
-		
-		nbt.setTag("followers", follow);
 		
 		// Save which God is being Favored
 		nbt.setInteger("mainGod", mainGod);

@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 import com.favor.altar.TileAltar;
+import com.favor.favornetwork.FavorHandler;
 
 public class PlayerProps implements IExtendedEntityProperties {
 	private static final String TAG = "FavorOfTheGods";
@@ -72,6 +73,10 @@ public class PlayerProps implements IExtendedEntityProperties {
 		
 		if(props.hasKey("religionName"))
 			religionName = props.getString("religionName");
+		
+		System.out.println(religionName);
+		
+		FavorHandler.addFollower(religionName, player);
 	}
 	
 	public boolean checkReligion()
