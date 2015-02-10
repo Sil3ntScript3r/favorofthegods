@@ -1,4 +1,4 @@
-package com.favor.altar;
+package com.favorofthegods.altar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-import com.favor.favornetwork.Favor;
-import com.favor.favornetwork.FavorHandler;
-import com.favor.gods.Gods;
+import com.favorofthegods.favornetwork.Favor;
+import com.favorofthegods.favornetwork.FavorHandler;
+import com.favorofthegods.gods.Gods;
 
 public class TileAltar extends TileEntity {
 	// Values used for math

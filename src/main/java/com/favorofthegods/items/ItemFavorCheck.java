@@ -1,4 +1,4 @@
-package com.favor.items;
+package com.favorofthegods.items;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -6,9 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.favor.PlayerProps;
-import com.favor.favornetwork.FavorHandler;
-import com.favor.gods.Gods;
+import com.favorofthegods.PlayerProps;
+import com.favorofthegods.favornetwork.FavorHandler;
+import com.favorofthegods.gods.Gods;
 
 public class ItemFavorCheck extends Item {
 	public ItemFavorCheck()

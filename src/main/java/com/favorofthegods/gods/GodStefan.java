@@ -1,4 +1,4 @@
-package com.favor.gods;
+package com.favorofthegods.gods;
 
 import java.util.ArrayList;
 import java.util.List;

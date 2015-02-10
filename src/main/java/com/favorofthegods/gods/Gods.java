@@ -1,4 +1,4 @@
-package com.favor.gods;
+package com.favorofthegods.gods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.favor.PlayerProps;
-import com.favor.altar.TileAltar;
-import com.favor.favornetwork.Favor;
-import com.favor.favornetwork.FavorHandler;
+import com.favorofthegods.PlayerProps;
+import com.favorofthegods.altar.TileAltar;
+import com.favorofthegods.favornetwork.Favor;
+import com.favorofthegods.favornetwork.FavorHandler;
 
 public class Gods {
 	// Ints used to easily talk about a certain God

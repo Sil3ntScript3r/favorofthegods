@@ -1,4 +1,4 @@
-package com.favor;
+package com.favorofthegods;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import com.favor.gods.Gods;
+import com.favorofthegods.gods.Gods;
 
 @Mod(modid = FavorOfTheGods.MODID, name = "Favor of the Gods", version = FavorOfTheGods.VERSION)
 public class FavorOfTheGods {
@@ -18,7 +18,7 @@ public class FavorOfTheGods {
 	@Mod.Instance(FavorOfTheGods.MODID)
 	public static FavorOfTheGods instance;
 	
-	@SidedProxy(clientSide = "com.favor.ClientOnlyProxy", serverSide = "com.favor.ServerOnlyProxy")
+	@SidedProxy(clientSide = "com.favorofthegods.ClientOnlyProxy", serverSide = "com.favorofthegods.ServerOnlyProxy")
 	public static CommonProxy proxy;
 	
 	@EventHandler

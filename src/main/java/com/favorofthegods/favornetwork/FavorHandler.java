@@ -1,4 +1,4 @@
-package com.favor.favornetwork;
+package com.favorofthegods.favornetwork;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;

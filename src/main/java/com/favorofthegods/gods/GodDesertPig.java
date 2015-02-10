@@ -1,4 +1,4 @@
-package com.favor.gods;
+package com.favorofthegods.gods;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.favor.PlayerProps;
-import com.favor.favornetwork.Favor;
-import com.favor.favornetwork.FavorHandler;
+import com.favorofthegods.PlayerProps;
+import com.favorofthegods.favornetwork.Favor;
+import com.favorofthegods.favornetwork.FavorHandler;
 
 public class GodDesertPig extends Gods {
 	private static List[] altarBlocks;

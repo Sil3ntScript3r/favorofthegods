@@ -1,4 +1,4 @@
-package com.favor.altar;
+package com.favorofthegods.altar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -12,17 +12,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.favor.PlayerProps;
-import com.favor.favornetwork.FavorHandler;
+import com.favorofthegods.FavorOfTheGods;
+import com.favorofthegods.PlayerProps;
+import com.favorofthegods.favornetwork.FavorHandler;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
-	private static final String TAG = "Favor_";
+	private static final String NAME = "blockAltar";
 	
 	public BlockAltar(Material material)
 	{
 		super(material);
+		GameRegistry.registerBlock(this, NAME);
+		GameRegistry.registerTileEntity(TileAltar.class, "tileAltar");
+		setUnlocalizedName(FavorOfTheGods.prependModID(NAME, '_'));
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
@@ -96,5 +104,31 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	{
 		System.out.println("Creating Tile Altar");
 		return new TileAltar();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public EnumWorldBlockLayer getBlockLayer()
+	{
+		return EnumWorldBlockLayer.SOLID;
+	}
+	
+	public boolean isOpaqueCube()
+	{
+		return true;
+	}
+	
+	public boolean isFullCube()
+	{
+		return true;
+	}
+	
+	public int getRenderType()
+	{
+		return 3;
+	}
+	
+	public String getName()
+	{
+		return NAME;
 	}
 }

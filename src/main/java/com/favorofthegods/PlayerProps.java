@@ -1,4 +1,4 @@
-package com.favor;
+package com.favorofthegods;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,8 +8,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import com.favor.altar.TileAltar;
-import com.favor.favornetwork.FavorHandler;
+import com.favorofthegods.altar.TileAltar;
+import com.favorofthegods.favornetwork.FavorHandler;
 
 public class PlayerProps implements IExtendedEntityProperties {
 	private static final String TAG = "FavorOfTheGods";

@@ -1,4 +1,4 @@
-package com.favor.favornetwork;
+package com.favorofthegods.favornetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.util.Constants;
 
-import com.favor.gods.Gods;
+import com.favorofthegods.gods.Gods;
 
 public class Favor extends net.minecraft.world.WorldSavedData {
 	// The list of every player following this religion
