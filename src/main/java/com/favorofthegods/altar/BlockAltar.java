@@ -105,28 +105,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 		System.out.println("Creating Tile Altar");
 		return new TileAltar();
 	}
-	
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.SOLID;
-	}
-	
-	public boolean isOpaqueCube()
-	{
-		return true;
-	}
-	
-	public boolean isFullCube()
-	{
-		return true;
-	}
-	
-	public int getRenderType()
-	{
-		return 3;
-	}
-	
+
 	public String getName()
 	{
 		return NAME;

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.favorofthegods.altar.BlockAltar;
-import com.favorofthegods.altar.TileAltar;
+import com.favorofthegods.altar.BlockDesertPig;
 import com.favorofthegods.items.ItemDecreaseFavor;
 import com.favorofthegods.items.ItemFavorCheck;
 import com.favorofthegods.items.ItemIncreaseFavor;
@@ -21,6 +21,7 @@ public abstract class CommonProxy implements IGuiHandler {
 	public static ItemIncreaseFavor increaseFavor;
 	public static ItemDecreaseFavor decreaseFavor;
 	public static BlockAltar altar;
+	public static BlockDesertPig blockDesertPig;
 	
 	private static final Map<String, NBTTagCompound> favorData = new HashMap<String, NBTTagCompound>();
 	
@@ -36,6 +37,9 @@ public abstract class CommonProxy implements IGuiHandler {
 		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");*/
 		
 		altar = new BlockAltar(Material.wood);
+		
+		blockDesertPig = (BlockDesertPig) new BlockDesertPig().setUnlocalizedName("favorofthegods_blockdesertpig");
+		GameRegistry.registerBlock(blockDesertPig, "blockDesertPig");
 	}
 
 	public void init()

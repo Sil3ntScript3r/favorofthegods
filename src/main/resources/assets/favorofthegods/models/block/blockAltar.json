@@ -1,6 +1,12 @@
 {
     "parent": "block/cube",
     "textures": {
-       "all": "favorofthegods:blocks/blockAltar"
+        "down": "favorofthegods:blocks/GodBlocks_down",
+        "up": "favorofthegods:blocks/GodBlocks_down",
+        "north": "favorofthegods:blocks/BlockAltar",
+        "east": "favorofthegods:blocks/BlockAltar",
+        "south": "favorofthegods:blocks/BlockAltar",
+        "west": "favorofthegods:blocks/BlockAltar",
+		"particle": "favorofthegods:blocks/GodBlocks_side"
     }
 }
