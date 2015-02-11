@@ -6,11 +6,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.favorofthegods.PlayerProps;
-import com.favorofthegods.altar.TileAltar;
-import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class Gods {
@@ -40,7 +39,7 @@ public class Gods {
 	{
 		return (ArrayList<Block>)godBlocks.get(god)[rank];
 	}
-	
+
 	public static void initEvents()
 	{
 		MinecraftForge.EVENT_BUS.register(new GodStefan());
@@ -93,6 +92,55 @@ public class Gods {
 			if(props.hasReligion())
 			{
 				FavorHandler.decreaseFavor(props.getReligionName(), god, num);
+			}
+		}
+	}
+	
+	public static enum EnumGods implements IStringSerializable
+	{
+		DESERT_PIG(GOD_DESERTPIG, "DesertPig"),
+		STEFAN(GOD_STEFAN, "Stefan");
+		
+		private final int meta;
+		private final String name;
+		private static final EnumGods[] META_LOOKUP = new EnumGods[values().length];
+				
+		public int getMetadata()
+		{
+			return meta;
+		}
+		
+		public String toString()
+		{
+			return name;
+		}
+		
+		public static EnumGods byMetadata(int meta)
+		{
+			if(meta < 0 || meta >= META_LOOKUP.length)
+			{
+				meta = 0;
+			}
+			
+			return META_LOOKUP[meta];
+		}
+		
+		public String getName()
+		{
+			return this.name;
+		}
+		
+		private EnumGods(int i_meta, String i_name)
+		{
+			this.meta = i_meta;
+			this.name = i_name;
+		}
+		
+		static
+		{
+			for(EnumGods gods : values())
+			{
+				META_LOOKUP[gods.getMetadata()] = gods;
 			}
 		}
 	}

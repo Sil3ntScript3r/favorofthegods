@@ -72,11 +72,10 @@ public class PlayerProps implements IExtendedEntityProperties {
 		NBTTagCompound props = (NBTTagCompound)compound.getTag(TAG);
 		
 		if(props.hasKey("religionName"))
+		{
 			religionName = props.getString("religionName");
-		
-		System.out.println(religionName);
-		
-		FavorHandler.addFollower(religionName, player);
+			FavorHandler.addFollower(religionName, player);
+		}
 	}
 	
 	public boolean hasReligion()

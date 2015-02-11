@@ -1,0 +1,10 @@
+{
+    "parent": "favorofthegods:block/blockRank0",
+    "textures": {
+        "north": "favorofthegods:blocks/BlockRank0_Stefan",
+        "east": "favorofthegods:blocks/BlockRank0_Stefan",
+        "south": "favorofthegods:blocks/BlockRank0_Stefan",
+        "west": "favorofthegods:blocks/BlockRank0_Stefan",
+        "particle": "favorofthegods:blocks/BlockRank0_Stefan"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "parent": "favorofthegods:block/blockRank0",
+    "textures": {
+        "north": "favorofthegods:blocks/BlockRank0_DesertPig",
+        "east": "favorofthegods:blocks/BlockRank0_DesertPig",
+        "south": "favorofthegods:blocks/BlockRank0_DesertPig",
+        "west": "favorofthegods:blocks/BlockRank0_DesertPig",
+        "particle": "favorofthegods:blocks/BlockRank0_DesertPig"
+    }
+}

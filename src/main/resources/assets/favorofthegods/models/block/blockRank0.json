@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "down": "favorofthegods:blocks/BlockAltarBase",
+        "up": "favorofthegods:blocks/BlockAltarBase"
+    }
+}

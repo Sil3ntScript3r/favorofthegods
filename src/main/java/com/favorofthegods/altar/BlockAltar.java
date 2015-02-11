@@ -23,7 +23,7 @@ import com.favorofthegods.PlayerProps;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
-	private static final String NAME = "blockAltar";
+	private static final String NAME = "blockaltar";
 	
 	public BlockAltar(Material material)
 	{
