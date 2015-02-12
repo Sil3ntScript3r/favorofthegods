@@ -176,6 +176,13 @@ public class GodDesertPig extends Gods {
 						
 						if(favor != null)
 						{
+							// Doesn't matter who they follow
+							if(player.inventory.hasItemStack(new ItemStack(Blocks.red_flower)))
+							{
+								decreaseFavor(player, GOD_DESERTPIG, 1);
+							}
+							
+							// If they need to follow Desert Pig
 							if(favor.getMain() == GOD_DESERTPIG && favor.getHighest() >= 1)
 							{
 								if(favor.getFavor(GOD_DESERTPIG) >= FavorHandler.MAX_FAVOR * .005)
