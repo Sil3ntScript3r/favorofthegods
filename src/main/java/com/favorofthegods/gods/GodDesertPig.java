@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.favorofthegods.PlayerProps;
+import com.favorofthegods.blocks.BlockList;
 import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 
@@ -30,11 +31,16 @@ public class GodDesertPig extends Gods {
 		altarBlocks = initAltarBlocks();
 		godBlocks.add(GOD_DESERTPIG, altarBlocks);
 		
-		altarBlocks[0].add(Blocks.sandstone);
+		altarBlocks[0].add(BlockList.desertPig0);
+		
 		altarBlocks[1].add(Blocks.tnt);
-		altarBlocks[2].add(Blocks.anvil);
-		altarBlocks[3].add(Blocks.iron_ore);
+		
+		altarBlocks[2].add(Blocks.sandstone);
+		
+		altarBlocks[3].add(Blocks.diamond_ore);
+		
 		altarBlocks[4].add(Blocks.jukebox);
+		
 		altarBlocks[5].add(Blocks.emerald_block);
 		//goodBlocks[5].add(pigBlock); Pepper demands a pig block
 	}

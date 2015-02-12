@@ -1,5 +1,5 @@
 {
-  "parent": "favorofthegods:block/blockRank0_DesertPig",
+  "parent": "favorofthegods:block/blockDesertPig0",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

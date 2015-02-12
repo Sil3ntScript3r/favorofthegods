@@ -1,3 +1,4 @@
-tile.favorofthegods_blockaltar.name=Altar of the Gods
-tile.favorofthegods_blockRank0.DesertPig.name=Desert Pig's Block
-tile.favorofthegods_blockRank0.Stefan.name=Stefan's Block
+itemGroup.altarTab=Altar of the Gods
+tile.favorofthegods_blockAltar.name=Altar of the Gods
+tile.favorofthegods_blockDesertPig0.name=Desert Pig's Block
+tile.favorofthegods_blockStefan0.name=Stefan's Block

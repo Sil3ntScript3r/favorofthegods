@@ -3,6 +3,8 @@ package com.favorofthegods.gods;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.favorofthegods.blocks.BlockList;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
@@ -21,7 +23,7 @@ public class GodStefan extends Gods {
 		altarBlocks = initAltarBlocks();
 		godBlocks.add(GOD_STEFAN, altarBlocks);
 		
-		altarBlocks[0].add(Blocks.dirt);
+		altarBlocks[0].add(BlockList.stefan0);
 		
 		altarBlocks[1].add(Blocks.red_flower);
 		altarBlocks[1].add(Blocks.yellow_flower);

@@ -12,22 +12,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.favorofthegods.FavorOfTheGods;
 import com.favorofthegods.PlayerProps;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
-	private static final String NAME = "blockaltar";
+	public static final String NAME = "blockAltar";
 	
-	public BlockAltar(Material material)
+	public BlockAltar()
 	{
-		super(material);
+		super(Material.wood);
 		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileAltar.class, "tileAltar");
 		setUnlocalizedName(FavorOfTheGods.prependModID(NAME, '_'));
@@ -92,7 +89,6 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	// When the block is spawned, check to see what rank the Altar is
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
-		System.out.println("Altar block spawned");
 		TileEntity altar = world.getTileEntity(pos);
 		if(altar != null && altar instanceof TileAltar)
 		{
@@ -102,12 +98,6 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		System.out.println("Creating Tile Altar");
 		return new TileAltar();
-	}
-
-	public String getName()
-	{
-		return NAME;
 	}
 }

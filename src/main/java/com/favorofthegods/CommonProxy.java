@@ -3,15 +3,16 @@ package com.favorofthegods;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.favorofthegods.altar.BlockAltar;
-import com.favorofthegods.altar.BlockRank0;
 import com.favorofthegods.blocks.BlockList;
 import com.favorofthegods.items.ItemDecreaseFavor;
 import com.favorofthegods.items.ItemFavorCheck;
@@ -21,6 +22,8 @@ public abstract class CommonProxy implements IGuiHandler {
 	public static ItemFavorCheck favorCheck;
 	public static ItemIncreaseFavor increaseFavor;
 	public static ItemDecreaseFavor decreaseFavor;
+	
+	public static CreativeTabs altarTab;
 	
 	private static final Map<String, NBTTagCompound> favorData = new HashMap<String, NBTTagCompound>();
 	
@@ -36,6 +39,15 @@ public abstract class CommonProxy implements IGuiHandler {
 		
 		decreaseFavor = (ItemDecreaseFavor)new ItemDecreaseFavor().setUnlocalizedName("decreaseFavor");
 		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");*/
+		
+		/*altarTab = new CreativeTabs("altarTab")
+		{
+			@SideOnly(Side.CLIENT)
+			public Item getTabIconItem()
+			{
+				return Items.gold_nugget;
+			}
+		};*/
 	}
 
 	public void init()

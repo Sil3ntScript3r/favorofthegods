@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"god=desertpig": { "model": "favorofthegods:blockRank0_DesertPig" },
-		"god=stefan": { "model": "favorofthegods:blockRank0_Stefan" }
-	}
-}

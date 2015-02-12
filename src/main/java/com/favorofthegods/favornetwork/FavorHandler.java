@@ -131,7 +131,6 @@ public class FavorHandler {
 		if(!favor.followers.contains(player))
 		{
 			favor.followers.add(player);
-			System.out.println("Added " + player + " to " + favor.followers);
 			favor.markDirty();
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -22,20 +23,27 @@ public class TileAltar extends TileEntity {
 	private static final int BASE_SIZE = 2;
 	private static final int SIZE_SCALE = 2;
 	private static final int BLOCKS_NEEDED = 5;
-	
-	// Rank of this Altar
-	private int rank;
-	
+
 	// Used later for calcs
 	private List<Block> surronding;
 	
 	// Name of this religion/altar
 	private String name;
 	
+	// Set whether this Altar used to be following a God
+	private boolean hadGod;
+	
+	// Rank of this Altar
+	private int rank;
+	private int mainGod;
+	
+	
 	public TileAltar()
 	{
 		// Init values to default
 		surronding = new ArrayList<Block>();
+		hadGod = false;
+		mainGod = -1;
 	}
 	
 	public void writeToNBT(NBTTagCompound tag)
@@ -44,6 +52,10 @@ public class TileAltar extends TileEntity {
 		
 		if(name != null)
 			tag.setString("religionName", name);
+		
+		tag.setBoolean("hadGod", hadGod);
+		
+		tag.setInteger("mainGod", mainGod);
 	}
 	
 	public void readFromNBT(NBTTagCompound tag)
@@ -52,6 +64,10 @@ public class TileAltar extends TileEntity {
 		
 		if(tag.hasKey("religionName"))
 			name = tag.getString("religionName");
+		
+		hadGod = tag.getBoolean("hadGod");
+		
+		mainGod = tag.getInteger("mainGod");
 	}
 	
 	// Master method to check the surronding blocks and religion's Favor to see what rank it is
@@ -65,12 +81,13 @@ public class TileAltar extends TileEntity {
 				return;
 			
 			// Make sure Altar isn't owned by a God already
-			if(favor.getMain() == -1)
+			if(hadGod == false)
 			{
 				// If it's not owned, assign it to one
 				if(checkRank0(world))
 				{
-					player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(favor.getMain()) + " accepts this Altar of the Gods."));
+					player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
+					hadGod = true;
 				}
 				else
 				{
@@ -81,13 +98,13 @@ public class TileAltar extends TileEntity {
 			else
 			{
 				// If it is owned, find out if it's still acceptable
-				if(Gods.getAltarBlocks(favor.getMain(), 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
+				if(Gods.getAltarBlocks(mainGod, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 				{
-					player.addChatComponentMessage(new ChatComponentText("This Altar is Favored by " + Gods.godNames.get(favor.getMain()) + "."));
+					player.addChatComponentMessage(new ChatComponentText("This Altar is Favored by " + Gods.godNames.get(mainGod) + "."));
 				}
 				else
 				{
-					player.addChatComponentMessage(new ChatComponentText("This Altar was Favored by " + Gods.godNames.get(favor.getMain()) + ", but has since lost it's Favor."));
+					player.addChatComponentMessage(new ChatComponentText("This Altar was Favored by " + Gods.godNames.get(mainGod) + ", but has since lost it's Favor."));
 					rank = -1;
 					return;
 				}
@@ -99,7 +116,7 @@ public class TileAltar extends TileEntity {
 			// Check the Altar at each Rank to see if it meets the requirements
 			for(int i = 1; i <= Gods.NUM_RANKS; i++)
 			{
-				if(favor.getFavor(favor.getMain()) < FavorHandler.RANKS[rank + 1])
+				if(favor.getFavor(mainGod) < FavorHandler.RANKS[rank + 1])
 					break;
 				
 				getBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * i));
@@ -147,7 +164,8 @@ public class TileAltar extends TileEntity {
 			if(Gods.getAltarBlocks(i, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 			{
 				rank = 0;
-				favor.setMain(i);
+				mainGod = i;
+				//favor.setMain(i);
 				return true;
 			}
 		}
