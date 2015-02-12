@@ -66,7 +66,7 @@ public class GodDesertPig extends Gods {
 					}
 					
 					// Desert Pig hates if you kill his own kind
-					else if(event.entity instanceof EntityPig)
+					else if(event.entity instanceof EntityPig && player.getFoodStats().getFoodLevel() > 1)
 					{
 						decreaseFavor(player, GOD_DESERTPIG, 2);
 						
