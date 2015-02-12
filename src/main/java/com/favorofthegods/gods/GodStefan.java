@@ -38,7 +38,7 @@ public class GodStefan extends Gods {
 			// The Great Stefan hates pigs
 			if(event.entity instanceof EntityPig)
 			{
-					increaseFavor( player, GOD_STEFAN, 1);
+					increaseFavor( player, GOD_STEFAN, 1, true);
 			}
 			// The Great Stefan does not approve of the killing of sheep
 			else if(event.entity instanceof EntitySheep)

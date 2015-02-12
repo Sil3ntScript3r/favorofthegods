@@ -62,7 +62,7 @@ public class GodDesertPig extends Gods {
 					// Desert Pig does not get along with sheep
 					if(event.entity instanceof EntitySheep)
 					{
-							increaseFavor(player, GOD_DESERTPIG, 1);
+							increaseFavor(player, GOD_DESERTPIG, 1, true);
 					}
 					
 					// Desert Pig hates if you kill his own kind
@@ -143,7 +143,7 @@ public class GodDesertPig extends Gods {
 								}
 	
 								event.entity.worldObj.spawnEntityInWorld(zomb);
-								increaseFavor(player, GOD_DESERTPIG, 2);
+								increaseFavor(player, GOD_DESERTPIG, 2, false);
 							}
 						}
 					}
@@ -172,19 +172,22 @@ public class GodDesertPig extends Gods {
 						
 						if(favor != null)
 						{
-							if(favor.getFavor(GOD_DESERTPIG) >= FavorHandler.MAX_FAVOR * .005)
+							if(favor.getMain() == GOD_DESERTPIG && favor.getHighest() >= 1)
 							{
-								if(rand.nextInt(256) == 0)
+								if(favor.getFavor(GOD_DESERTPIG) >= FavorHandler.MAX_FAVOR * .005)
 								{
 									if(rand.nextInt(256) == 0)
 									{
 										if(rand.nextInt(256) == 0)
 										{
-											ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .001)));
-											EntityItem entityItem = new EntityItem(player.worldObj, player.posX + rand.nextInt(3), player.posY + 5, player.posZ + rand.nextInt(3), item);
-											entityItem.setDefaultPickupDelay();
-											player.worldObj.spawnEntityInWorld(entityItem);
-											player.addChatComponentMessage(new ChatComponentText("Desert Pig has blessed you with his meat!"));
+											if(rand.nextInt(256) == 0)
+											{
+												ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .003)));
+												EntityItem entityItem = new EntityItem(player.worldObj, player.posX, player.posY + 2, player.posZ, item);
+												entityItem.setDefaultPickupDelay();
+												player.worldObj.spawnEntityInWorld(entityItem);
+												player.addChatComponentMessage(new ChatComponentText("Desert Pig has blessed you with his meat!"));
+											}
 										}
 									}
 								}

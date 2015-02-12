@@ -1,14 +1,14 @@
 package com.favorofthegods.favornetwork;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.util.Constants;
 
+import com.favorofthegods.altar.TileAltar;
 import com.favorofthegods.gods.Gods;
 
 public class Favor extends net.minecraft.world.WorldSavedData {
@@ -18,8 +18,14 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 	// Every God's Favor
 	private List<Integer> godFavors;
 	
+	// List of every Altar following this religion
+	private Set<TileAltar> altars;
+	
 	// Which God is the main Favor of this religion
 	private int mainGod;
+	
+	// Highest rank for the main god
+	private int highestRank;
 	
 	public Favor(String string)
 	{
@@ -28,6 +34,7 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 		mainGod = -1;
 		followers = new ArrayList<EntityPlayer>();
 		godFavors = new ArrayList<Integer>();
+		altars = new HashSet<TileAltar>();
 		
 		for(String s : Gods.godNames)
 		{
@@ -113,5 +120,20 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 		
 		if(godFavors.get(god) < FavorHandler.MIN_FAVOR)
 			godFavors.set(god, FavorHandler.MIN_FAVOR);
+	}
+	
+	public void addAltar(TileAltar altar)
+	{
+		altars.add(altar);
+	}
+	
+	public int getHighest()
+	{
+		return highestRank;
+	}
+	
+	public void setHighest(int num)
+	{
+		highestRank = num;
 	}
 }

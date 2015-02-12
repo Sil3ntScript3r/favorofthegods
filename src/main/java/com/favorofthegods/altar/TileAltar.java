@@ -28,7 +28,7 @@ public class TileAltar extends TileEntity {
 	private List<Block> surronding;
 	
 	// Name of this religion/altar
-	private String name;
+	private String religionName;
 	
 	// Set whether this Altar used to be following a God
 	private boolean hadGod;
@@ -44,14 +44,20 @@ public class TileAltar extends TileEntity {
 		surronding = new ArrayList<Block>();
 		hadGod = false;
 		mainGod = -1;
+		
+		if(religionName != null)
+		{
+			Favor favor = FavorHandler.getFavor(religionName);
+			favor.addAltar(this);
+		}
 	}
 	
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
 		
-		if(name != null)
-			tag.setString("religionName", name);
+		if(religionName != null)
+			tag.setString("religionName", religionName);
 		
 		tag.setBoolean("hadGod", hadGod);
 		
@@ -63,7 +69,7 @@ public class TileAltar extends TileEntity {
 		super.readFromNBT(tag);
 		
 		if(tag.hasKey("religionName"))
-			name = tag.getString("religionName");
+			religionName = tag.getString("religionName");
 		
 		hadGod = tag.getBoolean("hadGod");
 		
@@ -76,7 +82,7 @@ public class TileAltar extends TileEntity {
 		// Server is the only one that needs to check
 		if(!player.worldObj.isRemote)
 		{
-			Favor favor = FavorHandler.getFavor(name);
+			Favor favor = FavorHandler.getFavor(religionName);
 			if(favor == null)
 				return;
 			
@@ -109,6 +115,12 @@ public class TileAltar extends TileEntity {
 					return;
 				}
 			}
+			
+			if(favor.getMain() == -1)
+			{
+				favor.setMain(mainGod);
+			}
+			
 			// Reset the rank before we start counting
 			rank = 0;
 			
@@ -129,6 +141,9 @@ public class TileAltar extends TileEntity {
 			}
 			
 			System.out.println("Rank: " + rank);
+			
+			if(favor.getMain() == mainGod && favor.getHighest() < rank)
+				favor.setHighest(rank);
 		}
 	}
 
@@ -157,7 +172,7 @@ public class TileAltar extends TileEntity {
 	// Check is Altar meets Rank 0 requirements for any God
 	private boolean checkRank0(World world)
 	{
-		Favor favor = FavorHandler.getFavor(name);
+		Favor favor = FavorHandler.getFavor(religionName);
 		
 		for(int i = 0; i < Gods.godBlocks.size(); i++)
 		{
@@ -176,7 +191,7 @@ public class TileAltar extends TileEntity {
 	// Sorts all the surronding blocks by which rank they are for the main God
 	private int[] checkBlockRank()
 	{
-		Favor favor = FavorHandler.getFavor(name);
+		Favor favor = FavorHandler.getFavor(religionName);
 		
 		int[] blockCount = new int[Gods.NUM_RANKS + 1];
 		
@@ -225,12 +240,12 @@ public class TileAltar extends TileEntity {
 	
 	public String getReligionName()
 	{
-		return name;
+		return religionName;
 	}
 	
 	public void setReligionName(String name)
 	{
 		System.out.println("Altar's religion set to " + name);
-		this.name = name;
+		this.religionName = name;
 	}
 }

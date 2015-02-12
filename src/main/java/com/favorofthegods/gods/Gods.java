@@ -71,7 +71,7 @@ public class Gods {
 		return list;
 	}
 	
-	void increaseFavor(EntityPlayer player, int god, int num)
+	void increaseFavor(EntityPlayer player, int god, int num, boolean rival)
 	{
 		if(PlayerProps.get(player) != null)
 		{
@@ -79,7 +79,9 @@ public class Gods {
 			if(props.hasReligion())
 			{
 				FavorHandler.increaseFavor(props.getReligionName(), god, num);
-				FavorHandler.decreaseFavor(props.getReligionName(), getRivalGod(god), (int)num / 2);
+				
+				if(rival)
+					FavorHandler.decreaseFavor(props.getReligionName(), getRivalGod(god), (int)num / 2);
 			}
 		}
 	}
