@@ -100,7 +100,8 @@ public class GodDesertPig extends Gods {
 									zomb.setCurrentItemOrArmor(4, new ItemStack(Items.diamond_boots));
 									zomb.setCustomNameTag("Desert Pig's Incarnate <Rank 4>");
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is VERY upset at the death you caused!"));
-								} else if(pigFavor <= minFavor * .75)
+								}
+								else if(pigFavor <= minFavor * .75)
 								{
 									// RANK 3 ~ -7500 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
@@ -110,7 +111,8 @@ public class GodDesertPig extends Gods {
 									zomb.setCurrentItemOrArmor(4, new ItemStack(Items.iron_boots));
 									zomb.setCustomNameTag("Desert Pig's Incarnate <Rank 3>");
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is very upset at the death you caused!"));
-								} else if(pigFavor <= minFavor * .50)
+								}
+								else if(pigFavor <= minFavor * .50)
 								{
 									// Rank 2 ~ -5000 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.golden_sword));
@@ -120,7 +122,8 @@ public class GodDesertPig extends Gods {
 									zomb.setCurrentItemOrArmor(4, new ItemStack(Items.golden_boots));
 									zomb.setCustomNameTag("Desert Pig's Incarnate <Rank 2>");
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is upset at the death you caused!"));
-								} else if(pigFavor <= minFavor * .25)
+								}
+								else if(pigFavor <= minFavor * .25)
 								{
 									// Rank 1 ~ -2500 Favor
 									zomb.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_sword));
@@ -130,7 +133,8 @@ public class GodDesertPig extends Gods {
 									zomb.setCurrentItemOrArmor(4, new ItemStack(Items.leather_boots));
 									zomb.setCustomNameTag("Desert Pig's Incarnate <Rank 1>");
 									player.addChatComponentMessage(new ChatComponentText("Desert Pig is very angry at the death you caused!"));
-								} else
+								}
+								else
 								{
 									// Rank 0 ~ 0 Favor
 									//zomb.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword));

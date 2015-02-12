@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.favorofthegods.PlayerProps;
+import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 import com.favorofthegods.gods.Gods;
 
@@ -24,10 +25,16 @@ public class ItemFavorCheck extends Item {
 			
 			if(props.getReligionName() != null)
 			{
-				System.out.println("--Favor--");
-				System.out.println("Stefan: " + FavorHandler.getFavor(props.getReligionName()).getFavor(Gods.GOD_DESERTPIG));
-				System.out.println("Desert Pig: " + FavorHandler.getFavor(props.getReligionName()).getFavor(Gods.GOD_STEFAN));
-				System.out.println("Altar Location: " + props.getReligionName());
+				Favor favor = FavorHandler.getFavor(props.getReligionName());
+				if(favor != null)
+				{
+					System.out.println("--Favor--");
+					System.out.println("Stefan: " + favor.getFavor(Gods.GOD_STEFAN));
+					System.out.println("Desert Pig: " + favor.getFavor(Gods.GOD_DESERTPIG));
+					System.out.println("Religion Name: " + props.getReligionName());
+					System.out.println("Highest Rank: " + favor.getHighest());
+					System.out.println("Main God: " + favor.getMain());
+				}
 			}
 		}
 

@@ -5,13 +5,10 @@ import java.util.Map;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.favorofthegods.blocks.BlockList;
 import com.favorofthegods.items.ItemDecreaseFavor;
@@ -31,14 +28,14 @@ public abstract class CommonProxy implements IGuiHandler {
 	{
 		BlockList.preInit();
 		
-		/*favorCheck = (ItemFavorCheck)new ItemFavorCheck().setUnlocalizedName("favorCheck");
+		favorCheck = (ItemFavorCheck)new ItemFavorCheck().setUnlocalizedName("favorCheck");
 		GameRegistry.registerItem(favorCheck, "favorCheck");
 		
 		increaseFavor = (ItemIncreaseFavor)new ItemIncreaseFavor().setUnlocalizedName("increaseFavor");
 		GameRegistry.registerItem(increaseFavor, "increaseFavor");
 		
 		decreaseFavor = (ItemDecreaseFavor)new ItemDecreaseFavor().setUnlocalizedName("decreaseFavor");
-		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");*/
+		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");
 		
 		/*altarTab = new CreativeTabs("altarTab")
 		{

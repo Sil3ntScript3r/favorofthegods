@@ -116,6 +116,7 @@ public class TileAltar extends TileEntity {
 				}
 			}
 			
+			System.out.println(mainGod);
 			if(favor.getMain() == -1)
 			{
 				favor.setMain(mainGod);
@@ -180,7 +181,7 @@ public class TileAltar extends TileEntity {
 			{
 				rank = 0;
 				mainGod = i;
-				//favor.setMain(i);
+
 				return true;
 			}
 		}
