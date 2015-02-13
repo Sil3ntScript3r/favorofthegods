@@ -69,7 +69,7 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 			}
 		}
 
-		altar.checkRank(world, player);
+		altar.onInteract(player);
 
 		return true;
 	}

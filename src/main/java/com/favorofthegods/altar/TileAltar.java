@@ -6,8 +6,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -17,12 +17,13 @@ import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 import com.favorofthegods.gods.Gods;
 
-public class TileAltar extends TileEntity {
+public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 	// Values used for math
 	private static final int ALTAR_DEPTH = 3;
 	private static final int BASE_SIZE = 2;
 	private static final int SIZE_SCALE = 2;
 	private static final int BLOCKS_NEEDED = 5;
+	private static final int CHECK_DELAY = 200;
 
 	// Used later for calcs
 	private List<Block> surronding;
@@ -36,6 +37,8 @@ public class TileAltar extends TileEntity {
 	// Rank of this Altar
 	private int rank;
 	private int mainGod;
+	
+	private int lastTime;
 	
 	
 	public TileAltar()
@@ -74,23 +77,80 @@ public class TileAltar extends TileEntity {
 		hadGod = tag.getBoolean("hadGod");
 		
 		mainGod = tag.getInteger("mainGod");
+		
+		// When loading the Altar, set it to instantly check rank
+		lastTime = CHECK_DELAY;
+	}
+	
+	public void update()
+	{
+		lastTime++;
+		
+		if(lastTime > CHECK_DELAY)
+		{
+			System.out.println("Updating TileAltar");
+			checkRank();
+			lastTime = 0;
+		}
 	}
 	
 	// Master method to check the surronding blocks and religion's Favor to see what rank it is
-	public void checkRank(World world, EntityPlayer player)
+	public void checkRank()
 	{	
 		// Server is the only one that needs to check
-		if(!player.worldObj.isRemote)
+		if(!this.worldObj.isRemote)
 		{
-			Favor favor = FavorHandler.getFavor(religionName);
-			if(favor == null)
-				return;
-			
+			if(religionName != null && mainGod != -1)
+			{
+				Favor favor = FavorHandler.getFavor(religionName);
+				if(favor == null)
+					return;
+	
+				if(Gods.getAltarBlocks(mainGod, 0).contains(this.worldObj.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
+				{
+					// Reset the rank before we start counting
+					rank = 0;
+					
+					// Iterate through all the possible Ranks
+					// Check the Altar at each Rank to see if it meets the requirements
+					for(int i = 1; i <= Gods.NUM_RANKS; i++)
+					{
+						if(favor.getFavor(mainGod) < FavorHandler.RANKS[rank + 1])
+							break;
+						
+						getBlocks(this.pos, BASE_SIZE + (SIZE_SCALE * i));
+						int[] b = checkBlockRank();
+		
+						if(!checkRanks(i, b))
+							break;
+						
+						rank++;
+					}
+					
+					System.out.println("Rank: " + rank);
+					
+					if(favor.getMain() == mainGod && favor.getHighest() < rank)
+						favor.setHighest(rank);
+					
+					lastTime = 0;
+				}
+			}
+		}
+	}
+	
+	public void onInteract(EntityPlayer player)
+	{
+		Favor favor = FavorHandler.getFavor(religionName);
+		if(favor == null)
+			return;
+		
+		if(!this.worldObj.isRemote)
+		{
 			// Make sure Altar isn't owned by a God already
 			if(hadGod == false)
 			{
 				// If it's not owned, assign it to one
-				if(checkRank0(world))
+				if(checkRank0())
 				{
 					player.addChatComponentMessage(new ChatComponentText(Gods.godNames.get(mainGod) + " accepts this Altar of the Gods."));
 					hadGod = true;
@@ -104,7 +164,7 @@ public class TileAltar extends TileEntity {
 			else
 			{
 				// If it is owned, find out if it's still acceptable
-				if(Gods.getAltarBlocks(mainGod, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
+				if(Gods.getAltarBlocks(mainGod, 0).contains(this.worldObj.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 				{
 					player.addChatComponentMessage(new ChatComponentText("This Altar is Favored by " + Gods.godNames.get(mainGod) + "."));
 				}
@@ -116,35 +176,12 @@ public class TileAltar extends TileEntity {
 				}
 			}
 			
-			System.out.println(mainGod);
 			if(favor.getMain() == -1)
 			{
 				favor.setMain(mainGod);
 			}
 			
-			// Reset the rank before we start counting
-			rank = 0;
-			
-			// Iterate through all the possible Ranks
-			// Check the Altar at each Rank to see if it meets the requirements
-			for(int i = 1; i <= Gods.NUM_RANKS; i++)
-			{
-				if(favor.getFavor(mainGod) < FavorHandler.RANKS[rank + 1])
-					break;
-				
-				getBlocks(world, this.pos, BASE_SIZE + (SIZE_SCALE * i));
-				int[] b = checkBlockRank();
-
-				if(!checkRanks(i, b))
-					break;
-				
-				rank++;
-			}
-			
-			System.out.println("Rank: " + rank);
-			
-			if(favor.getMain() == mainGod && favor.getHighest() < rank)
-				favor.setHighest(rank);
+			checkRank();
 		}
 	}
 
@@ -171,13 +208,13 @@ public class TileAltar extends TileEntity {
 	}
 	
 	// Check is Altar meets Rank 0 requirements for any God
-	private boolean checkRank0(World world)
+	private boolean checkRank0()
 	{
 		Favor favor = FavorHandler.getFavor(religionName);
 		
 		for(int i = 0; i < Gods.godBlocks.size(); i++)
 		{
-			if(Gods.getAltarBlocks(i, 0).contains(world.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
+			if(Gods.getAltarBlocks(i, 0).contains(this.worldObj.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 			{
 				rank = 0;
 				mainGod = i;
@@ -210,7 +247,7 @@ public class TileAltar extends TileEntity {
 	}
 	
 	// Get all the blocks in the area
-	private void getBlocks(World world, BlockPos pos, int size)
+	private void getBlocks(BlockPos pos, int size)
 	{
 		surronding.clear();
 		
@@ -224,8 +261,8 @@ public class TileAltar extends TileEntity {
 			{
 				for(int y = startY; y <= pos.getY() + ALTAR_DEPTH; y++)
 				{
-					if(world.getBlockState(new BlockPos(x, y, z)).getBlock() != Blocks.air)
-						surronding.add(world.getBlockState(new BlockPos(x, y, z)).getBlock());
+					if(this.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock() != Blocks.air)
+						surronding.add(this.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock());
 				}
 			}
 		}
