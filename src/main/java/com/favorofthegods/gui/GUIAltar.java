@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import com.favorofthegods.FavorOfTheGods;
 import com.favorofthegods.altar.TileAltar;
 import com.favorofthegods.favornetwork.FavorHandler;
+import com.favorofthegods.gods.Gods;
 
 public class GUIAltar extends GuiScreen {
 	private int x, y, z;
@@ -39,15 +40,16 @@ public class GUIAltar extends GuiScreen {
 		int leftX = x + 8;
 		int rightX = x + 141;
 		int Y1 = y + 30;
+		int Y2 = Y1 + 50;
 		TileAltar altar = (TileAltar)world.getTileEntity(new BlockPos(this.x, this.y, this.z));
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(backgroundImage);
 		
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
+		// Draw all the boxes and the indicator
 		for(int i = 0; i < FavorHandler.getFavorSize(player); i++)
 		{
-			System.out.println(altar.getFavor(i));
 			if(i % 2 == 0)
 			{
 				drawTexturedModalRect(leftX + 2, Y1 + 3, 0, 198, 102, 21); 											// Background
@@ -59,6 +61,21 @@ public class GUIAltar extends GuiScreen {
 				drawTexturedModalRect(rightX + 2, Y1 + 3, 0, 198, 102, 21);
 				drawTexturedModalRect((rightX + 2) + 50 + (int)(altar.getFavor(i) / 200), Y1 + 3, 0, 235, 2, 21);
 				drawTexturedModalRect(rightX, Y1, 0, 170, 107, 26);
+			}
+		}
+		
+		// Draw all the text [FOR SOME REASON CAN'T DO THIS WITH THE BOXES?]
+		for(int i = 0; i < FavorHandler.getFavorSize(player); i++)
+		{
+			if(i % 2 == 0)
+			{
+				drawCenteredString(this.fontRendererObj, Gods.godNames.get(i), leftX + 52, Y1 + 4, 0x00999999);
+				drawCenteredString(this.fontRendererObj, "" + altar.getFavor(i), leftX + 52, Y1 + 16, 0x00999999);
+			}
+			else
+			{
+				drawCenteredString(this.fontRendererObj, Gods.godNames.get(i), rightX + 52, Y1 + 4, 0x00999999);
+				drawCenteredString(this.fontRendererObj, "" + altar.getFavor(i), rightX + 52, Y1 + 16, 0x00999999);
 			}
 		}
 	}
