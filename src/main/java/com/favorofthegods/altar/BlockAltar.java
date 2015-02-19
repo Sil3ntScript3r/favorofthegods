@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.favorofthegods.FavorOfTheGods;
 import com.favorofthegods.PlayerProps;
+import com.favorofthegods.Util;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
@@ -36,40 +37,42 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 	{
 		TileAltar altar = (TileAltar)world.getTileEntity(pos);
 		
-		if(!world.isRemote)
+		PlayerProps props = PlayerProps.get(player);
+		if(props != null)
 		{
-			PlayerProps props = PlayerProps.get(player);
-			if(props != null)
+			if(!props.hasReligion())
 			{
-				if(!props.hasReligion())
+				if(altar.getReligionName() == null)
 				{
-					if(altar.getReligionName() == null)
-					{
-						FavorHandler.createFavor(player.getName());
-						altar.setReligionName(player.getName());
-					}
-					
-					props.setReligionName(player.getName());
-					FavorHandler.addFollower(altar.getReligionName(), player);
-					player.addChatComponentMessage(new ChatComponentText("You are now a follower of the new religion " + "§9" + props.getReligionName() + "§r" + "."));
+					FavorHandler.createFavor(player.getName());
+					altar.setReligionName(player.getName());
 				}
-				else if(props.hasReligion() && altar.getReligionName() == null)
-				{
-					altar.setReligionName(props.getReligionName());
-					player.addChatComponentMessage(new ChatComponentText("This Altar now follows " + "§9" + props.getReligionName() + "§r" + "."));
-				}
-				else if(FavorHandler.isFollowerOf(altar.getReligionName(), player))
-				{
-					player.addChatComponentMessage(new ChatComponentText("You are already a follower " + "§9" + altar.getReligionName() + "§r" + "."));
-				}
-				else
-				{
-					player.addChatComponentMessage(new ChatComponentText("You can not join " + "§9" + altar.getReligionName() + "§r" + ", as you already are a follower of " + "§9" + props.getReligionName() + "§r" + "."));
-				}
+				
+				props.setReligionName(player.getName());
+				FavorHandler.addFollower(altar.getReligionName(), player);
+				Util.sendChat(player, "You are now a follower of the new religion " + "§9" + props.getReligionName() + "§r" + ".", world);
 			}
+			else if(props.hasReligion() && altar.getReligionName() == null)
+			{
+				altar.setReligionName(props.getReligionName());
+				Util.sendChat(player, "This Altar now follows " + "§9" + props.getReligionName() + "§r" + ".", world);
+			}
+			else if(FavorHandler.isFollowerOf(altar.getReligionName(), player))
+			{
+				Util.sendChat(player, "You are already a follower " + "§9" + altar.getReligionName() + "§r" + ".", world);
+			}
+			else
+			{
+				Util.sendChat(player, "You can not join " + "§9" + altar.getReligionName() + "§r" + ", as you already are a follower of " + "§9" + props.getReligionName() + "§r" + ".", world);
+			}
+			
+			altar.onInteract(player);
 		}
-
-		altar.onInteract(player);
+		
+		if(world.getTileEntity(pos) != null)
+		{
+			player.openGui(FavorOfTheGods.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+		}
 
 		return true;
 	}

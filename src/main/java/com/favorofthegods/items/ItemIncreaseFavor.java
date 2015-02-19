@@ -24,9 +24,9 @@ public class ItemIncreaseFavor extends Item {
 		
 		if(favor != null)
 			if(!player.isSneaking())
-				FavorHandler.increaseFavor(props.getReligionName(), Gods.GOD_STEFAN, 10);
+				FavorHandler.increaseFavor(props.getReligionName(), Gods.GOD_STEFAN, 250);
 			else
-				FavorHandler.increaseFavor(props.getReligionName(), Gods.GOD_STEFAN, 100);
+				FavorHandler.increaseFavor(props.getReligionName(), Gods.GOD_DESERTPIG, 250);
 		
 		return itemStack;
 	}

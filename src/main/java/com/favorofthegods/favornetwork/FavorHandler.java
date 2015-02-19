@@ -3,6 +3,8 @@ package com.favorofthegods.favornetwork;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+
+import com.favorofthegods.PlayerProps;
 /**
  * Main class that handles the entire Favor system
  * @author Sil3ntScript3r
@@ -35,6 +37,19 @@ public class FavorHandler {
 		}
 		
 		return data;
+	}
+	
+	public static Favor getFavor(EntityPlayer player)
+	{
+		PlayerProps props = PlayerProps.get(player);
+		if(props != null)
+		{
+			return getFavor(props.getReligionName());
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/**
@@ -119,6 +134,15 @@ public class FavorHandler {
 		data.markDirty();
 	}
 	
+	public static void setFavor(EntityPlayer player, int god, int amount)
+	{
+		PlayerProps props = PlayerProps.get(player);
+		if(props != null)
+		{
+			setFavor(props.getReligionName(), god, amount);
+		}
+	}
+	
 	/**
 	 * Adds a player to the list of followers of a religion
 	 * @param name 		Religion to add them to
@@ -149,5 +173,31 @@ public class FavorHandler {
 		}
 		
 		return false;
+	}
+	
+	public static int getGodFavor(EntityPlayer player, int god)
+	{
+		Favor favor = getFavor(player);
+		if(favor != null)
+		{
+			return favor.getFavor(god);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static int getFavorSize(EntityPlayer player)
+	{
+		Favor favor = getFavor(player);
+		if(favor != null)
+		{
+			return favor.getFavors().size();
+		}
+		else
+		{
+			return 0;
+		}
 	}
 }
