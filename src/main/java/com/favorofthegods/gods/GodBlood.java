@@ -7,7 +7,7 @@ public class GodBlood extends Gods {
 	
 	public GodBlood()
 	{
-		godNames.add(2, "Blood");
+		godNames.add(GOD_BLOOD, "Blood");
 		
 		altarBlocks = initAltarBlocks();
 		godBlocks.add(GOD_BLOOD, altarBlocks);

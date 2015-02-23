@@ -44,6 +44,7 @@ public class Gods {
 	{
 		MinecraftForge.EVENT_BUS.register(new GodStefan());
 		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
+		MinecraftForge.EVENT_BUS.register(new GodBlood());
 	}
 	
 	public static int getRivalGod(int god)
@@ -100,8 +101,9 @@ public class Gods {
 	
 	public static enum EnumGods implements IStringSerializable
 	{
+		STEFAN(GOD_STEFAN, "Stefan"),
 		DESERT_PIG(GOD_DESERTPIG, "DesertPig"),
-		STEFAN(GOD_STEFAN, "Stefan");
+		BLOOD(GOD_BLOOD, "Blood");
 		
 		private final int meta;
 		private final String name;

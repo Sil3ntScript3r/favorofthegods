@@ -74,8 +74,7 @@ public class GUIAltar extends GuiScreen {
 				drawTexturedModalRect(leftX + 2, (favorY + (favorYChange * c)) + 3, 0, 198, 102, 21); 													// Background
 				drawTexturedModalRect((leftX + 2) + 50 + (int)(altar.getFavor(godCountBox) / 200), (favorY + (favorYChange * c)) + 3, 0, 235, 2, 21); 	// Indicator
 				drawTexturedModalRect(leftX, (favorY + (favorYChange * c)), 0, 170, 107, 26);															// Outline
-				//godCountBox++;
-				godCountBox = 0;
+				godCountBox++;
 				break;
 			}
 			
@@ -86,16 +85,14 @@ public class GUIAltar extends GuiScreen {
 					drawTexturedModalRect(leftX + 2, (favorY + (favorYChange * c)) + 3, 0, 198, 102, 21); 													// Background
 					drawTexturedModalRect((leftX + 2) + 50 + (int)(altar.getFavor(godCountBox) / 200), (favorY + (favorYChange * c)) + 3, 0, 235, 2, 21); 	// Indicator
 					drawTexturedModalRect(leftX, (favorY + (favorYChange * c)), 0, 170, 107, 26);															// Outline
-					//godCountBox++;
-					godCountBox = 1;
+					godCountBox++;
 				}
 				else
 				{
 					drawTexturedModalRect(rightX + 2, (favorY + (favorYChange * c)) + 3, 0, 198, 102, 21);
 					drawTexturedModalRect((rightX + 2) + 50 + (int)(altar.getFavor(godCountBox) / 200), (favorY + (favorYChange * c)) + 3, 0, 235, 2, 21);
 					drawTexturedModalRect(rightX, (favorY + (favorYChange * c)), 0, 170, 107, 26);
-					//godCountBox++;
-					godCountBox = 0;
+					godCountBox++;
 				}
 			}
 		}
@@ -107,8 +104,7 @@ public class GUIAltar extends GuiScreen {
 			{
 				drawCenteredString(this.fontRendererObj, Gods.godNames.get(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
 				drawCenteredString(this.fontRendererObj, "" + altar.getFavor(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 16, 0x00999999);
-				//godCountText++;
-				godCountText = 1;
+				godCountText++;
 				break;
 			}
 			
@@ -118,15 +114,13 @@ public class GUIAltar extends GuiScreen {
 				{
 					drawCenteredString(this.fontRendererObj, Gods.godNames.get(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
 					drawCenteredString(this.fontRendererObj, "" + altar.getFavor(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 16, 0x00999999);
-					//godCountText++;
-					godCountText = 1;
+					godCountText++;
 				}
 				else
 				{
 					drawCenteredString(this.fontRendererObj, Gods.godNames.get(godCountText), rightX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
 					drawCenteredString(this.fontRendererObj, "" + altar.getFavor(godCountText), rightX + 52, (favorY + (favorYChange * c)) + 16, 0x00999999);
-					//godCountText++;
-					godCountText = 0;
+					godCountText++;
 				}
 			}
 		}
