@@ -16,13 +16,15 @@ public class EventList {
 		// Check if a player died on the server only
 		if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer)
 		{
+			EntityPlayer player = (EntityPlayer)event.entity;
+			
 			// It was a player, so copy their NBTTag...
 			NBTTagCompound playerData = new NBTTagCompound();
-			PlayerProps.get((EntityPlayer)event.entity).saveNBTData(playerData);
+			PlayerProps.get(player).saveNBTData(playerData);
 			
 			// ...And save it to the CommonProxy
-			CommonProxy.storeEntityData(((EntityPlayer)event.entity).getName(), playerData);
-			PlayerProps.saveProxy((EntityPlayer) event.entity);
+			CommonProxy.storeEntityData(player.getName(), playerData);
+			PlayerProps.saveProxy(player);
 		}
 	}
 	

@@ -31,6 +31,7 @@ public class ItemFavorCheck extends Item {
 					System.out.println("--Favor--");
 					System.out.println("Stefan: " + favor.getFavor(Gods.GOD_STEFAN));
 					System.out.println("Desert Pig: " + favor.getFavor(Gods.GOD_DESERTPIG));
+					System.out.println("Blood: " + favor.getFavor(Gods.GOD_BLOOD));
 					System.out.println("Religion Name: " + props.getReligionName());
 					System.out.println("Highest Rank: " + favor.getHighest());
 					System.out.println("Main God: " + favor.getMain());

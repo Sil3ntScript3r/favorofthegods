@@ -8,6 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 import com.favorofthegods.PlayerProps;
 import com.favorofthegods.favornetwork.FavorHandler;
@@ -34,6 +36,16 @@ public class Gods {
 	
 	Random rand = new Random();
 	
+	@SubscribeEvent
+	public void playerUpdate(PlayerTickEvent event)
+	{
+		GodStefan.tick(event);
+		GodDesertPig.tick(event);
+		GodBlood.tick(event);
+	}
+	
+	public static void tick(PlayerTickEvent event) {}
+
 	// Return the list of blocks for a certain rank
 	public static ArrayList<Block> getAltarBlocks(int god, int rank)
 	{

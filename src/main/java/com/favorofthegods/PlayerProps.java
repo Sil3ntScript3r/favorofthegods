@@ -1,25 +1,27 @@
 package com.favorofthegods;
 
+import java.util.HashMap;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import com.favorofthegods.altar.TileAltar;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class PlayerProps implements IExtendedEntityProperties {
 	private static final String TAG = "FavorOfTheGods";
+	
 	private final EntityPlayer player;
 	
 	private String religionName;
+	private NBTTagCompound values;
 
 	public PlayerProps(EntityPlayer player)
 	{
 		this.player = player;
+		values = new NBTTagCompound();
 	}
 	
 	public static void register(EntityPlayer player)
@@ -64,6 +66,8 @@ public class PlayerProps implements IExtendedEntityProperties {
 		if(religionName != null)
 			props.setString("religionName", religionName);
 
+		props.setTag("tags", values);
+		
 		compound.setTag(TAG, props);
 	}
 
@@ -76,6 +80,8 @@ public class PlayerProps implements IExtendedEntityProperties {
 			religionName = props.getString("religionName");
 			FavorHandler.addFollower(religionName, player);
 		}
+		
+		values = (NBTTagCompound)props.getTag("tags");
 	}
 	
 	public boolean hasReligion()
@@ -98,6 +104,24 @@ public class PlayerProps implements IExtendedEntityProperties {
 	public String getReligionName()
 	{
 		return religionName;
+	}
+	
+	public void setValue(String name, int value)
+	{
+		values.removeTag(name);
+		values.setInteger(name, value);
+	}
+	
+	public int getValue(String name)
+	{
+		if(values.hasKey(name))
+		{
+			return values.getInteger(name);
+		}
+		else
+		{
+			return -1;
+		}
 	}
 
 	public void init(Entity entity, World world)
