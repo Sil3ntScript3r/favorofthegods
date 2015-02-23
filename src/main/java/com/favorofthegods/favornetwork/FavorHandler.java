@@ -167,7 +167,6 @@ public class FavorHandler {
 		{
 			if(favor.followers.contains(player))
 			{
-				System.out.println(name + " contains " + player);
 				return true;
 			}
 		}

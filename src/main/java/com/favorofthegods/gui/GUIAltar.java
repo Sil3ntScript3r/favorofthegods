@@ -55,6 +55,9 @@ public class GUIAltar extends GuiScreen {
 		
 		drawTexturedModalRect(x, y, 0, 0, bgWidth, bgHeight);
 
+		// TODO: Show which god is the main
+		// TODO: Don't update the Favor amount of any god but main unless you sacrifice something
+		// TODO: Show rank of the altar
 		// TODO: Add additional pages to show past 6 gods
 		// Need more gods to set this up completely
 		int godCountBox = 0;

@@ -240,7 +240,7 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 			}
 		}
 		
-		//System.out.println(blockCount[0] + " : " + blockCount[1] + " : " + blockCount[2] + " : " + blockCount[3] + " : " + blockCount[4] + " : " + blockCount[5]);
+		System.out.println(blockCount[0] + " : " + blockCount[1] + " : " + blockCount[2] + " : " + blockCount[3] + " : " + blockCount[4] + " : " + blockCount[5]);
 		return blockCount;
 	}
 	
