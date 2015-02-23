@@ -57,7 +57,7 @@ public class GodDesertPig extends Gods {
 			{
 				if(props.hasReligion())
 				{
-					Favor favor = FavorHandler.getFavor(props.getReligionName());
+					Favor favor = FavorHandler.getFavor(player);
 					
 					// Desert Pig does not get along with sheep
 					if(event.entity instanceof EntitySheep)
