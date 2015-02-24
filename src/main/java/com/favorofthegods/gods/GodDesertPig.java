@@ -187,7 +187,7 @@ public class GodDesertPig extends Gods {
 								}
 	
 								event.entity.worldObj.spawnEntityInWorld(zomb);
-								increaseFavor(player, GOD_DESERTPIG, 2, false);
+								increaseFavor(player, GOD_DESERTPIG, 10, false);
 							}
 						}
 					}

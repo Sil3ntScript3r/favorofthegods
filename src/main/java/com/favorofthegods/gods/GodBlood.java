@@ -77,7 +77,7 @@ public class GodBlood extends Gods {
 		{
 			if(event.itemInHand.getItem() instanceof IPlantable || event.placedBlock.getBlock() instanceof IPlantable)
 			{
-				decreaseFavor(event.player, GOD_BLOOD, 2);
+				decreaseFavor(event.player, GOD_BLOOD, 1);
 			}
 		}
 	}
@@ -100,6 +100,7 @@ public class GodBlood extends Gods {
 						System.out.println("Enough blood has been spilled");
 						if(PlayerProps.get(player).getValue(BLOOD_REVIVE) <= 0)
 						{
+							// TODO: Add an animation to this. Aatrox passive-esque
 							System.out.println("You will be reborn");
 							event.setCanceled(true);
 							player.setHealth(player.getMaxHealth());

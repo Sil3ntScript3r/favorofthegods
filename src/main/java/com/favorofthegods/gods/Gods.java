@@ -19,6 +19,7 @@ public class Gods {
 	public static final int GOD_STEFAN = 0;
 	public static final int GOD_DESERTPIG = 1;
 	public static final int GOD_BLOOD = 2;
+	public static final int GOD_NATURE = 3;
 	
 	// List of all the blocks that can be used for the Altar
 	// First list = God to choose, based on it's number
@@ -42,6 +43,7 @@ public class Gods {
 		GodStefan.tick(event);
 		GodDesertPig.tick(event);
 		GodBlood.tick(event);
+		GodNature.tick(event);
 	}
 	
 	static void tick(PlayerTickEvent event) {}
@@ -57,6 +59,7 @@ public class Gods {
 		MinecraftForge.EVENT_BUS.register(new GodStefan());
 		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
 		MinecraftForge.EVENT_BUS.register(new GodBlood());
+		MinecraftForge.EVENT_BUS.register(new GodNature());
 	}
 	
 	public static int getRivalGod(int god)
@@ -115,7 +118,8 @@ public class Gods {
 	{
 		STEFAN(GOD_STEFAN, "Stefan"),
 		DESERT_PIG(GOD_DESERTPIG, "DesertPig"),
-		BLOOD(GOD_BLOOD, "Blood");
+		BLOOD(GOD_BLOOD, "Blood"),
+		NATURE(GOD_NATURE, "Nature");
 		
 		private final int meta;
 		private final String name;

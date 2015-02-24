@@ -3,6 +3,7 @@ package com.favorofthegods.blocks;
 import com.favorofthegods.altar.BlockAltar;
 import com.favorofthegods.blocks.rank0.BlockBlood0;
 import com.favorofthegods.blocks.rank0.BlockDesertPig0;
+import com.favorofthegods.blocks.rank0.BlockNature0;
 import com.favorofthegods.blocks.rank0.BlockStefan0;
 
 public class BlockList {
@@ -10,6 +11,7 @@ public class BlockList {
 	public static BlockDesertPig0 desertPig0;
 	public static BlockStefan0 stefan0;
 	public static BlockBlood0 blood0;
+	public static BlockNature0 nature0;
 	
 	public static void preInit()
 	{
@@ -18,5 +20,6 @@ public class BlockList {
 		desertPig0 = new BlockDesertPig0();
 		stefan0 = new BlockStefan0();
 		blood0 = new BlockBlood0();
+		nature0 = new BlockNature0();
 	}
 }

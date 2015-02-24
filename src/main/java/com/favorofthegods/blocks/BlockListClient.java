@@ -31,5 +31,8 @@ public class BlockListClient {
 		
 		Item itemBlockBlood0 = GameRegistry.findItem(FavorOfTheGods.MODID, BlockList.blood0.NAME);
 		render.register(itemBlockBlood0, 0, new ModelResourceLocation(FavorOfTheGods.prependModID(BlockList.blood0.NAME, ':'), "inventory"));
+		
+		Item itemBlockNature0 = GameRegistry.findItem(FavorOfTheGods.MODID, BlockList.nature0.NAME);
+		render.register(itemBlockNature0, 0, new ModelResourceLocation(FavorOfTheGods.prependModID(BlockList.nature0.NAME, ':'), "inventory"));
 	}
 }
