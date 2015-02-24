@@ -44,7 +44,7 @@ public class GodDesertPig extends Gods {
 		altarBlocks[4].add(Blocks.jukebox);
 		
 		altarBlocks[5].add(Blocks.emerald_block);
-		//goodBlocks[5].add(pigBlock); Pepper demands a pig block
+		// TODO: Pepper demands a pig block
 	}
 	
 	static void tick(PlayerTickEvent event)

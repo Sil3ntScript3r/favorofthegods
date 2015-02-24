@@ -37,6 +37,7 @@ public abstract class CommonProxy implements IGuiHandler {
 		decreaseFavor = (ItemDecreaseFavor)new ItemDecreaseFavor().setUnlocalizedName("decreaseFavor");
 		GameRegistry.registerItem(decreaseFavor, "decreaseFavor");
 		
+		// TODO: Get custom creative tab working
 		/*altarTab = new CreativeTabs("altarTab")
 		{
 			@SideOnly(Side.CLIENT)

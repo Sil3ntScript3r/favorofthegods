@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 import com.favorofthegods.PlayerProps;
+import com.favorofthegods.blocks.BlockList;
 import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 
@@ -27,11 +28,16 @@ public class GodBlood extends Gods {
 		altarBlocks = initAltarBlocks();
 		godBlocks.add(GOD_BLOOD, altarBlocks);
 		
-		altarBlocks[0].add(Blocks.cobblestone);
+		altarBlocks[0].add(BlockList.blood0);
+		
 		altarBlocks[1].add(Blocks.stone);
+		
 		altarBlocks[2].add(Blocks.obsidian);
+		
 		altarBlocks[3].add(Blocks.redstone_block);
+		
 		altarBlocks[4].add(Blocks.coal_block);
+		
 		altarBlocks[5].add(Blocks.stained_hardened_clay);
 	}
 	

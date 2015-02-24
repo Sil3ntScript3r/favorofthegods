@@ -1,4 +1,5 @@
 itemGroup.altarTab=Altar of the Gods
 tile.favorofthegods_blockAltar.name=Altar of the Gods
-tile.favorofthegods_blockDesertPig0.name=Desert Pig's Block
 tile.favorofthegods_blockStefan0.name=Stefan's Block
+tile.favorofthegods_blockDesertPig0.name=Desert Pig's Block
+tile.favorofthegods_blockBlood0.name=Blood's Block

@@ -67,12 +67,9 @@ public class PacketFavors implements IMessage {
 
 		public IMessage onMessage(PacketFavors message, MessageContext ctx)
 		{
-			System.out.println("Message received: syncing Favor");
-			
 			TileAltar altar = (TileAltar)Minecraft.getMinecraft().theWorld.getTileEntity(message.altarPos);
 			if(altar != null)
 			{
-				System.out.println("Altar found; setting favor");
 				altar.setFavors(message.godFavors);
 			}
 			

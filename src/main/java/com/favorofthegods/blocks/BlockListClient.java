@@ -25,7 +25,11 @@ public class BlockListClient {
 		
 		Item itemBlockDesertPig0 = GameRegistry.findItem(FavorOfTheGods.MODID, BlockList.desertPig0.NAME);
 		render.register(itemBlockDesertPig0, 0, new ModelResourceLocation(FavorOfTheGods.prependModID(BlockList.desertPig0.NAME, ':'), "inventory"));
+		
 		Item itemBlockStefan0 = GameRegistry.findItem(FavorOfTheGods.MODID, BlockList.stefan0.NAME);
 		render.register(itemBlockStefan0, 0, new ModelResourceLocation(FavorOfTheGods.prependModID(BlockList.stefan0.NAME, ':'), "inventory"));
+		
+		Item itemBlockBlood0 = GameRegistry.findItem(FavorOfTheGods.MODID, BlockList.blood0.NAME);
+		render.register(itemBlockBlood0, 0, new ModelResourceLocation(FavorOfTheGods.prependModID(BlockList.blood0.NAME, ':'), "inventory"));
 	}
 }
