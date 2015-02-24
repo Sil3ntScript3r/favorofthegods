@@ -35,7 +35,7 @@ public class GodBlood extends Gods {
 		altarBlocks[5].add(Blocks.stained_hardened_clay);
 	}
 	
-	public static void tick(PlayerTickEvent event)
+	static void tick(PlayerTickEvent event)
 	{
 		PlayerProps props = PlayerProps.get(event.player);
 		if(props != null)

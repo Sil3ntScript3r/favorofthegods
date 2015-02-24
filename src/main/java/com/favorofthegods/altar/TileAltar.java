@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.favorofthegods.Util;
+import com.favorofthegods.PlayerUtils;
 import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 import com.favorofthegods.gods.Gods;
@@ -151,12 +151,12 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 			// If it's not owned, assign it to one
 			if(checkRank0())
 			{
-				Util.sendChat(player, Gods.godNames.get(mainGod) + " accepts this Altar of the Gods.", worldObj);
+				PlayerUtils.sendChat(player, Gods.godNames.get(mainGod) + " accepts this Altar of the Gods.");
 				hadGod = true;
 			}
 			else
 			{
-				Util.sendChat(player, "No God wants this altar.", worldObj);
+				PlayerUtils.sendChat(player, "No God wants this altar.");
 				return;
 			}
 		}
@@ -165,11 +165,11 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 			// If it is owned, find out if it's still acceptable
 			if(Gods.getAltarBlocks(mainGod, 0).contains(this.worldObj.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 			{
-				Util.sendChat(player, "This Altar is Favored by " + Gods.godNames.get(mainGod) + ".", worldObj);
+				PlayerUtils.sendChat(player, "This Altar is Favored by " + Gods.godNames.get(mainGod) + ".");
 			}
 			else
 			{
-				Util.sendChat(player, "This Altar was Favored by " + Gods.godNames.get(mainGod) + ", but has since lost it's Favor.", worldObj);
+				PlayerUtils.sendChat(player, "This Altar was Favored by " + Gods.godNames.get(mainGod) + ", but has since lost it's Favor.");
 				rank = -1;
 				return;
 			}

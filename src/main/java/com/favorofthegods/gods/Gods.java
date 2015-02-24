@@ -34,7 +34,7 @@ public class Gods {
 	
 	String name;
 	
-	Random rand = new Random();
+	static Random rand = new Random();
 	
 	@SubscribeEvent
 	public void playerUpdate(PlayerTickEvent event)
@@ -44,7 +44,7 @@ public class Gods {
 		GodBlood.tick(event);
 	}
 	
-	public static void tick(PlayerTickEvent event) {}
+	static void tick(PlayerTickEvent event) {}
 
 	// Return the list of blocks for a certain rank
 	public static ArrayList<Block> getAltarBlocks(int god, int rank)
@@ -84,7 +84,7 @@ public class Gods {
 		return list;
 	}
 	
-	void increaseFavor(EntityPlayer player, int god, int num, boolean rival)
+	static void increaseFavor(EntityPlayer player, int god, int num, boolean rival)
 	{
 		if(PlayerProps.get(player) != null)
 		{
@@ -99,7 +99,7 @@ public class Gods {
 		}
 	}
 	
-	void decreaseFavor(EntityPlayer player, int god, int num)
+	static void decreaseFavor(EntityPlayer player, int god, int num)
 	{
 		if(PlayerProps.get(player) != null)
 		{

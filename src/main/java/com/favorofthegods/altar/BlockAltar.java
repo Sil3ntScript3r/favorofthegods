@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.favorofthegods.FavorOfTheGods;
 import com.favorofthegods.PlayerProps;
-import com.favorofthegods.Util;
+import com.favorofthegods.PlayerUtils;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class BlockAltar extends Block implements ITileEntityProvider {
@@ -50,20 +50,20 @@ public class BlockAltar extends Block implements ITileEntityProvider {
 				
 				props.setReligionName(player.getName());
 				FavorHandler.addFollower(altar.getReligionName(), player);
-				Util.sendChat(player, "You are now a follower of the new religion " + "§9" + props.getReligionName() + "§r" + ".", world);
+				PlayerUtils.sendChat(player, "You are now a follower of the new religion " + "§9" + props.getReligionName() + "§r" + ".");
 			}
 			else if(props.hasReligion() && altar.getReligionName() == null)
 			{
 				altar.setReligionName(props.getReligionName());
-				Util.sendChat(player, "This Altar now follows " + "§9" + props.getReligionName() + "§r" + ".", world);
+				PlayerUtils.sendChat(player, "This Altar now follows " + "§9" + props.getReligionName() + "§r" + ".");
 			}
 			else if(FavorHandler.isFollowerOf(altar.getReligionName(), player))
 			{
-				Util.sendChat(player, "You are already a follower " + "§9" + altar.getReligionName() + "§r" + ".", world);
+				PlayerUtils.sendChat(player, "You are already a follower " + "§9" + altar.getReligionName() + "§r" + ".");
 			}
 			else
 			{
-				Util.sendChat(player, "You can not join " + "§9" + altar.getReligionName() + "§r" + ", as you already are a follower of " + "§9" + props.getReligionName() + "§r" + ".", world);
+				PlayerUtils.sendChat(player, "You can not join " + "§9" + altar.getReligionName() + "§r" + ", as you already are a follower of " + "§9" + props.getReligionName() + "§r" + ".");
 			}
 			
 			altar.onInteract(player);

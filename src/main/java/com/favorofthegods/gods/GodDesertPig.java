@@ -15,8 +15,10 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 import com.favorofthegods.PlayerProps;
+import com.favorofthegods.PlayerUtils;
 import com.favorofthegods.blocks.BlockList;
 import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
@@ -43,6 +45,44 @@ public class GodDesertPig extends Gods {
 		
 		altarBlocks[5].add(Blocks.emerald_block);
 		//goodBlocks[5].add(pigBlock); Pepper demands a pig block
+	}
+	
+	static void tick(PlayerTickEvent event)
+	{
+		EntityPlayer player = event.player;
+		Favor favor = FavorHandler.getFavor(player);
+		
+		if(favor != null)
+		{
+			// Check if they hold a red flower
+			if(player.inventory.hasItemStack(new ItemStack(Blocks.red_flower)))
+			{
+				decreaseFavor(player, GOD_DESERTPIG, 1);
+			}
+			
+			// Check if they follow Desert Pig
+			if(favor.getMain() == GOD_DESERTPIG)
+			{
+				if(favor.getHighest() >= 1)
+				{
+					// If they have atleast a rank 1 altar, spawn some pork after a 1/16777216 chance
+					if(rand.nextInt(256) == 0)
+					{
+						if(rand.nextInt(256) == 0)
+						{
+							if(rand.nextInt(256) == 0)
+							{
+								ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .003)));
+								EntityItem entityItem = new EntityItem(player.worldObj, player.posX, player.posY + 2, player.posZ, item);
+								entityItem.setDefaultPickupDelay();
+								player.worldObj.spawnEntityInWorld(entityItem);
+								PlayerUtils.sendChat(player, "Desert Pig has blessed you with his meat!");
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	@SubscribeEvent
@@ -148,60 +188,6 @@ public class GodDesertPig extends Gods {
 	
 								event.entity.worldObj.spawnEntityInWorld(zomb);
 								increaseFavor(player, GOD_DESERTPIG, 2, false);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event)
-	{
-		if(!event.entity.worldObj.isRemote)
-		{
-			String[] players = MinecraftServer.getServer().getConfigurationManager().getAllUsernames();
-			
-			for(String i : players)
-			{
-				if(PlayerProps.get(MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(i)) != null);
-				{
-					EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(i);
-					PlayerProps props = PlayerProps.get(player);
-					
-					if(props.hasReligion())
-					{
-						Favor favor = FavorHandler.getFavor(props.getReligionName());
-						
-						if(favor != null)
-						{
-							// Doesn't matter who they follow
-							if(player.inventory.hasItemStack(new ItemStack(Blocks.red_flower)))
-							{
-								decreaseFavor(player, GOD_DESERTPIG, 1);
-							}
-							
-							// If they need to follow Desert Pig
-							if(favor.getMain() == GOD_DESERTPIG && favor.getHighest() >= 1)
-							{
-								if(favor.getFavor(GOD_DESERTPIG) >= FavorHandler.MAX_FAVOR * .005)
-								{
-									if(rand.nextInt(256) == 0)
-									{
-										if(rand.nextInt(256) == 0)
-										{
-											if(rand.nextInt(256) == 0)
-											{
-												ItemStack item = new ItemStack(Items.porkchop, (int)(Math.ceil(favor.getFavor(GOD_DESERTPIG) * .003)));
-												EntityItem entityItem = new EntityItem(player.worldObj, player.posX, player.posY + 2, player.posZ, item);
-												entityItem.setDefaultPickupDelay();
-												player.worldObj.spawnEntityInWorld(entityItem);
-												player.addChatComponentMessage(new ChatComponentText("Desert Pig has blessed you with his meat!"));
-											}
-										}
-									}
-								}
 							}
 						}
 					}

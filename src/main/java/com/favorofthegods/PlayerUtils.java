@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-public abstract class Util {
-	public static void sendChat(EntityPlayer player, String message, World world)
+public abstract class PlayerUtils {
+	public static void sendChat(EntityPlayer player, String message)
 	{
-		if(!world.isRemote)
+		if(!player.worldObj.isRemote)
 		{
 			player.addChatComponentMessage(new ChatComponentText(message));
 		}
