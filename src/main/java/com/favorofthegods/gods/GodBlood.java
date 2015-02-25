@@ -4,8 +4,11 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -46,6 +49,7 @@ public class GodBlood extends Gods {
 		PlayerProps props = PlayerProps.get(event.player);
 		if(props != null)
 		{
+			// Every tick, decrease the cooldown for the Blood Revive passive
 			if(props.getValue(BLOOD_REVIVE) > 0)
 			{
 				props.setValue(BLOOD_REVIVE, props.getValue(BLOOD_REVIVE) - 1);
@@ -63,6 +67,7 @@ public class GodBlood extends Gods {
 			
 			if(favor != null)
 			{
+				// Blood Gain 1: Killing something
 				increaseFavor(player, GOD_BLOOD, 1, true);
 			}
 		}
@@ -75,6 +80,7 @@ public class GodBlood extends Gods {
 		
 		if(favor != null)
 		{
+			// Blood Lose 1: Planting a plant
 			if(event.itemInHand.getItem() instanceof IPlantable || event.placedBlock.getBlock() instanceof IPlantable)
 			{
 				decreaseFavor(event.player, GOD_BLOOD, 1);
@@ -82,6 +88,7 @@ public class GodBlood extends Gods {
 		}
 	}
 	
+	// Blood Bonus 5: Death ignore
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void playerDeath(LivingDeathEvent event)
 	{
@@ -107,6 +114,25 @@ public class GodBlood extends Gods {
 							PlayerProps.get(player).setValue(BLOOD_REVIVE, 200);
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	// Blood Punish 2: Inflict weakness
+	@SubscribeEvent
+	public void onPlayerAttack(AttackEntityEvent event)
+	{
+		Favor favor = FavorHandler.getFavor(event.entityPlayer);
+		
+		if(favor != null)
+		{
+			if(favor.getFavor(GOD_BLOOD) <= -5000)
+			{
+				if(rand.nextInt(256) == 0)
+				{
+					event.entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 0));
+					increaseFavor(event.entityPlayer, GOD_BLOOD, 20, false);
 				}
 			}
 		}
