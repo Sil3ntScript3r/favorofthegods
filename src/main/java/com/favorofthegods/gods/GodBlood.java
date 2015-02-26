@@ -46,9 +46,47 @@ public class GodBlood extends Gods {
 	
 	static void tick(PlayerTickEvent event)
 	{
-		PlayerProps props = PlayerProps.get(event.player);
+		EntityPlayer player = event.player;
+		PlayerProps props = PlayerProps.get(player);
 		if(props != null)
 		{
+			Favor favor = FavorHandler.getFavor(player);
+			
+			if(favor != null)
+			{
+				if(event.player.worldObj.getTotalWorldTime() % 80L == 0L)
+				{
+					if(favor.getFavor(GOD_BLOOD) >= 2000)
+					{
+						int bloodFavor = favor.getFavor(GOD_BLOOD);
+						
+						if(bloodFavor == FavorHandler.MAX_FAVOR)
+						{
+							player.removePotionEffect(Potion.damageBoost.id);
+							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 180, 4, true, false));
+						}
+						else if(bloodFavor >= FavorHandler.MAX_FAVOR * .8)
+						{
+							player.removePotionEffect(Potion.damageBoost.id);
+							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 180, 3, true, false));
+						}
+						else if(bloodFavor >= FavorHandler.MAX_FAVOR * .6)
+						{
+							player.removePotionEffect(Potion.damageBoost.id);
+							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 180, 2, true, false));
+						}
+						else if(bloodFavor >= FavorHandler.MAX_FAVOR * .4)
+						{
+							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 180, 1, true, false));
+						}
+						else if(bloodFavor >= FavorHandler.MAX_FAVOR * .2)
+						{
+							player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 180, 0, true, false));
+						}
+					}
+				}
+			}
+			
 			// Every tick, decrease the cooldown for the Blood Revive passive
 			if(props.getValue(BLOOD_REVIVE) > 0)
 			{
@@ -119,7 +157,6 @@ public class GodBlood extends Gods {
 		}
 	}
 	
-	// Blood Punish 2: Inflict weakness
 	@SubscribeEvent
 	public void onPlayerAttack(AttackEntityEvent event)
 	{
@@ -127,6 +164,7 @@ public class GodBlood extends Gods {
 		
 		if(favor != null)
 		{
+			// Blood Punish 2: Inflict weakness
 			if(favor.getFavor(GOD_BLOOD) <= -5000)
 			{
 				if(rand.nextInt(256) == 0)
