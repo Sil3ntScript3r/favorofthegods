@@ -24,14 +24,11 @@ import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class GodDesertPig extends Gods {
-	private static List[] altarBlocks;
-	
 	public GodDesertPig()
 	{
-		godNames.add(GOD_DESERTPIG, "Desert Pig");
+		name = "Desert Pig";
 		
 		altarBlocks = initAltarBlocks();
-		godBlocks.add(GOD_DESERTPIG, altarBlocks);
 		
 		altarBlocks[0].add(BlockList.desertPig0);
 		

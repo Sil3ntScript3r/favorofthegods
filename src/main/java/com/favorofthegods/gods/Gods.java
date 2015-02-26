@@ -26,40 +26,49 @@ public class Gods {
 	// Array index = Rank of the block
 	// Second list = All the blocks the God has added for that rank
 	// All gods set this themself in their constructor
-	public static List<List[]> godBlocks = new ArrayList<List[]>();
+	//public static List<List[]> godBlocks = new ArrayList<List[]>();
 	
+	public static ArrayList<Gods> gods = new ArrayList<Gods>();
+
 	// List of all the God's names, sorted by their number
-	public static List<String> godNames = new ArrayList<String>();
-	
-	public static final int NUM_RANKS = 5;
-	
+	//public static List<String> godNames = new ArrayList<String>();
+
 	String name;
 	
+	List[] altarBlocks;
+	
 	static Random rand = new Random();
+	
+	public static void init()
+	{
+		gods.add(new GodStefan());
+		gods.add(new GodDesertPig());
+		gods.add(new GodBlood());
+		gods.add(new GodNature());
+	}
+	
+	public static void initEvents()
+	{
+		for(Gods i : gods)
+		{
+			MinecraftForge.EVENT_BUS.register(i);
+		}
+	}
 	
 	@SubscribeEvent
 	public void playerUpdate(PlayerTickEvent event)
 	{
-		GodStefan.tick(event);
-		GodDesertPig.tick(event);
-		GodBlood.tick(event);
-		GodNature.tick(event);
+		for(Gods i : gods)
+		{
+			i.tick(event);
+		}
 	}
 	
 	static void tick(PlayerTickEvent event) {}
-
-	// Return the list of blocks for a certain rank
-	public static ArrayList<Block> getAltarBlocks(int god, int rank)
+	
+	public boolean altarCheck()
 	{
-		return (ArrayList<Block>)godBlocks.get(god)[rank];
-	}
-
-	public static void initEvents()
-	{
-		MinecraftForge.EVENT_BUS.register(new GodStefan());
-		MinecraftForge.EVENT_BUS.register(new GodDesertPig());
-		MinecraftForge.EVENT_BUS.register(new GodBlood());
-		MinecraftForge.EVENT_BUS.register(new GodNature());
+		return true;
 	}
 	
 	public static int getRivalGod(int god)
@@ -77,9 +86,9 @@ public class Gods {
 	// Used by the gods to construct their ArrayList
 	static List[] initAltarBlocks()
 	{
-		List[] list = new List[NUM_RANKS + 1];
+		List[] list = new List[FavorHandler.NUM_RANKS + 1];
 		
-		for(int i = 0; i <= NUM_RANKS; i++)
+		for(int i = 0; i <= FavorHandler.NUM_RANKS; i++)
 		{
 			list[i] = new ArrayList<Block>();
 		}
@@ -112,6 +121,21 @@ public class Gods {
 				FavorHandler.decreaseFavor(props.getReligionName(), god, num);
 			}
 		}
+	}
+	
+	public static int godsLength()
+	{
+		return gods.size();
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public static List getAltarBlocks(int god, int rank)
+	{
+		return gods.get(god).altarBlocks[rank];
 	}
 	
 	public static enum EnumGods implements IStringSerializable

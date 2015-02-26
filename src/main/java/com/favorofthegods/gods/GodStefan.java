@@ -16,14 +16,11 @@ import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class GodStefan extends Gods {
-	private static List[] altarBlocks;
-	
 	public GodStefan()
 	{	
-		godNames.add(GOD_STEFAN, "Stefan");
+		name = "Stefan";
 		
 		altarBlocks = initAltarBlocks();
-		godBlocks.add(GOD_STEFAN, altarBlocks);
 		
 		altarBlocks[0].add(BlockList.stefan0);
 		
@@ -44,11 +41,13 @@ public class GodStefan extends Gods {
 		if(event.source.getEntity() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)event.source.getEntity();
+			
 			// The Great Stefan hates pigs
 			if(event.entity instanceof EntityPig)
 			{
 					increaseFavor( player, GOD_STEFAN, 1, true);
 			}
+			
 			// The Great Stefan does not approve of the killing of sheep
 			else if(event.entity instanceof EntitySheep)
 			{

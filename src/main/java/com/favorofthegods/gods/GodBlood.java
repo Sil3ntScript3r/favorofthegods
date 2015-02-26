@@ -21,15 +21,12 @@ import com.favorofthegods.favornetwork.FavorHandler;
 
 public class GodBlood extends Gods {
 	private static final String BLOOD_REVIVE = "bloodRevive";
-	
-	private static List[] altarBlocks;
-	
+
 	public GodBlood()
-	{
-		godNames.add(GOD_BLOOD, "Blood");
+	{	
+		name = "Blood";
 		
 		altarBlocks = initAltarBlocks();
-		godBlocks.add(GOD_BLOOD, altarBlocks);
 		
 		altarBlocks[0].add(BlockList.blood0);
 		

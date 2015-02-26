@@ -115,7 +115,7 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 				
 				// Iterate through all the possible Ranks
 				// Check the Altar at each Rank to see if it meets the requirements
-				for(int i = 1; i <= Gods.NUM_RANKS; i++)
+				for(int i = 1; i <= FavorHandler.NUM_RANKS; i++)
 				{
 					if(favor.getFavor(mainGod) < FavorHandler.RANKS[rank + 1])
 						break;
@@ -151,7 +151,7 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 			// If it's not owned, assign it to one
 			if(checkRank0())
 			{
-				PlayerUtils.sendChat(player, Gods.godNames.get(mainGod) + " accepts this Altar of the Gods.");
+				PlayerUtils.sendChat(player, Gods.gods.get(mainGod).getName() + " accepts this Altar of the Gods.");
 				hadGod = true;
 			}
 			else
@@ -165,11 +165,11 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 			// If it is owned, find out if it's still acceptable
 			if(Gods.getAltarBlocks(mainGod, 0).contains(this.worldObj.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 			{
-				PlayerUtils.sendChat(player, "This Altar is Favored by " + Gods.godNames.get(mainGod) + ".");
+				PlayerUtils.sendChat(player, "This Altar is Favored by " + Gods.gods.get(mainGod).getName() + ".");
 			}
 			else
 			{
-				PlayerUtils.sendChat(player, "This Altar was Favored by " + Gods.godNames.get(mainGod) + ", but has since lost it's Favor.");
+				PlayerUtils.sendChat(player, "This Altar was Favored by " + Gods.gods.get(mainGod).getName() + ", but has since lost it's Favor.");
 				rank = -1;
 				return;
 			}
@@ -210,7 +210,7 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 	{
 		Favor favor = FavorHandler.getFavor(religionName);
 		
-		for(int i = 0; i < Gods.godBlocks.size(); i++)
+		for(int i = 0; i < Gods.gods.size(); i++)
 		{
 			if(Gods.getAltarBlocks(i, 0).contains(this.worldObj.getBlockState(this.pos.add(0, -1, 0)).getBlock()))
 			{
@@ -229,9 +229,9 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 	{
 		Favor favor = FavorHandler.getFavor(religionName);
 		
-		int[] blockCount = new int[Gods.NUM_RANKS + 1];
+		int[] blockCount = new int[FavorHandler.NUM_RANKS + 1];
 		
-		for(int i = 0; i <= Gods.NUM_RANKS; i++)
+		for(int i = 0; i <= FavorHandler.NUM_RANKS; i++)
 		{
 			for(Block block : surronding)
 			{
@@ -281,7 +281,6 @@ public class TileAltar extends TileEntity implements IUpdatePlayerListBox {
 	
 	public void setReligionName(String name)
 	{
-		System.out.println("Altar's religion set to " + name);
 		this.religionName = name;
 	}
 	

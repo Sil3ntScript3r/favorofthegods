@@ -34,6 +34,7 @@ public class FavorOfTheGods {
 		proxy.preInit();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("Favor");
 		network.registerMessage(PacketFavors.Handler.class, PacketFavors.class, 0, Side.CLIENT);
+		Gods.init();
 	}
 	
 	@EventHandler

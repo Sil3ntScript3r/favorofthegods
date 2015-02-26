@@ -16,14 +16,11 @@ import com.favorofthegods.favornetwork.Favor;
 import com.favorofthegods.favornetwork.FavorHandler;
 
 public class GodNature extends Gods {
-	private static List[] altarBlocks;
-	
 	public GodNature()
 	{
-		godNames.add(GOD_NATURE, "Nature");
+		name = "Nature";
 		
 		altarBlocks = initAltarBlocks();
-		godBlocks.add(GOD_NATURE, altarBlocks);
 		
 		altarBlocks[0].add(BlockList.nature0);
 		
@@ -36,6 +33,11 @@ public class GodNature extends Gods {
 		altarBlocks[4].add(Blocks.oak_stairs);
 		
 		altarBlocks[5].add(Blocks.bookshelf);
+	}
+	
+	public boolean altarCheck()
+	{
+		return false;
 	}
 
 	@SubscribeEvent

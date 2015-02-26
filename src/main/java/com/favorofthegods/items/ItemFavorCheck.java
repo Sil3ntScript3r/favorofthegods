@@ -35,6 +35,7 @@ public class ItemFavorCheck extends Item {
 					System.out.println("Religion Name: " + props.getReligionName());
 					System.out.println("Highest Rank: " + favor.getHighest());
 					System.out.println("Main God: " + favor.getMain());
+					Gods.gods.get(0).altarCheck();
 				}
 			}
 		}

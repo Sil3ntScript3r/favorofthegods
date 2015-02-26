@@ -36,7 +36,7 @@ public class Favor extends net.minecraft.world.WorldSavedData {
 		godFavors = new ArrayList<Integer>();
 		altars = new HashSet<TileAltar>();
 		
-		for(String s : Gods.godNames)
+		for(Gods s : Gods.gods)
 		{
 			godFavors.add(0);
 		}

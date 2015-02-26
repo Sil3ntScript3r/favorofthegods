@@ -64,8 +64,8 @@ public class GUIAltar extends GuiScreen {
 		int godCountText = 0;
 		double godsOnPage;
 
-		if(FavorHandler.getFavorSize(player) < 6)
-			godsOnPage = FavorHandler.getFavorSize(player);
+		if(Gods.godsLength() < 6)
+			godsOnPage = Gods.godsLength();
 		else
 			godsOnPage = 6;
 		
@@ -105,7 +105,7 @@ public class GUIAltar extends GuiScreen {
 		{
 			if(c == Math.ceil(godsOnPage / 2) - 1 && godsOnPage % 2 == 1)
 			{
-				drawCenteredString(this.fontRendererObj, Gods.godNames.get(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
+				drawCenteredString(this.fontRendererObj, Gods.gods.get(godCountText).getName(), leftX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
 				drawCenteredString(this.fontRendererObj, "" + altar.getFavor(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 16, 0x00999999);
 				godCountText++;
 				break;
@@ -115,13 +115,13 @@ public class GUIAltar extends GuiScreen {
 			{
 				if(i % 2 == 0)
 				{
-					drawCenteredString(this.fontRendererObj, Gods.godNames.get(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
+					drawCenteredString(this.fontRendererObj, Gods.gods.get(godCountText).getName(), leftX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
 					drawCenteredString(this.fontRendererObj, "" + altar.getFavor(godCountText), leftX + 52, (favorY + (favorYChange * c)) + 16, 0x00999999);
 					godCountText++;
 				}
 				else
 				{
-					drawCenteredString(this.fontRendererObj, Gods.godNames.get(godCountText), rightX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
+					drawCenteredString(this.fontRendererObj, Gods.gods.get(godCountText).getName(), rightX + 52, (favorY + (favorYChange * c)) + 4, 0x00999999);
 					drawCenteredString(this.fontRendererObj, "" + altar.getFavor(godCountText), rightX + 52, (favorY + (favorYChange * c)) + 16, 0x00999999);
 					godCountText++;
 				}

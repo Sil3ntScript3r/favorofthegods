@@ -13,6 +13,7 @@ public class FavorHandler {
 	// Init some values for use other places
 	public static final int MAX_FAVOR = 10000;
 	public static final int MIN_FAVOR = -10000;
+	public static final int NUM_RANKS = 5;
 	public static final int[] RANKS = new int[]{0, 500, 2500, 5000, 7500, MAX_FAVOR};
 	
 	/**
@@ -180,19 +181,6 @@ public class FavorHandler {
 		if(favor != null)
 		{
 			return favor.getFavor(god);
-		}
-		else
-		{
-			return 0;
-		}
-	}
-	
-	public static int getFavorSize(EntityPlayer player)
-	{
-		Favor favor = getFavor(player);
-		if(favor != null)
-		{
-			return favor.getFavors().size();
 		}
 		else
 		{
